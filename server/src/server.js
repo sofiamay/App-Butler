@@ -5,7 +5,7 @@ import {port} from './config.js';
 
 const server = express();
 
-server.use(express.static(__dirname + '../client'));
+server.use(express.static(__dirname + '/../../client'));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 

@@ -14,6 +14,8 @@
     "passport": "0.3.2",
     "passport-github": "1.1.0",
     "pretty-error": "2.0.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
     "react-routing": "0.0.7"
   },
   "devDependencies": {
@@ -38,10 +40,11 @@
   },
   "scripts": {
     "test": "eslint src && jest",
-    "clean": "rm -rf build && mkdir build",
-    "build-server": "babel ./src/server/ -d ./build/server/",
-    "build": "npm run clean && npm run build-server",
+    "clean": "rm -rf server/build && mkdir server/build && rm -rf client/build && mkdir client/build",
+    "build-server": "babel ./server/src/ -d ./server/build/",
+    "build-client": "webpack --progress --colors --watch",
+    "build": "npm run clean && npm run build-server && npm run build-client",
     "deploy": "babel-node tools/run deploy",
-    "start": "node build/server/server.js"
+    "start": "node server/build/server.js"
   }
 }
