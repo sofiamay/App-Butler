@@ -2,6 +2,15 @@ import passport from 'passport';
 import GitHubStrategy from 'passport-github';
 import User from 'USERMODELPATH';
 
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
 
 passport.use(new GitHubStrategy({
 
