@@ -1,8 +1,8 @@
-import githubAuth from '/../passport/githubAuth';
+import githubAuth from './../passport/githubAuth';
 
 
 module.exports = (app, express) => {
-  app.use(express.static(__dirname + '/../../client'));
+  app.use(express.static(__dirname + './../../../../client'));
 
   app.get('/auth/github', githubAuth.handleLogin);
 
