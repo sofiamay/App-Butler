@@ -18,11 +18,14 @@
     "express": "4.13.4",
     "express-session": "^1.13.0",
     "json-loader": "^0.5.4",
+<<<<<<< 7d4a3afceab329f693dc7f1a737ca2fa5c2571d9
     "jsonwebtoken": "^6.2.0",
     "letsencrypt": "^1.4.4",
     "letsencrypt-express": "^1.1.5",
     "mongoose": "^4.4.14",
     "mongoose-relationship": "^0.1.5",
+=======
+>>>>>>> Add passport, passport-github
     "passport": "^0.3.2",
     "passport-github": "1.1.0",
     "path": "^0.12.7",
