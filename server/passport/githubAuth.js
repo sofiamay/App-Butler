@@ -2,6 +2,14 @@ import passport from 'passport';
 import GitHubStrategy from 'passport-github';
 import User from 'USERMODELPATH';
 
+
+module.exports.handleLogin = passport.authenticate('github');
+
+module.exports.authenticateLogin = passport.authenticate('github', { failureRedirect: '/login' }, (req, res) => {
+  res.redirect('/');
+});
+
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
