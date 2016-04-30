@@ -21,7 +21,7 @@ passport.use(new GitHubStrategy({
           user.github = profile.id;
           user.tokens.push({
             kind: 'github',
-            accessToken: accessToken
+            accessToken,
           });
           user.profile.name = user.profile.name || profile.displayName;
           user.profile.picture = user.profile.picture || profile._json.avatar_url;
@@ -39,23 +39,26 @@ passport.use(new GitHubStrategy({
       if (existingUser) {
         return done(null, existingUser);
       }
-      User.findOne({ email: profile._json.email }, (err, existingEmailUser) => {
+      User.findOne({ email: profile._json.email }, (err2, existingEmailUser) => {
         if (existingEmailUser) {
           req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Github manually from Account Settings.' });
-          done(err);
+          done(err2);
         } else {
           const user = new User();
           user.email = profile._json.email;
           user.github = profile.id;
-          user.tokens.push({ kind: 'github', accessToken: accessToken });
+          user.tokens.push({
+            kind: 'github',
+            accessToken,
+          });
           user.profile.name = profile.displayName;
           user.profile.picture = profile._json.avatar_url;
           user.profile.website = profile._json.blog;
-          user.save(err => {
-            done(err, user);
+          user.save(err3 => {
+            done(err3, user);
           });
         }
       });
-    }
-  )
+    });
+  }
 }));
