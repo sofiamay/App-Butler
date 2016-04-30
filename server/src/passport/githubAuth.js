@@ -1,9 +1,10 @@
 import passport from 'passport';
 import GitHubStrategy from 'passport-github';
 import User from 'USERMODELPATH';
+import { GITHUB_ID, GITHUB_SECRET } from './../GITHUBKEYS.js';
 
 
-module.exports.handleLogin = passport.authenticate('github');
+module.exports.handleLogin = passport.authenticate('github', { scope: 'user, public_repo, repo, delete_repo, admin:repo_hook, admin:org' });
 
 module.exports.authenticateLogin = passport.authenticate('github', { failureRedirect: '/login' }, (req, res) => {
   res.redirect('/');
@@ -22,8 +23,8 @@ passport.deserializeUser((id, done) => {
 
 passport.use(new GitHubStrategy({
 
-  clientID: process.env.GITHUB_ID,
-  clientSecret: process.env.GITHUB_SECRET,
+  clientID: GITHUB_ID,
+  clientSecret: GITHUB_SECRET,
   callbackURL: '/auth/github/callback',
   passReqToCallback: true,
 }, (req, accessToken, refreshToken, profile, done) => {

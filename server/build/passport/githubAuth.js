@@ -12,9 +12,11 @@ var _passportGithub2 = _interopRequireDefault(_passportGithub);
 
 // var _USERMODELPATH2 = _interopRequireDefault(_USERMODELPATH);
 
+var _GITHUBKEYS = require('./../GITHUBKEYS.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-module.exports.handleLogin = _passport2.default.authenticate('github');
+module.exports.handleLogin = _passport2.default.authenticate('github', { scope: 'user, public_repo, repo, delete_repo, admin:repo_hook, admin:org' });
 
 module.exports.authenticateLogin = _passport2.default.authenticate('github', { failureRedirect: '/login' }, function (req, res) {
   res.redirect('/');
@@ -30,13 +32,10 @@ _passport2.default.deserializeUser(function (id, done) {
   });
 });
 
-process.env.GITHUB_ID = 'cb448b1d4f0c743a1e36';
-process.env.GITHUB_SECRET = '815aa4606f476444691c5f1c16b9c70da6714dc6';
-console.log(process.env.GITHUB_ID);
 _passport2.default.use(new _passportGithub2.default({
 
-  clientID: process.env.GITHUB_ID,
-  clientSecret: process.env.GITHUB_SECRET,
+  clientID: _GITHUBKEYS.GITHUB_ID,
+  clientSecret: _GITHUBKEYS.GITHUB_SECRET,
   callbackURL: '/auth/github/callback',
   passReqToCallback: true
 }, function (req, accessToken, refreshToken, profile, done) {
