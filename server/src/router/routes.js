@@ -7,7 +7,7 @@ module.exports = (app, express) => {
   app.get('/auth/github', githubAuth.handleLogin);
 
   app.get('/auth/github/callback', githubAuth.authenticateLogin, (req, res) => {
-    res.redirect('/home');
+    res.redirect('/');
   });
 };
 

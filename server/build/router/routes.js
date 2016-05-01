@@ -12,6 +12,6 @@ module.exports = function (app, express) {
   app.get('/auth/github', _githubAuth2.default.handleLogin);
 
   app.get('/auth/github/callback', _githubAuth2.default.authenticateLogin, function (req, res) {
-    res.redirect('/home');
+    res.redirect('/');
   });
 };

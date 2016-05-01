@@ -89,6 +89,6 @@
     "build-client": "webpack --progress --colors --watch",
     "build": "npm run clean && npm run build-server && npm run build-client",
     "deploy": "babel-node tools/run deploy",
-    "start": "node server/build/server.js"
+    "start": "nodemon server/build/server.js"
   }
 }
