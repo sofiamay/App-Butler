@@ -1,10 +1,10 @@
 import passport from 'passport';
-import GitHubStrategy from 'passport-github';
-import User from 'USERMODELPATH';
+import { Strategy } from 'passport-github';
+// import User from 'USERMODELPATH';
 import { GITHUB_ID, GITHUB_SECRET } from './../GITHUBKEYS.js';
 
 
-module.exports.handleLogin = passport.authenticate('github', { scope: 'user, public_repo, repo, delete_repo, admin:repo_hook, admin:org' });
+module.exports.handleLogin = passport.authenticate('github');
 
 module.exports.authenticateLogin = passport.authenticate('github', { failureRedirect: '/login' });
 
@@ -14,21 +14,24 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+  // User.findById(id, (err, user) => {
+  //   done(err, user);
+  // });
+  done(null, id);
 });
 
-passport.use(new GitHubStrategy({
+passport.use(new Strategy({
 
   clientID: GITHUB_ID,
   clientSecret: GITHUB_SECRET,
   callbackURL: '/auth/github/callback',
-  passReqToCallback: true,
-}, (req, accessToken, refreshToken, profile, done) => {
-  console.log(profile);
-  console.log(accessToken);
-  done(null);
+  userAgent: 'localhost:8000',
+  scope: 'user, public_repo, repo, delete_repo, admin:org',
+  // userAgent: 'AppButler.io',
+  // passReqToCallback: true,
+}, (accessToken, refreshToken, tokenDetails, profile, done) => {
+  // refreshToken is not provided by GitHub
+  done(null, profile);
   // User.findOne({ github: profile.id }, (err, existingUser) => {
   //   if (existingUser) {
   //     // Login the user
