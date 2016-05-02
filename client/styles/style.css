@@ -14,7 +14,8 @@ hr {
   margin: 7px 0px 8px;
   height: 1px;
   opacity: 1;
-  background-color: rgb(224, 224, 224);
+  border: none;
+  background-color: #c9c9c9;
 }
 
 .container {
@@ -44,6 +45,7 @@ hr {
   width: 200px;
   height: 100%;
   display: table-cell;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
 
 .sidebar-top {
@@ -52,16 +54,18 @@ hr {
   line-height: 25px;
   padding-right: 5px;
   text-align: right;
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.sidebar-content {
+  padding: 0 10px 10px 10px;
+  border-top: 1px solid #f3f2f2;
 }
 
 .blockArea {
   vertical-align: top;
   display: table-cell;
   padding: 5px;
-}
-
-.sidebar-content {
-  padding: 10px;
 }
 
 /* Button Styling */
@@ -72,6 +76,7 @@ hr {
   padding: 6px 12px;
   text-align: center;
   border: 1px solid transparent;
+  font-size: 14px;
 }
 
 .btn-block {
@@ -90,4 +95,34 @@ hr {
 
 .btn-default:hover {
   background: #e6e6e6;
+}
+
+/* Block styling */
+.block {
+  width: 170px;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+}
+
+.block-lg {
+  height: 50px;
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+  background-color: #1da8ff;
+  padding: 5px;
+}
+
+.block-settings {
+  text-align: right;
+}
+
+.block-settings i {
+  margin-left: 7px;
+}
+
+.block-icon {
+  margin-right: 5px;
+}
+
+.block-icon i {
+  font-size: 16px;
 }
