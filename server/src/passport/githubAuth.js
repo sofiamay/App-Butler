@@ -31,6 +31,7 @@ passport.use(new Strategy({
   // passReqToCallback: true,
 }, (accessToken, refreshToken, tokenDetails, profile, done) => {
   // refreshToken is not provided by GitHub
+  console.log(profile.username + ': login successful' + ' with access token: ' + accessToken);
   done(null, profile);
   // User.findOne({ github: profile.id }, (err, existingUser) => {
   //   if (existingUser) {
