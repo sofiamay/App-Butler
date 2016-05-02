@@ -14,14 +14,14 @@
     "passport": "0.3.2",
     "passport-github": "1.1.0",
     "pretty-error": "2.0.0",
-    "react": "^15.0.1",
+    "react": "^0.14.8",
     "react-dom": "^15.0.1",
     "react-routing": "0.0.7"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.3.0",
     "babel-cli": "^6.6.5",
-    "babel-eslint": "^5.0.0",
+    "babel-eslint": "^6.0.4",
     "babel-jest": "^9.0.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-transform": "^2.0.2",
@@ -30,19 +30,18 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "browser-sync": "^2.11.1",
-    "eslint": "^2.3.0",
+    "chai": "^3.5.0",
     "core-js": "^2.1.3",
     "css-loader": "^0.23.1",
     "csscomb": "^3.1.8",
     "del": "^2.2.0",
     "enzyme": "^2.0.0",
-    "eslint": "^2.3.0",
-    "eslint-config-airbnb": "^6.1.0",
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb": "^6.2.0",
     "eslint-loader": "^1.3.0",
     "eslint-plugin-react": "^4.2.0",
-<<<<<<< HEAD
-=======
     "estraverse-fb": "^1.3.1",
+    "expect": "^1.18.0",
     "extend": "^3.0.0",
     "file-loader": "^0.8.5",
     "gaze": "^0.5.2",
@@ -52,7 +51,15 @@
     "jest-cli": "^0.9.0",
     "jscs": "^2.11.0",
     "json-loader": "^0.5.4",
+    "karma": "^0.13.22",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-mocha": "^0.2.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.26",
+    "karma-webpack": "^1.7.0",
     "mkdirp": "^0.5.1",
+    "mocha": "^2.4.5",
     "ncp": "^2.0.0",
     "node-mocks-http": "^1.5.2",
     "postcss": "^5.0.19",
@@ -72,7 +79,11 @@
     "webpack-middleware": "^1.5.1"
   },
   "scripts": {
-    "test": "eslint src && jest",
+    "test-mocha": "mocha client/test/sample-test.js",
+    "test-karma": "karma start",
+    "lint": "eslint client/src/** server/src/**; exit 0",
+    "test-client": "mocha client/test/sample-test.js",
+    "test": "npm run lint && mocha",
     "clean": "rm -rf server/build && mkdir server/build && rm -rf client/build && mkdir client/build",
     "build-server": "babel ./server/src/ -d ./server/build/",
     "build-client": "webpack --progress --colors --watch",
@@ -80,10 +91,4 @@
     "deploy": "babel-node tools/run deploy",
     "start": "node server/build/server.js"
   }
-
 }
-=======
-    "start": "babel-node tools/run start"
-  }
-}
-

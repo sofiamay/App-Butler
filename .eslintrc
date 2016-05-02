@@ -6,7 +6,8 @@
   },
   "env": {
     "browser": true,
-    "jest": true
+    "node": true,
+    "mocha": true,
   },
   "rules": {
     "no-confusing-arrow": 0,
