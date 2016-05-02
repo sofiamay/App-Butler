@@ -1,9 +1,11 @@
-'use strict';
-
 import React from 'react';
 import { render } from 'react-dom';
+import { Router, Route, hashHistory } from 'react-router';
 
-var App = React.createClass({
+// Components
+
+
+const App = React.createClass({
 
   render() {
     return <h1>Hello, World</h1>;
@@ -11,9 +13,13 @@ var App = React.createClass({
 
 });
 
-// render (
-//   <App />,
-//   document.getElementById('app')
-// );
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={Index}>
+      <Route path="about" component={About}/>
+      <Route path="*" component={NoMatch}/>
+    </Route>
+  </Router>
+), document.body);
 
 export default App;

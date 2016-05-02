@@ -10,3 +10,4 @@ npm-debug.log
 .env
 /server/src/GITHUBKEYS.js
 /server/src/token.js
+.DS_Store
