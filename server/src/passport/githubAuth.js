@@ -26,7 +26,7 @@ passport.use(new Strategy({
   clientSecret: GITHUB_SECRET,
   callbackURL: '/auth/github/callback',
   userAgent: 'localhost:8000',
-  scope: 'user, public_repo, repo, delete_repo, admin:org',
+  scope: 'user, public_repo, repo, admin:org',
   // userAgent: 'AppButler.io',
   // passReqToCallback: true,
 }, (accessToken, refreshToken, tokenDetails, profile, done) => {
