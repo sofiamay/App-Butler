@@ -2,8 +2,8 @@
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
 
 ./build
-./server/build
-./client/build
+server/build
+client/build
 node_modules
 ncp-debug.log
 npm-debug.log
