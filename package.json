@@ -86,7 +86,7 @@
   "scripts": {
     "test-karma": "karma start",
     "lint": "eslint client/src/** server/src/**; exit 0",
-    "test": "npm run lint && mocha && npm run test-karma",
+    "test": "npm run lint && mocha --ui tdd --compilers js:babel-register 'test/**/*.js' && npm run test-karma",
     "clean": "rm -rf server/build && mkdir server/build && rm -rf client/build && mkdir client/build",
     "build-server": "babel ./server/src/ -d ./server/build/",
     "build-client": "webpack --progress --colors --watch",
