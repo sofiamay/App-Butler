@@ -3,23 +3,16 @@ import { render } from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
 
 // Components
+import Index from './components/Index.js';
+import Design from './components/Design.js';
+import NoMatch from './components/NoMatch.js';
 
-
-const App = React.createClass({
-
-  render() {
-    return <h1>Hello, World</h1>;
-  },
-
-});
+console.log('Design is: ', Design);
 
 render((
   <Router history={hashHistory}>
-    <Route path="/" component={Index}>
-      <Route path="about" component={About}/>
-      <Route path="*" component={NoMatch}/>
-    </Route>
+    <Route path="/" component={Index} />
+    <Route path="/design" component={Design} />
+    <Route path="/*" component={NoMatch} />
   </Router>
-), document.body);
-
-export default App;
+), document.getElementById('app'));

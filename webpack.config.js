@@ -49,7 +49,7 @@ module.exports = {
         // `exclude` lets you specify tests that, when passed by a filename, cause those
         // files to *not* be transformed by the loader. There's also an `include` option
         // that works in the inverse way.
-        exclude: /node_modules/,
+        exclude: /(node_modules)/,
 
         // `loader` names the actual loader that is to be applied. In this case,
         // this object requires 'babel-loader' to do the transformation.
