@@ -53,7 +53,6 @@ passport.use(new Strategy({
           return err;
         }
         console.log(addedUser + ' has been saved');
-        return;
       });
     }
   });
