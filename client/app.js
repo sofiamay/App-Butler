@@ -7,8 +7,6 @@ import Index from './components/Index.js';
 import Design from './components/Design.js';
 import NoMatch from './components/NoMatch.js';
 
-console.log('Design is: ', Design);
-
 render((
   <Router history={hashHistory}>
     <Route path="/" component={Index} />

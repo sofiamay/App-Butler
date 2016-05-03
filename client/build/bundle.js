@@ -62,16 +62,11 @@
 
 	var _Design2 = _interopRequireDefault(_Design);
 
-	var _NoMatch = __webpack_require__(317);
+	var _NoMatch = __webpack_require__(318);
 
 	var _NoMatch2 = _interopRequireDefault(_NoMatch);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	console.log('Design is: ', _Design2.default);
-
-	// Components
-
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
@@ -80,6 +75,8 @@
 	  _react2.default.createElement(_reactRouter.Route, { path: '/design', component: _Design2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/*', component: _NoMatch2.default })
 	), document.getElementById('app'));
+
+	// Components
 
 /***/ },
 /* 1 */
@@ -27212,7 +27209,7 @@
 /* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -27242,6 +27239,18 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Nav = __webpack_require__(320);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _Sidebar = __webpack_require__(321);
+
+	var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+	var _BlockArea = __webpack_require__(322);
+
+	var _BlockArea2 = _interopRequireDefault(_BlockArea);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Index = function (_React$Component) {
@@ -27257,80 +27266,20 @@
 	  }
 
 	  (0, _createClass3.default)(Index, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "container" },
-	        _react2.default.createElement("div", { className: "nav" }),
+	        'div',
+	        { className: 'container' },
+	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "content" },
+	          'div',
+	          { className: 'content' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "row" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "sidebar" },
-	              _react2.default.createElement(
-	                "div",
-	                { className: "sidebar-top" },
-	                _react2.default.createElement("i", { className: "fa fa-caret-left", "aria-hidden": "true" }),
-	                _react2.default.createElement("i", { className: "fa fa-caret-left", "aria-hidden": "true" })
-	              ),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "sidebar-content" },
-	                _react2.default.createElement(
-	                  "div",
-	                  { className: "categories" },
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn-block btn-default" },
-	                    "Server"
-	                  ),
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "btn-block btn-default" },
-	                    "Routers"
-	                  )
-	                ),
-	                _react2.default.createElement("hr", null),
-	                _react2.default.createElement(
-	                  "div",
-	                  { className: "blocks" },
-	                  _react2.default.createElement(
-	                    "div",
-	                    { className: "block block-lg" },
-	                    _react2.default.createElement(
-	                      "div",
-	                      { className: "block-settings" },
-	                      _react2.default.createElement("i", { className: "fa fa-info-circle", "aria-hidden": "true" }),
-	                      _react2.default.createElement("i", { className: "fa fa-sliders", "aria-hidden": "true" })
-	                    ),
-	                    _react2.default.createElement(
-	                      "div",
-	                      { className: "block-info" },
-	                      _react2.default.createElement(
-	                        "span",
-	                        { className: "block-icon" },
-	                        _react2.default.createElement("i", { className: "fa fa-random", "aria-hidden": "true" })
-	                      ),
-	                      _react2.default.createElement(
-	                        "span",
-	                        { className: "block-text" },
-	                        "Router"
-	                      )
-	                    )
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              { className: "blockArea" },
-	              "block area"
-	            )
+	            'div',
+	            { className: 'row' },
+	            _react2.default.createElement(_Sidebar2.default, null),
+	            _react2.default.createElement(_BlockArea2.default, null)
 	          )
 	        )
 	      );
@@ -27339,10 +27288,14 @@
 	  return Index;
 	}(_react2.default.Component);
 
+	// Import Required Components
+
+
 	exports.default = Index;
 
 /***/ },
-/* 317 */
+/* 317 */,
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27360,8 +27313,129 @@
 	exports.default = function () {
 	  return _react2.default.createElement(
 	    "div",
-	    { "class": "noMatch" },
+	    { className: "noMatch" },
 	    "404 not found"
+	  );
+	};
+
+/***/ },
+/* 319 */,
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  return _react2.default.createElement("div", { className: "nav" });
+	};
+
+/***/ },
+/* 321 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "sidebar" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "sidebar-top" },
+	      _react2.default.createElement("i", { className: "fa fa-caret-left", "aria-hidden": "true" }),
+	      _react2.default.createElement("i", { className: "fa fa-caret-left", "aria-hidden": "true" })
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "sidebar-content" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "categories" },
+	        _react2.default.createElement(
+	          "a",
+	          { href: "#", className: "btn-block btn-default" },
+	          "Server"
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { href: "#", className: "btn-block btn-default" },
+	          "Routers"
+	        )
+	      ),
+	      _react2.default.createElement("hr", null),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "blocks" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "block block-lg" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "block-settings" },
+	            _react2.default.createElement("i", { className: "fa fa-info-circle", "aria-hidden": "true" }),
+	            _react2.default.createElement("i", { className: "fa fa-sliders", "aria-hidden": "true" })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "block-info" },
+	            _react2.default.createElement(
+	              "span",
+	              { className: "block-icon" },
+	              _react2.default.createElement("i", { className: "fa fa-random", "aria-hidden": "true" })
+	            ),
+	            _react2.default.createElement(
+	              "span",
+	              { className: "block-text" },
+	              "Router"
+	            )
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "blockArea" },
+	    "block area"
 	  );
 	};
 
