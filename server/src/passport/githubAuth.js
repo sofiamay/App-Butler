@@ -1,6 +1,6 @@
 import passport from 'passport';
 import { Strategy } from 'passport-github';
-import User from './../models/config.js';
+import User from './../models/user.js';
 import { GITHUB_ID, GITHUB_SECRET } from './../GITHUBKEYS.js';
 import userController from './../controllers/userController.js';
 import mongoose from 'mongoose';
@@ -34,28 +34,27 @@ passport.use(new Strategy({
 }, (req, accessToken, refreshToken, tokenDetails, profile, done) => {
   // refreshToken is not provided by GitHub
   console.log(profile.username + ': login successful' + ' with access token: ' + accessToken);
-  done(null, profile);
+  done(null, profile); // Reports a successful authentication to successfulRedirect
+
   User.findOne({ githubID: profile.id }, (err, existingUser) => {
     if (existingUser) {
       // Login the user
       done(null, existingUser);
-    } else { // store user into database
-
-      // User.findById(req.user.id, (err2, user) => {
-      //   user.github = profile.id;
-      //   user.tokens.push({
-      //     kind: 'github',
-      //     accessToken,
-      //   });
-      //   user.profile.name = user.profile.name || profile.displayName;
-      //   user.profile.picture = user.profile.picture || profile._json.avatar_url;
-      //   user.profile.location = user.profile.location || profile._json.location;
-      //   user.profile.website = user.profile.website || profile._json.blog;
-      //   user.save(err3 => {
-      //     req.flash('info', { msg: 'GitHub account has been linked.' });
-      //     done(err3, user);
-      //   });
-      // });
+    } else {
+      // user not found, store to database
+      const newUser = new User({
+        name: profile._json.name,
+        id: profile._json.id, // ADD
+        email: profile._json.email,
+        githubID: profile.username,
+      });
+      newUser.save((err2, addedUser) => {
+        if (err) {
+          return err;
+        }
+        console.log(addedUser + ' has been saved');
+        return;
+      });
     }
   });
 }));
