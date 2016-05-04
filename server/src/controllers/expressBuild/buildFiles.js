@@ -3,13 +3,19 @@ import { buildMainFile } from '../../../../server/build/controllers/expressBuild
 
 const http = require('https');
 
-export function buildAllFiles(request, response) {
-  
-}
 export function buildFile(fileConfig, userConfig) {
   // build main server file
   if (fileConfig.type === 'main') { return buildMainFile(fileConfig, userConfig); }
   return new Error('Undefined file type');
+}
+
+export function buildAllFiles(request, response) {
+  console.log('building all files....');
+  let files = [];
+  for (let fileName in request.session.files) {
+    files.push(buildFile(request.session.files[fileName], request.body.data));
+  }
+  return files;
 }
 
 export function fileToGitHub(fileConfig, userConfig, fileName) {
