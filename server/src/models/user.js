@@ -7,6 +7,7 @@ export default mongoose.model('User', new Schema({
   name: String,
   email: String,
   githubID: String,
+  encryptedToken: String,
   id: Number,
   key: String,
   files: [{

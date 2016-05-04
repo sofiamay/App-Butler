@@ -2,6 +2,7 @@ import passport from 'passport';
 import { Strategy } from 'passport-github';
 import User from './../models/user.js';
 import { GITHUB_ID, GITHUB_SECRET } from './../GITHUBKEYS.js';
+import bcrypt from 'bcrypt';
 
 export default {
   handleLogin: passport.authenticate('github'),
@@ -38,11 +39,21 @@ passport.use(new Strategy({
       done(null, existingUser);
     } else {
       // user not found, store to database
+      let encryptedToken = '';
+      const saltRounds = 10;
+      bcrypt.hash(accessToken, saltRounds, (err, hash) => {
+        if (err) {
+          console.log(err);
+        } else {
+          encryptedToken = hash;
+        }
+      });
       const newUser = new User({
         name: profile._json.name,
         id: profile._json.id, // ADD
         email: profile._json.email,
         githubID: profile.username,
+        encryptedToken,
       });
       newUser.save((err2, addedUser) => {
         if (err) {
