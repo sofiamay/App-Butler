@@ -5,6 +5,7 @@
     "npm": ">=3.3 <4"
   },
   "dependencies": {
+    "app-root-path": "^1.0.0",
     "babel-polyfill": "6.6.1",
     "babel-runtime": "6.6.1",
     "bluebird": "3.3.3",
@@ -15,6 +16,7 @@
     "mongoose-relationship": "^0.1.5",
     "passport": "^0.3.2",
     "passport-github": "1.1.0",
+    "path": "^0.12.7",
     "pretty-error": "2.0.0",
     "react": "^0.14.8",
     "react-dom": "^15.0.1",
@@ -86,7 +88,7 @@
   "scripts": {
     "test-karma": "karma start",
     "lint": "eslint client/src/** server/src/**; exit 0",
-    "test": "npm run lint && mocha && npm run test-karma",
+    "test": "npm run lint && mocha --ui tdd --compilers js:babel-register 'test/**/*.js' && npm run test-karma",
     "clean": "rm -rf server/build && mkdir server/build && rm -rf client/build && mkdir client/build",
     "build-server": "babel ./server/src/ -d ./server/build/",
     "build-client": "webpack --progress --colors --watch",
