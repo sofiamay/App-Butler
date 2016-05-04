@@ -29029,7 +29029,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'sidebar-content', style: displayContent },
-	          _react2.default.createElement(_Categories2.default, null),
+	          _react2.default.createElement(_Categories2.default, { changeCategory: this.props.changeCategory }),
 	          _react2.default.createElement('hr', null),
 	          _react2.default.createElement(_Blocks2.default, { currentCategory: this.props.currentCategory })
 	        )
@@ -29059,7 +29059,7 @@
 /* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	        value: true
@@ -29071,19 +29071,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function () {
+	exports.default = function (props) {
 	        return _react2.default.createElement(
-	                "div",
-	                { className: "categories" },
+	                'div',
+	                { className: 'categories' },
 	                _react2.default.createElement(
-	                        "a",
-	                        { href: "#", className: "btn-block btn-default" },
-	                        "Server"
+	                        'a',
+	                        { onClick: function onClick() {
+	                                        return props.changeCategory('SERVER');
+	                                }, className: 'btn-block btn-default' },
+	                        'Server'
 	                ),
 	                _react2.default.createElement(
-	                        "a",
-	                        { href: "#", className: "btn-block btn-default" },
-	                        "Routers"
+	                        'a',
+	                        { onClick: function onClick() {
+	                                        return props.changeCategory('ROUTERS');
+	                                }, className: 'btn-block btn-default' },
+	                        'Routers'
 	                )
 	        );
 	};
@@ -29142,6 +29146,7 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "blocks" },
+	        this.props.currentCategory,
 	        _react2.default.createElement(
 	          "div",
 	          { className: "block block-lg" },

@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
         <i className={carrots} aria-hidden="true"></i></a>
         </div>
         <div className="sidebar-content" style={displayContent}>
-          <Categories />
+          <Categories changeCategory={this.props.changeCategory} />
           <hr></hr>
 
           <Blocks currentCategory={this.props.currentCategory} />

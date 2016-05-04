@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default () => (
+export default (props) => (
   <div className="categories">
-          <a href="#" className="btn-block btn-default">Server</a>
-          <a href="#" className="btn-block btn-default">Routers</a>
+          <a onClick={() => props.changeCategory('SERVER')} className="btn-block btn-default">Server</a>
+          <a onClick={() => props.changeCategory('ROUTERS')} className="btn-block btn-default">Routers</a>
   </div>
 );
