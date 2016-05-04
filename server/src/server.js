@@ -5,11 +5,18 @@ import { port } from './config.js';
 import passport from 'passport';
 import routes from './router/routes';
 import mongoose from 'mongoose';
+import session from 'express-session';
 
 const server = express();
 const router = routes;
 
 mongoose.connect('mongodb://localhost/AppButler');
+
+server.use(session({
+  secret: 'plankton',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 server.use(express.static(__dirname + '/../../client'));
 // server.use(bodyParser.json());
