@@ -11,7 +11,7 @@ function addMiddleware() {
 }
 
 function addServerListen(name, port) {
-  return `app.listen(3000, function () {console.log(\'${name} listening on port ${port}\');`;
+  return `app.listen(${port}, function () {console.log(\'${name} listening on port ${port}\');`;
 }
 
 export function buildMainFile(fileConfig, userConfig) {
@@ -23,7 +23,7 @@ export function buildMainFile(fileConfig, userConfig) {
   if (userConfig.middleware) { file += addMiddleware(); }
   // server listen
   const name = userConfig.appName || 'myApp';
-  const port = userConfig.serverSettings.port;
+  const port = userConfig.serverSettings.port || 8000;
   file += addServerListen(name, port);
   console.log(file);
   return file;
