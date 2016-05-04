@@ -2,37 +2,41 @@ import React from 'react';
 import Categories from './Categories';
 import Blocks from './Blocks';
 
+// Redux
+import { changeCategory } from './../../../actions/DesignActions.js';
 import { connect } from 'react-redux';
-import { togglePanel } from './../../../actions/DesignActions.js';
 
-@connect(state => ({ state: state.todos }))
 class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: true,
+    };
+  }
+
   getSidebarWidth() {
-    // return this.state.open ? '200px' : '25px';
+    return this.state.open ? '200px' : '25px';
   }
 
   displayContent() {
-    // return this.state.open ? 'block' : 'none';
+    return this.state.open ? 'block' : 'none';
   }
 
   showCarrots() {
-    // return this.state.open ? 'fa fa-caret-left' : 'fa fa-caret-right';
+    return this.state.open ? 'fa fa-caret-left' : 'fa fa-caret-right';
   }
 
   togglePanel() {
-    console.log('props', this.props.state);
-
-    // dispatch(togglePanel());
-
-    // this.setState({
-    //   open: !this.state.open,
-    // });
+    console.log('Props', this.props.currentCategory);
+    this.setState({
+      open: !this.state.open,
+    });
   }
 
   render() {
-    let sidebarWidth = { width: '200px' };
-    let displayContent = { display: 'block' };
-    let carrots = 'fa fa-caret-left';
+    let sidebarWidth = { width: this.getSidebarWidth() };
+    let displayContent = { display: this.displayContent() };
+    let carrots = this.showCarrots();
     return (
       <div className="sidebar" style={sidebarWidth}>
         <div className="sidebar-top">
@@ -43,11 +47,26 @@ class Sidebar extends React.Component {
           <Categories />
           <hr></hr>
 
-          <Blocks />
+          <Blocks currentCategory={this.props.currentCategory} />
         </div>
       </div>
     );
   }
 }
 
-export default Sidebar;
+
+function mapStateToProps(state) {
+  return {
+    currentCategory: state.design.currentCategory,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    changeCategory: (category) => {
+      dispatch(changeCategory(category));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

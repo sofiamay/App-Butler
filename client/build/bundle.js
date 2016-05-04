@@ -56,8 +56,6 @@
 
 	var _reactRedux = __webpack_require__(229);
 
-	var _redux = __webpack_require__(236);
-
 	var _Index = __webpack_require__(253);
 
 	var _Index2 = _interopRequireDefault(_Index);
@@ -70,29 +68,18 @@
 
 	var _NoMatch2 = _interopRequireDefault(_NoMatch);
 
-	var _DesignReducers = __webpack_require__(347);
+	var _store = __webpack_require__(347);
 
-	var _DesignReducers2 = _interopRequireDefault(_DesignReducers);
+	var _store2 = _interopRequireDefault(_store);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// Redux Setup
-	var defaultState = {
-	  ui: {
-	    panel: {
-	      open: true
-	    }
-	  }
-	};
 
 	// Components
 
 
-	var store = (0, _redux.createStore)(_DesignReducers2.default, defaultState);
-
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
-	  { store: store },
+	  { store: _store2.default },
 	  _react2.default.createElement(
 	    _reactRouter.Router,
 	    { history: _reactRouter.hashHistory },
@@ -28975,52 +28962,57 @@
 
 	var _Blocks2 = _interopRequireDefault(_Blocks);
 
+	var _DesignActions = __webpack_require__(353);
+
 	var _reactRedux = __webpack_require__(229);
 
-	var _DesignActions = __webpack_require__(348);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Redux
 
 	var Sidebar = function (_React$Component) {
 	  (0, _inherits3.default)(Sidebar, _React$Component);
 
-	  function Sidebar() {
+	  function Sidebar(props) {
 	    (0, _classCallCheck3.default)(this, Sidebar);
-	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Sidebar).apply(this, arguments));
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Sidebar).call(this, props));
+
+	    _this.state = {
+	      open: true
+	    };
+	    return _this;
 	  }
 
 	  (0, _createClass3.default)(Sidebar, [{
 	    key: 'getSidebarWidth',
 	    value: function getSidebarWidth() {
-	      // return this.state.open ? '200px' : '25px';
+	      return this.state.open ? '200px' : '25px';
 	    }
 	  }, {
 	    key: 'displayContent',
 	    value: function displayContent() {
-	      // return this.state.open ? 'block' : 'none';
+	      return this.state.open ? 'block' : 'none';
 	    }
 	  }, {
 	    key: 'showCarrots',
 	    value: function showCarrots() {
-	      // return this.state.open ? 'fa fa-caret-left' : 'fa fa-caret-right';
+	      return this.state.open ? 'fa fa-caret-left' : 'fa fa-caret-right';
 	    }
 	  }, {
 	    key: 'togglePanel',
 	    value: function togglePanel() {
-	      console.log('props', this.props.state);
-
-	      // dispatch(togglePanel());
-
-	      // this.setState({
-	      //   open: !this.state.open,
-	      // });
+	      console.log('Props', this.props.currentCategory);
+	      this.setState({
+	        open: !this.state.open
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var sidebarWidth = { width: '200px' };
-	      var displayContent = { display: 'block' };
-	      var carrots = 'fa fa-caret-left';
+	      var sidebarWidth = { width: this.getSidebarWidth() };
+	      var displayContent = { display: this.displayContent() };
+	      var carrots = this.showCarrots();
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'sidebar', style: sidebarWidth },
@@ -29039,7 +29031,7 @@
 	          { className: 'sidebar-content', style: displayContent },
 	          _react2.default.createElement(_Categories2.default, null),
 	          _react2.default.createElement('hr', null),
-	          _react2.default.createElement(_Blocks2.default, null)
+	          _react2.default.createElement(_Blocks2.default, { currentCategory: this.props.currentCategory })
 	        )
 	      );
 	    }
@@ -29047,7 +29039,21 @@
 	  return Sidebar;
 	}(_react2.default.Component);
 
-	exports.default = Sidebar;
+	function mapStateToProps(state) {
+	  return {
+	    currentCategory: state.design.currentCategory
+	  };
+	}
+
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    changeCategory: function changeCategory(category) {
+	      dispatch((0, _DesignActions.changeCategory)(category));
+	    }
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Sidebar);
 
 /***/ },
 /* 343 */
@@ -29218,26 +29224,127 @@
 
 /***/ },
 /* 347 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _redux = __webpack_require__(236);
+
+	var _DesignReducers = __webpack_require__(348);
+
+	var _DesignReducers2 = _interopRequireDefault(_DesignReducers);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Redux Setup
+	var defaultState = {
+	  design: {
+	    currentCategory: 'SERVER'
+	  }
+	};
+
+	exports.default = (0, _redux.createStore)(_DesignReducers2.default, defaultState);
+
+/***/ },
+/* 348 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _assign = __webpack_require__(349);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
 	exports.default = todoReducer;
-	function todoReducer(state, action) {
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function todoReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+
 	  switch (action.type) {
-	    case 'TOGGLE_PANEL':
-	      state.ui.panel.open = !state.ui.panel.open;
-	      return state.ui.panel.open;
+	    case 'CHANGE_CATEGORY':
+	      return (0, _assign2.default)({}, state, {
+	        design: {
+	          currentCategory: action.category
+	        }
+	      });
 	    default:
 	      return state;
 	  }
 	}
 
 /***/ },
-/* 348 */
+/* 349 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(350), __esModule: true };
+
+/***/ },
+/* 350 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(351);
+	module.exports = __webpack_require__(267).Object.assign;
+
+/***/ },
+/* 351 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(266);
+
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(352)});
+
+/***/ },
+/* 352 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// 19.1.2.1 Object.assign(target, source, ...)
+	var getKeys  = __webpack_require__(299)
+	  , gOPS     = __webpack_require__(323)
+	  , pIE      = __webpack_require__(324)
+	  , toObject = __webpack_require__(257)
+	  , IObject  = __webpack_require__(302)
+	  , $assign  = Object.assign;
+
+	// should work with symbols and should have deterministic property order (V8 bug)
+	module.exports = !$assign || __webpack_require__(276)(function(){
+	  var A = {}
+	    , B = {}
+	    , S = Symbol()
+	    , K = 'abcdefghijklmnopqrst';
+	  A[S] = 7;
+	  K.split('').forEach(function(k){ B[k] = k; });
+	  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+	}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
+	  var T     = toObject(target)
+	    , aLen  = arguments.length
+	    , index = 1
+	    , getSymbols = gOPS.f
+	    , isEnum     = pIE.f;
+	  while(aLen > index){
+	    var S      = IObject(arguments[index++])
+	      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
+	      , length = keys.length
+	      , j      = 0
+	      , key;
+	    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
+	  } return T;
+	} : $assign;
+
+/***/ },
+/* 353 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29245,10 +29352,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.togglePanel = togglePanel;
-	function togglePanel() {
+	exports.changeCategory = changeCategory;
+	function changeCategory(category) {
 	  return {
-	    type: 'TOGGLE_PANEL'
+	    type: 'CHANGE_CATEGORY',
+	    category: category
 	  };
 	}
 	// export function editTodo(id, text) {

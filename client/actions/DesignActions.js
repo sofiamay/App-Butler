@@ -1,6 +1,7 @@
-export function togglePanel() {
+export function changeCategory(category) {
   return {
-    type: 'TOGGLE_PANEL',
+    type: 'CHANGE_CATEGORY',
+    category,
   };
 }
 // export function editTodo(id, text) {
