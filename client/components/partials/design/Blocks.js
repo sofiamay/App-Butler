@@ -1,4 +1,6 @@
 import React from 'react';
+import BlockItem from './BlockItem.js';
+import BlockData from './../../../data/blocks.js';
 
 export default class Blocks extends React.Component {
   constructor(props) {
@@ -7,19 +9,27 @@ export default class Blocks extends React.Component {
   }
 
   render() {
+    switch (this.props.currentCategory) {
+      case 'SERVER':
+        this.shownBlocks = BlockData.server;
+        break;
+      case 'ROUTERS':
+        this.shownBlocks = BlockData.routers;
+        break;
+      default:
+        this.shownBlocks = BlockData.server;
+        break;
+    }
     return (
       <div className="blocks">
-      {this.props.currentCategory}
-        <div className="block block-lg">
-          <div className="block-settings">
-          <i className="fa fa-info-circle" aria-hidden="true"></i><i className="fa fa-sliders" aria-hidden="true"></i>
-          </div>
-          <div className="block-info">
-          <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
-          <span className="block-text">Router</span>
-          </div>
-        </div>
+      {this.shownBlocks.map(item =>
+        <BlockItem key={item.key} data={item} />
+      )}
       </div>
     );
   }
 }
+
+Blocks.propTypes = {
+  currentCategory: React.PropTypes.string,
+};

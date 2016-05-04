@@ -1,8 +1,11 @@
 import React from 'react';
+import CategoryItem from './CategoryItem.js';
+import CategoryData from './../../../data/categories.js';
 
 export default (props) => (
   <div className="categories">
-          <a onClick={() => props.changeCategory('SERVER')} className="btn-block btn-default">Server</a>
-          <a onClick={() => props.changeCategory('ROUTERS')} className="btn-block btn-default">Routers</a>
+    {CategoryData.map(item =>
+      <CategoryItem key={item.key} data={item} event={props.changeCategory} currentCategory={props.currentCategory} />
+    )}
   </div>
 );

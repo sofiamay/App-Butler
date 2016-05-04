@@ -27,7 +27,6 @@ class Sidebar extends React.Component {
   }
 
   togglePanel() {
-    console.log('Props', this.props.currentCategory);
     this.setState({
       open: !this.state.open,
     });
@@ -44,7 +43,7 @@ class Sidebar extends React.Component {
         <i className={carrots} aria-hidden="true"></i></a>
         </div>
         <div className="sidebar-content" style={displayContent}>
-          <Categories changeCategory={this.props.changeCategory} />
+          <Categories changeCategory={this.props.changeCategory} currentCategory={this.props.currentCategory} />
           <hr></hr>
 
           <Blocks currentCategory={this.props.currentCategory} />

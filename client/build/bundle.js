@@ -64,11 +64,11 @@
 
 	var _Design2 = _interopRequireDefault(_Design);
 
-	var _NoMatch = __webpack_require__(346);
+	var _NoMatch = __webpack_require__(351);
 
 	var _NoMatch2 = _interopRequireDefault(_NoMatch);
 
-	var _store = __webpack_require__(347);
+	var _store = __webpack_require__(352);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -28854,7 +28854,7 @@
 
 	var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
-	var _BlockArea = __webpack_require__(345);
+	var _BlockArea = __webpack_require__(350);
 
 	var _BlockArea2 = _interopRequireDefault(_BlockArea);
 
@@ -28958,11 +28958,11 @@
 
 	var _Categories2 = _interopRequireDefault(_Categories);
 
-	var _Blocks = __webpack_require__(344);
+	var _Blocks = __webpack_require__(346);
 
 	var _Blocks2 = _interopRequireDefault(_Blocks);
 
-	var _DesignActions = __webpack_require__(353);
+	var _DesignActions = __webpack_require__(349);
 
 	var _reactRedux = __webpack_require__(229);
 
@@ -29002,7 +29002,6 @@
 	  }, {
 	    key: 'togglePanel',
 	    value: function togglePanel() {
-	      console.log('Props', this.props.currentCategory);
 	      this.setState({
 	        open: !this.state.open
 	      });
@@ -29029,7 +29028,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'sidebar-content', style: displayContent },
-	          _react2.default.createElement(_Categories2.default, { changeCategory: this.props.changeCategory }),
+	          _react2.default.createElement(_Categories2.default, { changeCategory: this.props.changeCategory, currentCategory: this.props.currentCategory }),
 	          _react2.default.createElement('hr', null),
 	          _react2.default.createElement(_Blocks2.default, { currentCategory: this.props.currentCategory })
 	        )
@@ -29062,8 +29061,62 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	        value: true
+	  value: true
 	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _CategoryItem = __webpack_require__(344);
+
+	var _CategoryItem2 = _interopRequireDefault(_CategoryItem);
+
+	var _categories = __webpack_require__(345);
+
+	var _categories2 = _interopRequireDefault(_categories);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'categories' },
+	    _categories2.default.map(function (item) {
+	      return _react2.default.createElement(_CategoryItem2.default, { key: item.key, data: item, event: props.changeCategory, currentCategory: props.currentCategory });
+	    })
+	  );
+	};
+
+/***/ },
+/* 344 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(254);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(280);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(281);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(285);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(332);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(1);
 
@@ -29071,29 +29124,155 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function (props) {
-	        return _react2.default.createElement(
-	                'div',
-	                { className: 'categories' },
-	                _react2.default.createElement(
-	                        'a',
-	                        { onClick: function onClick() {
-	                                        return props.changeCategory('SERVER');
-	                                }, className: 'btn-block btn-default' },
-	                        'Server'
-	                ),
-	                _react2.default.createElement(
-	                        'a',
-	                        { onClick: function onClick() {
-	                                        return props.changeCategory('ROUTERS');
-	                                }, className: 'btn-block btn-default' },
-	                        'Routers'
-	                )
-	        );
+	var CategoryItem = function (_React$Component) {
+	  (0, _inherits3.default)(CategoryItem, _React$Component);
+
+	  function CategoryItem(props) {
+	    (0, _classCallCheck3.default)(this, CategoryItem);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(CategoryItem).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  (0, _createClass3.default)(CategoryItem, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var activeClass = this.props.currentCategory === this.props.data.actionName ? 'btn-active' : null;
+	      return _react2.default.createElement(
+	        'a',
+	        { onClick: function onClick() {
+	            return _this2.props.event(_this2.props.data.actionName);
+	          }, className: this.props.data.classes + ' ' + activeClass },
+	        this.props.data.name
+	      );
+	    }
+	  }]);
+	  return CategoryItem;
+	}(_react2.default.Component);
+
+	exports.default = CategoryItem;
+
+
+	CategoryItem.propTypes = {
+	  data: _react2.default.PropTypes.object
 	};
 
 /***/ },
-/* 344 */
+/* 345 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = [{
+	  key: 1,
+	  name: 'Server',
+	  classes: 'btn-block btn-default',
+	  actionName: 'SERVER'
+	}, {
+	  key: 2,
+	  name: 'Routers',
+	  classes: 'btn-block btn-default',
+	  actionName: 'ROUTERS'
+	}];
+
+/***/ },
+/* 346 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(254);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(280);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(281);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(285);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(332);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BlockItem = __webpack_require__(347);
+
+	var _BlockItem2 = _interopRequireDefault(_BlockItem);
+
+	var _blocks = __webpack_require__(348);
+
+	var _blocks2 = _interopRequireDefault(_blocks);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Blocks = function (_React$Component) {
+	  (0, _inherits3.default)(Blocks, _React$Component);
+
+	  function Blocks(props) {
+	    (0, _classCallCheck3.default)(this, Blocks);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Blocks).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  (0, _createClass3.default)(Blocks, [{
+	    key: 'render',
+	    value: function render() {
+	      switch (this.props.currentCategory) {
+	        case 'SERVER':
+	          this.shownBlocks = _blocks2.default.server;
+	          break;
+	        case 'ROUTERS':
+	          this.shownBlocks = _blocks2.default.routers;
+	          break;
+	        default:
+	          this.shownBlocks = _blocks2.default.server;
+	          break;
+	      }
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'blocks' },
+	        this.shownBlocks.map(function (item) {
+	          return _react2.default.createElement(_BlockItem2.default, { key: item.key, data: item });
+	        })
+	      );
+	    }
+	  }]);
+	  return Blocks;
+	}(_react2.default.Component);
+
+	exports.default = Blocks;
+
+
+	Blocks.propTypes = {
+	  currentCategory: _react2.default.PropTypes.string
+	};
+
+/***/ },
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29128,59 +29307,116 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Blocks = function (_React$Component) {
-	  (0, _inherits3.default)(Blocks, _React$Component);
+	var BlockItem = function (_React$Component) {
+	  (0, _inherits3.default)(BlockItem, _React$Component);
 
-	  function Blocks(props) {
-	    (0, _classCallCheck3.default)(this, Blocks);
+	  function BlockItem(props) {
+	    (0, _classCallCheck3.default)(this, BlockItem);
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Blocks).call(this, props));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(BlockItem).call(this, props));
 
 	    _this.state = {};
 	    return _this;
 	  }
 
-	  (0, _createClass3.default)(Blocks, [{
+	  (0, _createClass3.default)(BlockItem, [{
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "blocks" },
-	        this.props.currentCategory,
+	        { className: "block block-lg" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "block block-lg" },
+	          { className: "block-settings" },
+	          _react2.default.createElement("i", { className: "fa fa-info-circle", "aria-hidden": "true" }),
+	          _react2.default.createElement("i", { className: "fa fa-sliders", "aria-hidden": "true" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "block-info" },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "block-settings" },
-	            _react2.default.createElement("i", { className: "fa fa-info-circle", "aria-hidden": "true" }),
-	            _react2.default.createElement("i", { className: "fa fa-sliders", "aria-hidden": "true" })
+	            "span",
+	            { className: "block-icon" },
+	            _react2.default.createElement("i", { className: this.props.data.icon, "aria-hidden": "true" })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "block-info" },
-	            _react2.default.createElement(
-	              "span",
-	              { className: "block-icon" },
-	              _react2.default.createElement("i", { className: "fa fa-random", "aria-hidden": "true" })
-	            ),
-	            _react2.default.createElement(
-	              "span",
-	              { className: "block-text" },
-	              "Router"
-	            )
+	            "span",
+	            { className: "block-text" },
+	            this.props.data.name
 	          )
 	        )
 	      );
 	    }
 	  }]);
-	  return Blocks;
+	  return BlockItem;
 	}(_react2.default.Component);
 
-	exports.default = Blocks;
+	exports.default = BlockItem;
+
+
+	BlockItem.propTypes = {
+	  data: _react2.default.PropTypes.object
+	};
 
 /***/ },
-/* 345 */
+/* 348 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  server: [{
+	    key: 1,
+	    name: 'Server',
+	    icon: 'fa fa-server'
+	  }],
+	  routers: [{
+	    key: 1,
+	    name: 'Router',
+	    icon: 'fa fa-random'
+	  }, {
+	    key: 2,
+	    name: 'Endpoint',
+	    icon: 'fa fa-code-fork'
+	  }]
+	};
+
+/***/ },
+/* 349 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.changeCategory = changeCategory;
+	function changeCategory(category) {
+	  return {
+	    type: 'CHANGE_CATEGORY',
+	    category: category
+	  };
+	}
+	// export function editTodo(id, text) {
+	//   return {
+	//     type: 'EDIT_TODO',
+	//     id,
+	//     text,
+	//     date: Date.now()
+	//   };
+	// }
+	// export function deleteTodo(id) {
+	//   return {
+	//     type: 'DELETE_TODO',
+	//     id
+	//   };
+	// }
+
+/***/ },
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29204,7 +29440,7 @@
 	};
 
 /***/ },
-/* 346 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29228,7 +29464,7 @@
 	};
 
 /***/ },
-/* 347 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29239,7 +29475,7 @@
 
 	var _redux = __webpack_require__(236);
 
-	var _DesignReducers = __webpack_require__(348);
+	var _DesignReducers = __webpack_require__(353);
 
 	var _DesignReducers2 = _interopRequireDefault(_DesignReducers);
 
@@ -29255,7 +29491,7 @@
 	exports.default = (0, _redux.createStore)(_DesignReducers2.default, defaultState);
 
 /***/ },
-/* 348 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29264,7 +29500,7 @@
 	  value: true
 	});
 
-	var _assign = __webpack_require__(349);
+	var _assign = __webpack_require__(354);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -29289,29 +29525,29 @@
 	}
 
 /***/ },
-/* 349 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(350), __esModule: true };
+	module.exports = { "default": __webpack_require__(355), __esModule: true };
 
 /***/ },
-/* 350 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(351);
+	__webpack_require__(356);
 	module.exports = __webpack_require__(267).Object.assign;
 
 /***/ },
-/* 351 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.3.1 Object.assign(target, source)
 	var $export = __webpack_require__(266);
 
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(352)});
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(357)});
 
 /***/ },
-/* 352 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29347,37 +29583,6 @@
 	    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
 	  } return T;
 	} : $assign;
-
-/***/ },
-/* 353 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.changeCategory = changeCategory;
-	function changeCategory(category) {
-	  return {
-	    type: 'CHANGE_CATEGORY',
-	    category: category
-	  };
-	}
-	// export function editTodo(id, text) {
-	//   return {
-	//     type: 'EDIT_TODO',
-	//     id,
-	//     text,
-	//     date: Date.now()
-	//   };
-	// }
-	// export function deleteTodo(id) {
-	//   return {
-	//     type: 'DELETE_TODO',
-	//     id
-	//   };
-	// }
 
 /***/ }
 /******/ ]);

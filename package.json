@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "app-root-path": "^1.0.0",
+    "babel-plugin-transform-decorators": "^6.8.0",
     "babel-polyfill": "6.6.1",
     "babel-runtime": "6.6.1",
     "bluebird": "3.3.3",
