@@ -1,10 +1,30 @@
+const chai = require('chai');
+chai.should();
+const expect = require('chai').expect;
+const { it } = require('arrow-mocha/es5');
+
+import { buildFile } from '../../../../server/build/controllers/expressBuild/buildFile.js';
+
 describe('File Builder', () => {
-  it('should call buildMainFile when given a main server file');
+  const fileConfig = {
+    type: 'main',
+  };
+  const userConfig = {
+    serverType: 'node-express',
+    appName: 'ACoolApp',
+    serverSettings: {
+      port: 8000,
+      expressName: 'app',
+    },
+  };
+  it('should call not return an error when called on the main server file', () => {
+    expect(buildFile(fileConfig, userConfig)).to.not.be.an('error');
+  });
 
   describe('Creation of the main server file', () => {
-    const request = '';
-
-    it('contains code that instantiates express');
+    it('should return a string', () => {
+      expect(buildFile(fileConfig, userConfig)).to.be.a('string');
+    });
 
     it('contains code that tells the server to listen');
 

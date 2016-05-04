@@ -2,6 +2,8 @@ sudo: false
 language: node_js
 node_js:
   - '5.8'
+services:
+    - mongodb
 before_script:
   - npm install -g webpack
   - npm install -g karma-cli
