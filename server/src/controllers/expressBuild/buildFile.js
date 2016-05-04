@@ -3,6 +3,9 @@ import { buildMainFile } from '../../../../server/build/controllers/expressBuild
 
 const http = require('https');
 
+export function buildAllFiles(request, response) {
+  
+}
 export function buildFile(fileConfig, userConfig) {
   // build main server file
   if (fileConfig.type === 'main') { return buildMainFile(fileConfig, userConfig); }
