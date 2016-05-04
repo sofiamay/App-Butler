@@ -1,28 +1,53 @@
 import React from 'react';
+import Categories from './Categories';
+import Blocks from './Blocks';
 
-export default () => (
-  <div className="sidebar">
-    <div className="sidebar-top">
-    <i className="fa fa-caret-left" aria-hidden="true"></i><i className="fa fa-caret-left" aria-hidden="true"></i>
-    </div>
-    <div className="sidebar-content">
-      <div className="categories">
-        <a href="#" className="btn-block btn-default">Server</a>
-        <a href="#" className="btn-block btn-default">Routers</a>
-      </div>
-      <hr></hr>
+import { connect } from 'react-redux';
+import { togglePanel } from './../../../actions/DesignActions.js';
 
-      <div className="blocks">
-        <div className="block block-lg">
-          <div className="block-settings">
-          <i className="fa fa-info-circle" aria-hidden="true"></i><i className="fa fa-sliders" aria-hidden="true"></i>
-          </div>
-          <div className="block-info">
-          <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
-          <span className="block-text">Router</span>
-          </div>
+@connect(state => ({ state: state.todos }))
+class Sidebar extends React.Component {
+  getSidebarWidth() {
+    // return this.state.open ? '200px' : '25px';
+  }
+
+  displayContent() {
+    // return this.state.open ? 'block' : 'none';
+  }
+
+  showCarrots() {
+    // return this.state.open ? 'fa fa-caret-left' : 'fa fa-caret-right';
+  }
+
+  togglePanel() {
+    console.log('props', this.props.state);
+
+    // dispatch(togglePanel());
+
+    // this.setState({
+    //   open: !this.state.open,
+    // });
+  }
+
+  render() {
+    let sidebarWidth = { width: '200px' };
+    let displayContent = { display: 'block' };
+    let carrots = 'fa fa-caret-left';
+    return (
+      <div className="sidebar" style={sidebarWidth}>
+        <div className="sidebar-top">
+        <a onClick={this.togglePanel.bind(this)} className="toggleLink"><i className={carrots} aria-hidden="true"></i>
+        <i className={carrots} aria-hidden="true"></i></a>
+        </div>
+        <div className="sidebar-content" style={displayContent}>
+          <Categories />
+          <hr></hr>
+
+          <Blocks />
         </div>
       </div>
-    </div>
-  </div>
-);
+    );
+  }
+}
+
+export default Sidebar;
