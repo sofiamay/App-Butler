@@ -39,27 +39,25 @@ passport.use(new Strategy({
       done(null, existingUser);
     } else {
       // user not found, store to database
-      let encryptedToken = '';
       const saltRounds = 10;
-      bcrypt.hash(accessToken, saltRounds, (err, hash) => {
-        if (err) {
-          console.log(err);
+      bcrypt.hash(accessToken, saltRounds, (err2, hash) => {
+        if (err2) {
+          console.log(err2);
         } else {
-          encryptedToken = hash;
+          const newUser = new User({
+            name: profile._json.name,
+            id: profile._json.id, // ADD
+            email: profile._json.email,
+            githubID: profile.username,
+            encryptedToken: hash,
+          });
+          newUser.save((err3, addedUser) => {
+            if (err3) {
+              return err3;
+            }
+            console.log(addedUser + ' has been saved');
+          });
         }
-      });
-      const newUser = new User({
-        name: profile._json.name,
-        id: profile._json.id, // ADD
-        email: profile._json.email,
-        githubID: profile.username,
-        encryptedToken,
-      });
-      newUser.save((err2, addedUser) => {
-        if (err) {
-          console.log(err);
-        }
-        console.log(`${addedUser} has been saved`);
       });
     }
   });
