@@ -25,7 +25,7 @@ pe.start();
 
 server.use(express.static(`${__dirname}/../../client`));
 
-server.use(cookieParser('Hope nobody sees this'));
+server.use(cookieParser('Hope nobody sees this')); // FOR DEV, STORE SECRET PROPERLY IN PROD
 
 server.use(bodyParser.json());
 

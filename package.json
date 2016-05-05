@@ -18,6 +18,7 @@
     "express": "4.13.4",
     "express-session": "^1.13.0",
     "json-loader": "^0.5.4",
+    "jsonwebtoken": "^6.2.0",
     "mongoose": "^4.4.14",
     "mongoose-relationship": "^0.1.5",
     "passport": "^0.3.2",
