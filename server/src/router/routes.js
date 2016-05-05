@@ -1,4 +1,5 @@
 import githubAuth from './../passport/githubAuth';
+import { generateServer } from '../controllers/generateServer.js';
 
 
 module.exports = (app, express) => {
@@ -9,5 +10,6 @@ module.exports = (app, express) => {
   app.get('/auth/github/callback', githubAuth.authenticateLogin, (req, res) => {
     res.redirect('/');
   });
+  app.post('/config', generateServer);
 };
 
