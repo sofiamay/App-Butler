@@ -28,7 +28,7 @@ export function fileToGitHub(fileConfig, userConfig, fileName) {
     port: null,
     path: `/repos/dylanksys/WOW/contents/${fileName}`,
     headers: {
-      authorization: ['token ', process.env.GH_TOKEN].join(),
+      authorization: `token ${process.env.GH_TOKEN}`,
       'content-type': 'application/json',
       'cache-control': 'no-cache',
       'user-agent': 'appButler',

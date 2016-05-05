@@ -58,7 +58,7 @@ passport.use(new Strategy({
         if (err) {
           return err;
         }
-        console.log([addedUser, ' has been saved'].join());
+        console.log(`${addedUser} has been saved`);
         return addedUser;
       });
     }
