@@ -29,7 +29,6 @@ server.use(cookieParser('Hope nobody sees this')); // FOR DEV, STORE SECRET PROP
 
 server.use(bodyParser.json());
 
-
 server.use(passport.initialize());
 router(server, express);
 
