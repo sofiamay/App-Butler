@@ -42,6 +42,10 @@ Visualize your backend while creating it
 ## Development
 
 ### Installing Dependencies
+From within the root directory:
 
-
+```sh
+npm install
+npm run build
+```
 
