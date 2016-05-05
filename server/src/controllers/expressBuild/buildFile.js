@@ -1,5 +1,5 @@
 import { buildMainFile } from '../../../../server/build/controllers/expressBuild/buildMainFile.js';
-const GH_TOKEN = require('/../../token.js');
+// const GH_TOKEN = require('/../../token.js');
 
 const http = require('https');
 
@@ -18,7 +18,7 @@ export function fileToGitHub(fileConfig, userConfig, fileName) {
     "port": null,
     "path": "/repos/dylanksys/WOW/contents/" + fileName,
     "headers": {
-    "authorization": 'token ' + GH_TOKEN,
+    "authorization": 'token ' + process.env.GH_TOKEN,
     "content-type": 'application/json',
     "cache-control": 'no-cache',
     "user-agent": 'appButler',
