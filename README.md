@@ -1,5 +1,5 @@
-
- # Butler
+# Butler
+Visualize your backend while creating it
 
 <hr>
 
@@ -23,12 +23,22 @@
 1. [Deployment](#deployment)
 
 <hr>
+
 ## Usage
 
 <hr>
+
 ## Requirements
 
+- Node >= 5.0.x < 6 
+- Express 
+- Mongo 3.2.x
+  - Mongoose 4.4.x
+- React 
+- Redux 
+
 <hr>
+
 ## Development
 
 ### Installing Dependencies
