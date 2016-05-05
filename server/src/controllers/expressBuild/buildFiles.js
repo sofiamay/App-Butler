@@ -11,11 +11,12 @@ export function buildFile(fileConfig, userConfig) {
 
 export function buildAllFiles(request, response) {
   const files = [];
-  for (const fileName in request.session.files) {
-    if (request.session.files) {
-      files.push(buildFile(request.session.files[fileName], request.body.data));
-    }
-  }
+  request.session.files.forEach(fileName => {
+    files.push(buildFile(request.session.files[fileName], request.body.data));
+  });
+  // for (let fileName in request.session.files) {
+  //   files.push(buildFile(request.session.files[fileName], request.body.data));
+  // }
   return files;
 }
 export function fileToGitHub(fileConfig, userConfig, fileName) {
@@ -27,7 +28,7 @@ export function fileToGitHub(fileConfig, userConfig, fileName) {
     port: null,
     path: `/repos/dylanksys/WOW/contents/${fileName}`,
     headers: {
-      authorization: 'token ', // + process.env.GH_TOKEN,
+      authorization: ['token ', process.env.GH_TOKEN].join(),
       'content-type': 'application/json',
       'cache-control': 'no-cache',
       'user-agent': 'appButler',
@@ -46,9 +47,11 @@ export function fileToGitHub(fileConfig, userConfig, fileName) {
     });
   });
 
-  req.write(JSON.stringify({ message: 'Initial Commit',
-  content: encodedFile,
-  committer: { name: 'AppButler', email: 'AppButler@AppButler.io' } }));
+  req.write(JSON.stringify({
+    message: 'Initial Commit',
+    content: encodedFile,
+    committer: { name: 'AppButler', email: 'AppButler@AppButler.io' },
+  }));
   req.end();
 }
 

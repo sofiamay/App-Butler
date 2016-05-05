@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import PrettyError from 'pretty-error';
+// import PrettyError from 'pretty-error';
 import { port } from './config.js';
 import passport from 'passport';
 import routes from './router/routes';
