@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { Strategy } from 'passport-github';
 import User from './../models/user.js';
-import { GITHUB_ID, GITHUB_SECRET } from './../GITHUBKEYS.js';
+import { GITHUB_ID, GITHUB_SECRET } from '../GITHUBKEYS.js';
 import userController from './../controllers/userController.js';
 import mongoose from 'mongoose';
 

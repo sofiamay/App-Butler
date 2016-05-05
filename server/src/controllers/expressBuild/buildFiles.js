@@ -10,7 +10,6 @@ export function buildFile(fileConfig, userConfig) {
 }
 
 export function buildAllFiles(request, response) {
-  console.log('building all files....');
   let files = [];
   for (let fileName in request.session.files) {
     files.push(buildFile(request.session.files[fileName], request.body.data));

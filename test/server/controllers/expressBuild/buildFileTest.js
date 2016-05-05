@@ -43,7 +43,6 @@ describe('File Builder', () => {
   describe('Build All files', () => {
     it('should build all files and save them to an array', () => {
       const response = httpMocks.createResponse();
-      console.log(buildAllFiles(request, response));
       expect(buildAllFiles(request, response)).to.contain('var app = require (\'express\');\napp.listen(8000, function () {console.log(\'myApp listening on port 8000\');');
     });
   });

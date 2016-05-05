@@ -19,8 +19,8 @@ server.use(session({
 }));
 
 server.use(express.static(__dirname + '/../../client'));
-// server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
+// server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use(passport.initialize());
 router(server, express);
@@ -28,3 +28,5 @@ router(server, express);
 server.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}`);
 });
+
+export default server;
