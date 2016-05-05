@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import PrettyError from 'pretty-error';
 import { port } from './config.js';
 import passport from 'passport';
@@ -23,6 +24,9 @@ const pe = new PrettyError();
 pe.start();
 
 server.use(express.static(`${__dirname}/../../client`));
+
+server.use(cookieParser('Hope nobody sees this'));
+
 server.use(bodyParser.json());
 
 server.use(passport.initialize());
