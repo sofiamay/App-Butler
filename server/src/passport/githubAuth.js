@@ -32,6 +32,12 @@ passport.use(new Strategy({
   console.log(`${profile.username}: login successful with access token:${accessToken}`);
   done(null, profile); // Reports a successful authentication to successfulRedirect
 
+  const token = jwt.sign({
+    token: accessToken,
+  }, 'CHANGETHISFORPROD');
+
+  profile.token = token;
+  done(null, profile); // Reports a successful authentication to successfulRedirect
   User.findOne({ githubID: profile.username }, (err, existingUser) => {
     if (existingUser) {
       // Login the user
@@ -39,14 +45,11 @@ passport.use(new Strategy({
       done(null, existingUser);
     } else {
       // user not found, store to database
-      const token = jwt.sign({
-        token: accessToken,
-      }, 'CHANGETHISFORPROD');
 
       const newUser = new User({
         name: profile._json.name,
         id: profile._json.id,
-        encryptedToken: token, // <0----------------
+        encryptedToken: token,
         email: profile._json.email,
         githubID: profile.username,
       });
@@ -54,7 +57,7 @@ passport.use(new Strategy({
         if (err) {
           return err;
         }
-        console.log(addedUser + ' has been saved');
+        console.log([addedUser, ' has been saved'].join());
       });
     }
   });
