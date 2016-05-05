@@ -9,6 +9,8 @@ export default class Blocks extends React.Component {
   }
 
   render() {
+    // Sets "this.shownBlocks" to the relevant array from the loaded BlockData
+    // This allows use to load up the currently active Category's blocks
     switch (this.props.currentCategory) {
       case 'SERVER':
         this.shownBlocks = BlockData.server;
@@ -23,7 +25,7 @@ export default class Blocks extends React.Component {
     return (
       <div className="blocks">
       {this.shownBlocks.map(item =>
-        <BlockItem key={item.key} data={item} />
+        <BlockItem type={item.type} key={item.key} data={item} />
       )}
       </div>
     );

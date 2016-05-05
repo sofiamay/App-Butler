@@ -2,7 +2,7 @@ import React from 'react';
 import Categories from './Categories';
 import Blocks from './Blocks';
 
-// Redux
+// Import Redux functions & related actions
 import { changeCategory } from './../../../actions/DesignActions.js';
 import { connect } from 'react-redux';
 
@@ -13,7 +13,8 @@ class Sidebar extends React.Component {
       open: true,
     };
   }
-
+  // Methods for opening & closing sidebar
+  // Redux wasn't used here since it's irrelevant to the global state
   getSidebarWidth() {
     return this.state.open ? '200px' : '25px';
   }
@@ -53,7 +54,12 @@ class Sidebar extends React.Component {
   }
 }
 
+Sidebar.propTypes = {
+  currentCategory: React.PropTypes.string,
+  changeCategory: React.PropTypes.func,
+};
 
+// Helper functions to add Redux store methods & state attributes to component
 function mapStateToProps(state) {
   return {
     currentCategory: state.design.currentCategory,
@@ -67,5 +73,5 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-
+// Use Redux's connect() method to map to the class
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

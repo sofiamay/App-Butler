@@ -5,7 +5,11 @@ import Nav from './partials/Nav.js';
 import Sidebar from './partials/design/Sidebar.js';
 import BlockArea from './partials/design/BlockArea.js';
 
-export default class Index extends React.Component {
+// Import React DnD
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
+
+class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -25,3 +29,6 @@ export default class Index extends React.Component {
 );
   }
 }
+
+export default DragDropContext(HTML5Backend)(Index);
+
