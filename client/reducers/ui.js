@@ -1,8 +1,8 @@
-export default function todoReducer(state = {}, action) {
+export default function uiReducer(state = {}, action) {
   switch (action.type) {
     case 'CHANGE_CATEGORY':
       return Object.assign({}, state, {
-        design: {
+        designer: {
           currentCategory: action.category,
         },
       });

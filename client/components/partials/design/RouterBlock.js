@@ -25,12 +25,12 @@ const boxSource = {
   },
 };
 
-@DropTarget('server', blockTarget, (connect, monitor) => ({
+@DropTarget(['endpoint', 'router'], blockTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   isOverCurrent: monitor.isOver({ shallow: true }),
 }))
-@DragSource(props => props.type, boxSource, (connect) => ({
+@DragSource('router', boxSource, (connect) => ({
   connectDragSource: connect.dragSource(),
 }))
 export default class RouterBlock extends React.Component {

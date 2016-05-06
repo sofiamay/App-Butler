@@ -62,7 +62,7 @@ Sidebar.propTypes = {
 // Helper functions to add Redux store methods & state attributes to component
 function mapStateToProps(state) {
   return {
-    currentCategory: state.design.currentCategory,
+    currentCategory: state.designer.currentCategory,
   };
 }
 

@@ -3,13 +3,15 @@ import React from 'react';
 // Import Required Components
 import Nav from './partials/Nav.js';
 import Sidebar from './partials/design/Sidebar.js';
-import BlockArea from './partials/design/BlockArea.js';
+import CanvasContainer from './partials/design/CanvasContainer.js';
 
 // Import React DnD
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
-class Design extends React.Component {
+// Decorate Design Component as a Drop Context
+@DragDropContext(HTML5Backend)
+export default class Design extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -22,13 +24,10 @@ class Design extends React.Component {
         <div className="content">
           <div className="row">
           <Sidebar />
-          <BlockArea />
+          <CanvasContainer />
         </div>
         </div>
       </div>
    );
   }
 }
-
-export default DragDropContext(HTML5Backend)(Design);
-
