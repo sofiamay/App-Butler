@@ -33,7 +33,7 @@ passport.use(new Strategy({
   passReqToCallback: true,
 }, (req, accessToken, refreshToken, tokenDetails, profile, done) => {
   // refreshToken is not provided by GitHub
-  console.log(profile.username + ': login successful' + ' with access token: ' + accessToken);
+  console.log(`${profile.username}: login successful with access token:${accessToken}`);
   done(null, profile); // Reports a successful authentication to successfulRedirect
 
   User.findOne({ githubID: profile.id }, (err, existingUser) => {
@@ -52,7 +52,7 @@ passport.use(new Strategy({
         if (err) {
           console.log(err);
         }
-        console.log(addedUser + ' has been saved');
+        console.log(`${addedUser} has been saved`);
       });
     }
   });

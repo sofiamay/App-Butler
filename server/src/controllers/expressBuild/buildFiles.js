@@ -10,8 +10,8 @@ export function buildFile(fileConfig, userConfig) {
 }
 
 export function buildAllFiles(request, response) {
-  let files = [];
-  for (let fileName in request.session.files) {
+  const files = [];
+  for (const fileName in request.session.files) {
     files.push(buildFile(request.session.files[fileName], request.body.data));
   }
   return files;
@@ -24,12 +24,12 @@ export function fileToGitHub(fileConfig, userConfig, fileName) {
     method: 'PUT',
     hostname: 'api.github.com',
     port: null,
-    path: '/repos/dylanksys/WOW/contents/' + fileName,
+    path: `/repos/dylanksys/WOW/contents/${fileName}`,
     headers: {
-    authorization: 'token ' //+ process.env.GH_TOKEN,
-    'content-type': 'application/json',
-    'cache-control': 'no-cache',
-    'user-agent': 'appButler',
+      authorization: 'token ', // + process.env.GH_TOKEN,
+      'content-type': 'application/json',
+      'cache-control': 'no-cache',
+      'user-agent': 'appButler',
     },
   };
 
@@ -41,7 +41,7 @@ export function fileToGitHub(fileConfig, userConfig, fileName) {
 
     res.on('end', () => {
       const body = Buffer.concat(chunks);
-      // console.log(body.toString());
+      console.log(body.toString());
     });
   });
 
