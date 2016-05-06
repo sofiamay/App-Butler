@@ -19,6 +19,8 @@
     "express-session": "^1.13.0",
     "json-loader": "^0.5.4",
     "jsonwebtoken": "^6.2.0",
+    "letsencrypt": "^1.4.4",
+    "letsencrypt-express": "^1.1.5",
     "mongoose": "^4.4.14",
     "mongoose-relationship": "^0.1.5",
     "passport": "^0.3.2",
@@ -33,7 +35,8 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.4.0",
     "redux": "^3.5.2",
-    "uuid": "^2.0.2"
+    "uuid": "^2.0.2",
+    "spdy": "^3.3.2"
   },
   "devDependencies": {
     "arrow-mocha": "^1.0.1",

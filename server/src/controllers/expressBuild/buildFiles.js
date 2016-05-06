@@ -28,13 +28,12 @@ export function fileToGitHub(fileConfig, userConfig, fileName) {
     port: null,
     path: `/repos/dylanksys/WOW/contents/${fileName}`,
     headers: {
-      authorization: `token ${process.env.GH_TOKEN}`,
+      authorization: 'token TOKEN',
       'content-type': 'application/json',
       'cache-control': 'no-cache',
       'user-agent': 'appButler',
     },
   };
-
   const req = http.request(options, (res) => {
     const chunks = [];
     res.on('data', (chunk) => {
@@ -55,3 +54,17 @@ export function fileToGitHub(fileConfig, userConfig, fileName) {
   req.end();
 }
 
+const fileConfig = {
+  type: 'main',
+  name: 'server.js',
+};
+const userConfig = {
+  serverType: 'node-express',
+  appName: 'ACoolApp',
+  serverSettings: {
+    port: 3000,
+    expressName: 'app',
+  },
+};
+
+fileToGitHub(fileConfig, userConfig, 'test3.js');

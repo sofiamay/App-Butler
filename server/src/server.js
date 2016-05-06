@@ -9,6 +9,13 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 // import browserSync from 'browser-sync';
 
+import https from 'https';
+import fs from 'fs';
+// import LEX from 'letsencrypt-express'; // letsencrypt
+// import http from 'http'; // letsencrypt
+// import spdy from 'spdy'; // letsencrypt
+
+
 const server = express();
 const router = routes;
 
@@ -44,6 +51,53 @@ server.listen(port, () => {
   //     },
   //   ],
   // });
+
+// ////// STARTSSL ///////////
+const privateKey = fs.readFileSync(`${__dirname}/../../dylan.key`);
+const certificate = fs.readFileSync(`${__dirname}/../../server.pem`);
+
+https.createServer({
+  key: privateKey,
+  cert: certificate,
+  passphrase: 'appbutler',
+}, server).listen(port, () => {
+  console.log(`Server running at ${port}`);
 });
+// /////////////////////////////
+
+// const lex = LEX.testing().create({
+//   configDir: `${__dirname}/letsencrypt`,
+//   onRequest: server,
+//   server: require('letsencrypt').productionServerUrl,
+//   approveRegistration: (hostname, cb) => {
+//     cb(null, {
+//       domains: ['localhost'],
+//       email: 'kuangd.usfcaubms@gmail.com',
+//       agreeTos: true,
+//     });
+//   },
+// }).listen(
+//   // you can give just the port, or expand out to the full options
+//   [8000, {
+//     port: 8080,
+//     address: 'localhost',
+//     onListening: () => {
+//       console.log('http://localhost');
+//     },
+//   }],
+//   [1337, {
+//     port: 8443,
+//     address: 'localhost',
+//   }], () => {
+//     const protocol = ('requestCert' in this) ? 'https' : 'http';
+//     console.log(`Listening at ${protocol}://localhost:${this.address().port}`);
+//   });
+// console.log(lex.plainServers);
+// console.log(lex.tlsServers);
+
+
+// server.listen(port, () => {
+//   console.log(`The server is running at http://localhost:${port}`);
+// });
 
 export default server;
