@@ -10,6 +10,13 @@ class Form extends React.Component {
 
   selectServerType = (event) => {
     this.setState({ server: event.target.value });
+    this.props.updateConfig({ server: event.target.value });
+  }
+
+  updateServerConfig = (event) => {
+    let updateObj = {};
+    updateObj[event.target.name] = event.target.value;
+    this.props.updateConfig(updateObj);
   }
 
   currentServerDisplay = () => {
@@ -18,10 +25,11 @@ class Form extends React.Component {
         return (
           <div className="express">
             Port<br />
-            <input type="text" name="port" /><br />
+            <input type="text" name="port" onBlur={this.updateServerConfig} /><br />
             Express name
             <input type="text" name="express-instantiation"
               placeholder="app=express()"
+              onBlur={this.updateServerConfig}
             />
           </div>
           );
@@ -39,7 +47,7 @@ class Form extends React.Component {
       <form action="" method="post">
         <div>
           App Name
-          <input type="text" name="appName" required />
+          <input type="text" name="appName" required onBlur={this.updateServerConfig} />
         </div>
         <div>
           Server Type<br />
@@ -56,7 +64,7 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-
+  updateConfig: React.PropTypes.func.isRequired,
 };
 
 export default Form;

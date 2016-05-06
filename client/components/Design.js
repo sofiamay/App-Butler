@@ -17,7 +17,16 @@ import { DragDropContext } from 'react-dnd';
 export default class Design extends React.Component {
   constructor(props) {
     super(props);
+    // Holds the state of the user config
     this.state = {};
+  }
+
+  updateServerConfig = (options) => {
+    let stateUpdate = {};
+    Object.keys(options).forEach((key) => {
+      stateUpdate[key] = options[key];
+    });
+    this.setState({ stateUpdate });
   }
 
   render() {
@@ -27,7 +36,7 @@ export default class Design extends React.Component {
         <div className="content">
           <div className="row">
           <Sidebar>
-            <Form />
+            <Form updateConfig={this.updateServerConfig} />
           </Sidebar>
           <CanvasContainer />
         </div>
