@@ -53,7 +53,7 @@ server.listen(port, () => {
   // });
 
 // ////// STARTSSL ///////////
-const privateKey = fs.readFileSync(`${__dirname}/../../dylan.key`);
+const privateKey = fs.readFileSync(`${__dirname}/../../dyland.key`);
 const certificate = fs.readFileSync(`${__dirname}/../../server.pem`);
 
 https.createServer({
