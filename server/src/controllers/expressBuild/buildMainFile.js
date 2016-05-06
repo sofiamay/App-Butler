@@ -14,7 +14,7 @@ function addServerListen(name, port) {
   return `app.listen(${port}, function () {console.log(\'${name} listening on port ${port}\');`;
 }
 
-export function buildMainFile(fileConfig, userConfig) {
+export default function buildMainFile(fileConfig, userConfig) {
   let file = '';
   const expressName = userConfig.serverSettings.expressName || 'app';
   const name = userConfig.appName || 'myApp';
