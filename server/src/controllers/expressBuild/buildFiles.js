@@ -9,7 +9,7 @@ export function buildFile(fileConfig, userConfig) {
   return new Error('Undefined file type');
 }
 
-export function buildAllFiles(request) {
+export function buildAllFiles(request, response) {
   const files = [];
   for (const fileName in request.session.files) {
     if (request.session.files) {
