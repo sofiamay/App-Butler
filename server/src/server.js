@@ -6,6 +6,7 @@ import passport from 'passport';
 import routes from './router/routes';
 import mongoose from 'mongoose';
 import session from 'express-session';
+// import browserSync from 'browser-sync';
 
 const server = express();
 const router = routes;
@@ -18,15 +19,27 @@ server.use(session({
   saveUninitialized: true,
 }));
 
-server.use(express.static(__dirname + '/../../client'));
+const pe = new PrettyError();
+pe.start();
+
+server.use(express.static(`${__dirname}/../../client`));
 server.use(bodyParser.json());
-// server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use(passport.initialize());
 router(server, express);
 
 server.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}`);
+  // Listen for the `init` event
+  // browserSync({
+  //   proxy: `localhost:${port}`,
+  //   files: [
+  //     `${__dirname}/../../client/**/*.{js}`,
+  //     {
+  //       match: ['wp-content/themes/**/*.php'],
+  //     },
+  //   ],
+  // });
 });
 
 export default server;
