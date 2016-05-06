@@ -2,8 +2,7 @@ import React from 'react';
 
 // React DnD Functionality
 // Sets up BlockArea as a place to drop items
-import { DropTarget } from 'react-dnd';
-import RouterBlock from './RouterBlock.js';
+import { DragSource, DropTarget } from 'react-dnd';
 
 // Settings for Target areafor React DnD
 const blockTarget = {
@@ -20,12 +19,21 @@ const blockTarget = {
   },
 };
 
+const boxSource = {
+  beginDrag() {
+    return {};
+  },
+};
+
 @DropTarget('server', blockTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   isOverCurrent: monitor.isOver({ shallow: true }),
 }))
-export default class BlockArea extends React.Component {
+@DragSource(props => props.type, boxSource, (connect) => ({
+  connectDragSource: connect.dragSource(),
+}))
+export default class RouterBlock extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
     isOver: React.PropTypes.bool.isRequired,
@@ -35,15 +43,11 @@ export default class BlockArea extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      hasDropped: false,
-      hasDroppedOnChild: false,
-    };
+    this.state = {};
   }
 
   render() {
     const { isOverCurrent, connectDropTarget } = this.props;
-    // const { hasDropped, hasDroppedOnChild } = this.state;
 
     let backgroundColor;
     if (isOverCurrent) {

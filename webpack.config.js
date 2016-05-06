@@ -67,9 +67,9 @@ module.exports = {
         // and 'es2015' presets when it transforms files. `query` becomes a query string, similar
         // to what you see in request URLs, and the same thing could be achieved by writing this above:
         // loader: 'babel?presets[]=react,presets[]=es2015'
-        plugins: ['transform-decorators'],
         query: {
-          presets: ['es2015', 'stage-0', 'react'],
+          presets: ['stage-0', 'react'],
+          plugins: ['transform-decorators-legacy'],
         }
       },
     ]
