@@ -4,6 +4,9 @@ import React from 'react';
 import Nav from './partials/Nav.js';
 import Sidebar from './partials/design/Sidebar.js';
 import CanvasContainer from './partials/design/CanvasContainer.js';
+import BlockArea from './partials/design/BlockArea.js';
+import Form from './partials/design/Form.js';
+
 
 // Import React DnD
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -23,7 +26,9 @@ export default class Design extends React.Component {
         <Nav />
         <div className="content">
           <div className="row">
-          <Sidebar />
+          <Sidebar>
+            <Form />
+          </Sidebar>
           <CanvasContainer />
         </div>
         </div>
