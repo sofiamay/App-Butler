@@ -8,47 +8,49 @@ class Form extends React.Component {
     };
   }
 
-  selectServerType(event) {
+  selectServerType = (event) => {
     this.setState({ server: event.target.value });
   }
-  // Methods for opening & closing sidebar
-  // Redux wasn't used here since it's irrelevant to the global state
-  // getSidebarWidth() {
-  //   return this.state.open ? '200px' : '25px';
-  // }
 
-  // displayContent() {
-  //   return this.state.open ? 'block' : 'none';
-  // }
-
-  // showCarrots() {
-  //   return this.state.open ? 'fa fa-caret-left' : 'fa fa-caret-right';
-  // }
-
-  // togglePanel() {
-  //   this.setState({
-  //     open: !this.state.open,
-  //   });
-  // }
+  currentServerDisplay = () => {
+    switch (this.state.server) {
+      case 'express':
+        return (
+          <div className="express">
+            Port<br />
+            <input type="text" name="port" /><br />
+            Express name
+            <input type="text" name="express-instantiation"
+              placeholder="app=express()"
+            />
+          </div>
+          );
+      default:
+        return (
+          <div>
+          </div>
+          );
+    }
+  }
 
   render() {
-    // let sidebarWidth = { width: this.getSidebarWidth() };
-    // let displayContent = { display: this.displayContent() };
-    // let carrots = this.showCarrots();
+    let currentServerDisplay = this.currentServerDisplay();
     return (
-      <div className="form">
+      <form action="" method="post">
         <div>
           App Name
-          <input type="text" name="appName" />
+          <input type="text" name="appName" required />
         </div>
         <div>
           Server Type<br />
-          <select>
-            <option onChange={this.selectServerType} value="express">Express</option>
+          <select onChange={this.selectServerType}>
+            <option value="null"></option>
+            <option value="express">Express</option>
           </select>
         </div>
-
-      </div>
+        <hr />
+        {currentServerDisplay}
+      </form>
     );
   }
 }
