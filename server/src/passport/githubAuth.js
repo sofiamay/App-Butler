@@ -2,8 +2,8 @@ import passport from 'passport';
 import { Strategy } from 'passport-github';
 import User from './../models/user.js';
 import { GITHUB_ID, GITHUB_SECRET } from '../GITHUBKEYS.js';
-import userController from './../controllers/userController.js';
-import mongoose from 'mongoose';
+// import userController from './../controllers/userController.js';
+// import mongoose from 'mongoose';
 
 export default {
   handleLogin: passport.authenticate('github'),
@@ -33,7 +33,7 @@ passport.use(new Strategy({
   passReqToCallback: true,
 }, (req, accessToken, refreshToken, tokenDetails, profile, done) => {
   // refreshToken is not provided by GitHub
-  console.log(profile.username + ': login successful' + ' with access token: ' + accessToken);
+  console.log(`${profile.username}: login successful with access token:${accessToken}`);
   done(null, profile); // Reports a successful authentication to successfulRedirect
 
   User.findOne({ githubID: profile.id }, (err, existingUser) => {
@@ -50,9 +50,9 @@ passport.use(new Strategy({
       });
       newUser.save((err2, addedUser) => {
         if (err) {
-          return err;
+          console.log(err);
         }
-        console.log(addedUser + ' has been saved');
+        console.log(`${addedUser} has been saved`);
       });
     }
   });

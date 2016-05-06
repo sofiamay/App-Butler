@@ -28,17 +28,17 @@ const runningServer = server.listen(port, () => {
 
 /* Tests */
 
-describe('Routes', function() {
-  describe('Generating files', function() {
-    it('Should return error, when the request has no body', function(done) {
+describe('Routes', () => {
+  describe('Generating files', () => {
+    it('Should return error, when the request has no body', (done) => {
       supertest(server)
       .post('/config')
       .expect(400)
-      .end(function(err, res) {
+      .end((err, res) => {
         if (err) { done(); }
       });
     });
-    it('Should return the constructed files to the user', function(done) {
+    it('Should return the constructed files to the user', (done) => {
       const requestBody = {
         data: {
           serverType: 'node-express',
@@ -51,11 +51,10 @@ describe('Routes', function() {
       supertest(server)
       .post('/config')
       .send(requestBody)
-      .end(function(err, res) {
+      .end((err, res) => {
         expect(res.text.indexOf('require (\'express\')')).to.be.above(-1);
         done();
       });
-      
     });
   });
 });
