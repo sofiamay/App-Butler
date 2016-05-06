@@ -3,7 +3,7 @@ import { generateServer } from '../controllers/generateServer.js';
 
 
 module.exports = (app, express) => {
-  app.use(express.static(__dirname + './../../../../client'));
+  app.use(express.static(`${__dirname}/../../../../client`));
 
   app.get('/auth/github', githubAuth.handleLogin);
 
