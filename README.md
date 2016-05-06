@@ -49,7 +49,7 @@ npm run build
 ```
 ## Contributing + Github Workflow
 
-See [github.md](CONTRIBUTING.md) for contribution and github workflow guidelines.
+See [contributing.md](contributing.md) for contribution and github workflow guidelines.
 
 <hr>
 
