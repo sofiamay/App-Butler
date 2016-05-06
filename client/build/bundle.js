@@ -28868,19 +28868,19 @@
 
 	// Import React DnD
 
-	var Index = function (_React$Component) {
-	  (0, _inherits3.default)(Index, _React$Component);
+	var Design = function (_React$Component) {
+	  (0, _inherits3.default)(Design, _React$Component);
 
-	  function Index(props) {
-	    (0, _classCallCheck3.default)(this, Index);
+	  function Design(props) {
+	    (0, _classCallCheck3.default)(this, Design);
 
-	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Index).call(this, props));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Design).call(this, props));
 
 	    _this.state = {};
 	    return _this;
 	  }
 
-	  (0, _createClass3.default)(Index, [{
+	  (0, _createClass3.default)(Design, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -28900,13 +28900,13 @@
 	      );
 	    }
 	  }]);
-	  return Index;
+	  return Design;
 	}(_react2.default.Component);
 
 	// Import Required Components
 
 
-	exports.default = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default)(Index);
+	exports.default = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default)(Design);
 
 /***/ },
 /* 341 */
@@ -29095,12 +29095,19 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function (props) {
+	exports.default = function (_ref) {
+	  var changeCategory = _ref.changeCategory;
+	  var currentCategory = _ref.currentCategory;
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'categories' },
 	    _categories2.default.map(function (item) {
-	      return _react2.default.createElement(_CategoryItem2.default, { key: item.key, data: item, event: props.changeCategory, currentCategory: props.currentCategory });
+	      return _react2.default.createElement(_CategoryItem2.default, {
+	        key: item.key,
+	        data: item,
+	        event: changeCategory,
+	        currentCategory: currentCategory
+	      });
 	    })
 	  );
 	};
@@ -29161,9 +29168,12 @@
 	      var activeClass = this.props.currentCategory === this.props.data.actionName ? 'btn-active' : null;
 	      return _react2.default.createElement(
 	        'a',
-	        { onClick: function onClick() {
+	        {
+	          onClick: function onClick() {
 	            return _this2.props.event(_this2.props.data.actionName);
-	          }, className: this.props.data.classes + ' ' + activeClass },
+	          },
+	          className: this.props.data.classes + ' ' + activeClass
+	        },
 	        this.props.data.name
 	      );
 	    }
@@ -29275,7 +29285,7 @@
 	        'div',
 	        { className: 'blocks' },
 	        this.shownBlocks.map(function (item) {
-	          return _react2.default.createElement(_BlockItem2.default, { type: item.type, key: item.key, data: item });
+	          return _react2.default.createElement(_BlockItem2.default, { key: item.key, type: item.type, data: item });
 	        })
 	      );
 	    }

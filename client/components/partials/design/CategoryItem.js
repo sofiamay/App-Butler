@@ -9,7 +9,10 @@ export default class CategoryItem extends React.Component {
   render() {
     const activeClass = this.props.currentCategory === this.props.data.actionName ? 'btn-active' : null;
     return (
-      <a onClick={() => this.props.event(this.props.data.actionName)} className={`${this.props.data.classes} ${activeClass}`}>
+      <a
+        onClick={() => this.props.event(this.props.data.actionName)}
+        className={`${this.props.data.classes} ${activeClass}`}
+      >
       {this.props.data.name}
       </a>
     );

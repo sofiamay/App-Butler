@@ -9,7 +9,7 @@ import BlockArea from './partials/design/BlockArea.js';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
-class Index extends React.Component {
+class Design extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -26,9 +26,9 @@ class Index extends React.Component {
         </div>
         </div>
       </div>
-);
+   );
   }
 }
 
-export default DragDropContext(HTML5Backend)(Index);
+export default DragDropContext(HTML5Backend)(Design);
 

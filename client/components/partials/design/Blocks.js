@@ -25,7 +25,7 @@ export default class Blocks extends React.Component {
     return (
       <div className="blocks">
       {this.shownBlocks.map(item =>
-        <BlockItem type={item.type} key={item.key} data={item} />
+        <BlockItem key={item.key} type={item.type} data={item} />
       )}
       </div>
     );
