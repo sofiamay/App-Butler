@@ -19,6 +19,12 @@ class Form extends React.Component {
     this.props.updateConfig(updateObj);
   }
 
+  submitServerConfig = (event) => {
+    event.preventDefault();
+    this.props.submitConfig();
+    return false;
+  }
+
   currentServerDisplay = () => {
     switch (this.state.server) {
       case 'express':
@@ -44,7 +50,7 @@ class Form extends React.Component {
   render() {
     let currentServerDisplay = this.currentServerDisplay();
     return (
-      <form action="" method="post">
+      <form>
         <div>
           App Name
           <input type="text" name="appName" required onBlur={this.updateServerConfig} />
@@ -58,6 +64,7 @@ class Form extends React.Component {
         </div>
         <hr />
         {currentServerDisplay}
+        <button onClick={this.submitServerConfig} name="submitConfig">Build Server</button>
       </form>
     );
   }
@@ -65,6 +72,7 @@ class Form extends React.Component {
 
 Form.propTypes = {
   updateConfig: React.PropTypes.func.isRequired,
+  submitConfig: React.PropTypes.func.isRequired,
 };
 
 export default Form;

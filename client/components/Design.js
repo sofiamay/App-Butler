@@ -17,7 +17,7 @@ import { DragDropContext } from 'react-dnd';
 export default class Design extends React.Component {
   constructor(props) {
     super(props);
-    // Holds the state of the user config
+    // Holds the state of the server config
     this.state = {};
   }
 
@@ -29,6 +29,10 @@ export default class Design extends React.Component {
     this.setState({ stateUpdate });
   }
 
+  submitServerConfig = () => {
+    console.log('Send to server!');
+  }
+
   render() {
     return (
       <div className="container">
@@ -36,7 +40,7 @@ export default class Design extends React.Component {
         <div className="content">
           <div className="row">
           <Sidebar>
-            <Form updateConfig={this.updateServerConfig} />
+            <Form updateConfig={this.updateServerConfig} submitConfig={this.submitServerConfig} />
           </Sidebar>
           <CanvasContainer />
         </div>
