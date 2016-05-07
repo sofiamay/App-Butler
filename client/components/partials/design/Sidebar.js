@@ -1,18 +1,28 @@
 import React from 'react';
-import Categories from './Categories';
-import Blocks from './Blocks';
+import Form from './Form.js';
 
-// Import Redux functions & related actions
-import { changeCategory } from './../../../actions/ui.js';
+// Redux Actions & Methods
+import { updateConfig } from './../../../actions/serverConfig.js';
 import { connect } from 'react-redux';
 
+// Use Redux's connect() method to map to the class
+@connect(state => ({
+  serverConfig: state.serverConfig,
+}), dispatch => ({
+  updateConfig: (config) => {
+    dispatch(updateConfig(config));
+  },
+}))
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: true,
     };
+    this.submitConfig = this.submitConfig.bind(this);
+    this.togglePanel = this.togglePanel.bind(this);
   }
+
   // Methods for opening & closing sidebar
   // Redux wasn't used here since it's irrelevant to the global state
   getSidebarWidth() {
@@ -33,6 +43,12 @@ class Sidebar extends React.Component {
     });
   }
 
+  // Method to post serverConfig
+  submitConfig() {
+    console.log('store.serverconfig: This will be sent to the server');
+    console.log(this.props.serverConfig);
+  }
+
   render() {
     let sidebarWidth = { width: this.getSidebarWidth() };
     let displayContent = { display: this.displayContent() };
@@ -40,14 +56,13 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar" style={sidebarWidth}>
         <div className="sidebar-top">
-        <a onClick={this.togglePanel.bind(this)} className="toggleLink"><i className={carrots} aria-hidden="true"></i>
-        <i className={carrots} aria-hidden="true"></i></a>
+        <a onClick={this.togglePanel} className="toggleLink">
+          <i className={carrots} aria-hidden="true"></i>
+          <i className={carrots} aria-hidden="true"></i>
+        </a>
         </div>
         <div className="sidebar-content" style={displayContent}>
-          <Categories changeCategory={this.props.changeCategory} currentCategory={this.props.currentCategory} />
-          <hr></hr>
-
-          <Blocks currentCategory={this.props.currentCategory} />
+          <Form updateConfig={this.props.updateConfig} submitConfig={this.submitConfig} />
         </div>
       </div>
     );
@@ -55,23 +70,9 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  currentCategory: React.PropTypes.string,
-  changeCategory: React.PropTypes.func,
+  updateConfig: React.PropTypes.func.isRequired,
+  serverConfig: React.PropTypes.object,
 };
 
-// Helper functions to add Redux store methods & state attributes to component
-function mapStateToProps(state) {
-  return {
-    currentCategory: state.ui.currentCategory,
-  };
-}
+export default Sidebar;
 
-function mapDispatchToProps(dispatch) {
-  return {
-    changeCategory: (category) => {
-      dispatch(changeCategory(category));
-    },
-  };
-}
-// Use Redux's connect() method to map to the class
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

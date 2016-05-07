@@ -4,6 +4,8 @@ import React from 'react';
 import Nav from './partials/Nav.js';
 import Sidebar from './partials/design/Sidebar.js';
 import CanvasContainer from './partials/design/CanvasContainer.js';
+import Form from './partials/design/Form.js';
+
 
 // Import React DnD
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -14,8 +16,27 @@ import { DragDropContext } from 'react-dnd';
 export default class Design extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+    };
   }
+
+  // updateServerConfig = (options) => {
+  //   let stateUpdate = {};
+  //   Object.keys(options).forEach((key) => {
+  //     stateUpdate[key] = options[key];
+  //   });
+  //   this.setState({ stateUpdate });
+  // }
+
+  // submitServerConfig = () => {
+  //   console.log(this.state);
+  //   if (this.state.server === 'express') {
+  //     console.log('server type looks good');
+  //   } else {
+  //     console.log('form error!');
+  //   }
+  //   console.log('Send to server!');
+  // }
 
   render() {
     return (
