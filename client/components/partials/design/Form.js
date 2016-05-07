@@ -16,7 +16,7 @@ class Form extends React.Component {
   updateServerConfig = (event) => {
     let updateObj = {};
     updateObj[event.target.name] = event.target.value;
-    this.props.updateConfig(updateObj);
+    return this.props.updateConfig(updateObj);
   }
 
   submitServerConfig = (event) => {

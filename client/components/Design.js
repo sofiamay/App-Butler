@@ -18,7 +18,8 @@ export default class Design extends React.Component {
   constructor(props) {
     super(props);
     // Holds the state of the server config
-    this.state = {};
+    this.state = {
+    };
   }
 
   updateServerConfig = (options) => {
@@ -30,6 +31,12 @@ export default class Design extends React.Component {
   }
 
   submitServerConfig = () => {
+    console.log(this.state);
+    if (this.state.server === 'express') {
+      console.log('server type looks good');
+    } else {
+      console.log('form error!');
+    }
     console.log('Send to server!');
   }
 
