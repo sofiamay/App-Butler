@@ -25,12 +25,12 @@ const boxSource = {
   },
 };
 
-@DropTarget('server', blockTarget, (connect, monitor) => ({
+@DropTarget('endpoint', blockTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   isOverCurrent: monitor.isOver({ shallow: true }),
 }))
-@DragSource(props => props.type, boxSource, (connect) => ({
+@DragSource('router', boxSource, (connect) => ({
   connectDragSource: connect.dragSource(),
 }))
 export default class RouterBlock extends React.Component {
@@ -39,6 +39,7 @@ export default class RouterBlock extends React.Component {
     isOver: React.PropTypes.bool.isRequired,
     isOverCurrent: React.PropTypes.bool.isRequired,
     children: React.PropTypes.node,
+    data: React.PropTypes.object,
   }
 
   constructor(props) {
@@ -49,13 +50,15 @@ export default class RouterBlock extends React.Component {
   render() {
     const { isOverCurrent, connectDropTarget } = this.props;
 
-    let backgroundColor;
-    if (isOverCurrent) {
-      backgroundColor = '#E9F4F5';
-    }
-
     return connectDropTarget(
-      <div className="blockArea" style={{ backgroundColor }}>
+      <div className="block block-lg">
+        <div className="block-settings">
+        <i className="fa fa-info-circle" aria-hidden="true"></i><i className="fa fa-sliders" aria-hidden="true"></i>
+        </div>
+        <div className="block-info">
+        <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
+        <span className="block-text">{this.props.data.name}</span>
+        </div>
       </div>
     );
   }
