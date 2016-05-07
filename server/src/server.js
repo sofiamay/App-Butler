@@ -60,7 +60,7 @@ https.createServer({
   key: privateKey,
   cert: certificate,
   passphrase: 'appbutler',
-}, server).listen(port, () => {
+}, server).listen(1337, () => {
   console.log(`Server running at ${port}`);
 });
 // /////////////////////////////
@@ -96,8 +96,8 @@ https.createServer({
 // console.log(lex.tlsServers);
 
 
-// server.listen(port, () => {
-//   console.log(`The server is running at http://localhost:${port}`);
-// });
+server.listen(port, () => {
+  console.log(`The server is running at http://localhost:${port}`);
+});
 
 export default server;
