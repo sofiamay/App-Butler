@@ -16,7 +16,6 @@ Visualize your backend while creating it
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Roadmap](#roadmap)
 1. [Contributing](#contributing)
 1. [Architecture](#architecture)
 1. [API](#api)
@@ -48,4 +47,9 @@ From within the root directory:
 npm install
 npm run build
 ```
+## Contributing + Github Workflow
+
+See [contributing.md](contributing.md) for contribution and github workflow guidelines.
+
+<hr>
 
