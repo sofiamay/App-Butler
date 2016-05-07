@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-// import PrettyError from 'pretty-error';
+import PrettyError from 'pretty-error';
 import { port } from './config.js';
 import passport from 'passport';
 import routes from './router/routes';
@@ -39,18 +39,19 @@ server.use(bodyParser.json());
 server.use(passport.initialize());
 router(server, express);
 
-server.listen(port, () => {
-  console.log(`The server is running at http://localhost:${port}`);
-  // Listen for the `init` event
-  // browserSync({
-  //   proxy: `localhost:${port}`,
-  //   files: [
-  //     `${__dirname}/../../client/**/*.{js}`,
-  //     {
-  //       match: ['wp-content/themes/**/*.php'],
-  //     },
-  //   ],
-  // });
+// server.listen(port, () => {
+//   console.log(`The server is running at http://localhost:${port}`);
+//   // Listen for the `init` event
+//   // browserSync({
+//   //   proxy: `localhost:${port}`,
+//   //   files: [
+//   //     `${__dirname}/../../client/**/*.{js}`,
+//   //     {
+//   //       match: ['wp-content/themes/**/*.php'],
+//   //     },
+//   //   ],
+//   // });
+// });
 
 // ////// STARTSSL ///////////
 const privateKey = fs.readFileSync(`${__dirname}/../../dyland.key`);
@@ -99,5 +100,3 @@ https.createServer({
 server.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}`);
 });
-
-export default server;
