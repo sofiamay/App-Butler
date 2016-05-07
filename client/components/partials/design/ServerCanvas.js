@@ -1,5 +1,5 @@
 import React from 'react';
-
+import RouterBlock from './RouterBlock.js';
 // React DnD Functionality
 // Sets up BlockArea as a place to drop items
 import { DropTarget } from 'react-dnd';
@@ -41,17 +41,12 @@ export default class CanvasContainer extends React.Component {
   }
 
   render() {
-    const { isOverCurrent, connectDropTarget } = this.props;
-    // const { hasDropped, hasDroppedOnChild } = this.state;
-
-    let backgroundColor;
-    if (isOverCurrent) {
-      backgroundColor = '#E9F4F5';
-    }
-
+    const { isOverCurrent, connectDropTarget, routers } = this.props;
     return connectDropTarget(
-      <div className="blockArea" style={{ backgroundColor }}>
-      <a className="btn btn-default"><i className="fa fa-plus" aria-hidden="true"></i> Add Router</a>
+      <div className="serverCanvas">
+        {routers.map(router => (
+          <RouterBlock key={router.id} id={router.id} data={router} />
+        ))}
       </div>
     );
   }

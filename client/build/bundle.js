@@ -28975,7 +28975,7 @@
 
 	var _Blocks2 = _interopRequireDefault(_Blocks);
 
-	var _DesignActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./../../../actions/DesignActions.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _ui = __webpack_require__(590);
 
 	var _reactRedux = __webpack_require__(229);
 
@@ -29062,14 +29062,14 @@
 	// Helper functions to add Redux store methods & state attributes to component
 	function mapStateToProps(state) {
 	  return {
-	    currentCategory: state.designer.currentCategory
+	    currentCategory: state.ui.currentCategory
 	  };
 	}
 
 	function mapDispatchToProps(dispatch) {
 	  return {
 	    changeCategory: function changeCategory(category) {
-	      dispatch((0, _DesignActions.changeCategory)(category));
+	      dispatch((0, _ui.changeCategory)(category));
 	    }
 	  };
 	}
@@ -35178,7 +35178,138 @@
 /***/ },
 /* 463 */,
 /* 464 */,
-/* 465 */,
+/* 465 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _getPrototypeOf = __webpack_require__(254);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(280);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(281);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(285);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(332);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _dec, _dec2, _class, _class2, _temp;
+
+	// React DnD Functionality
+	// Sets up BlockArea as a place to drop items
+
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDnd = __webpack_require__(348);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Settings for Target areafor React DnD
+	var blockTarget = {
+	  drop: function drop(props, monitor, component) {
+	    var hasDroppedOnChild = monitor.didDrop();
+	    if (hasDroppedOnChild) {
+	      return;
+	    }
+
+	    component.setState({
+	      hasDropped: true,
+	      hasDroppedOnChild: hasDroppedOnChild
+	    });
+	  }
+	};
+
+	var boxSource = {
+	  beginDrag: function beginDrag() {
+	    return {};
+	  }
+	};
+
+	var RouterBlock = (_dec = (0, _reactDnd.DropTarget)('endpoint', blockTarget, function (connect, monitor) {
+	  return {
+	    connectDropTarget: connect.dropTarget(),
+	    isOver: monitor.isOver(),
+	    isOverCurrent: monitor.isOver({ shallow: true })
+	  };
+	}), _dec2 = (0, _reactDnd.DragSource)('router', boxSource, function (connect) {
+	  return {
+	    connectDragSource: connect.dragSource()
+	  };
+	}), _dec(_class = _dec2(_class = (_temp = _class2 = function (_React$Component) {
+	  (0, _inherits3.default)(RouterBlock, _React$Component);
+
+	  function RouterBlock(props) {
+	    (0, _classCallCheck3.default)(this, RouterBlock);
+
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(RouterBlock).call(this, props));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  (0, _createClass3.default)(RouterBlock, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var isOverCurrent = _props.isOverCurrent;
+	      var connectDropTarget = _props.connectDropTarget;
+
+
+	      return connectDropTarget(_react2.default.createElement(
+	        'div',
+	        { className: 'block block-lg' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'block-settings' },
+	          _react2.default.createElement('i', { className: 'fa fa-info-circle', 'aria-hidden': 'true' }),
+	          _react2.default.createElement('i', { className: 'fa fa-sliders', 'aria-hidden': 'true' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'block-info' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'block-icon' },
+	            _react2.default.createElement('i', { className: 'fa fa-random', 'aria-hidden': 'true' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'block-text' },
+	            this.props.data.name
+	          )
+	        )
+	      ));
+	    }
+	  }]);
+	  return RouterBlock;
+	}(_react2.default.Component), _class2.propTypes = {
+	  connectDropTarget: _react2.default.PropTypes.func.isRequired,
+	  isOver: _react2.default.PropTypes.bool.isRequired,
+	  isOverCurrent: _react2.default.PropTypes.bool.isRequired,
+	  children: _react2.default.PropTypes.node,
+	  data: _react2.default.PropTypes.object
+	}, _temp)) || _class) || _class);
+	exports.default = RouterBlock;
+
+/***/ },
 /* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -38985,10 +39116,10 @@
 
 	// Redux Setup
 	var defaultState = {
-	  designer: {
-	    currentCategory: 'SERVER',
-	    routers: []
-	  }
+	  ui: {
+	    currentCategory: 'SERVER'
+	  },
+	  routers: []
 	};
 
 	exports.default = (0, _redux.createStore)(_reducers2.default, defaultState);
@@ -39070,15 +39201,15 @@
 
 	var _ui2 = _interopRequireDefault(_ui);
 
-	var _routes = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./routes\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _routers = __webpack_require__(591);
 
-	var _routes2 = _interopRequireDefault(_routes);
+	var _routers2 = _interopRequireDefault(_routers);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = (0, _redux.combineReducers)({
 	  ui: _ui2.default,
-	  routes: _routes2.default
+	  routers: _routers2.default
 	});
 
 /***/ },
@@ -39106,9 +39237,7 @@
 	  switch (action.type) {
 	    case 'CHANGE_CATEGORY':
 	      return (0, _assign2.default)({}, state, {
-	        designer: {
-	          currentCategory: action.category
-	        }
+	        currentCategory: action.category
 	      });
 	    default:
 	      return state;
@@ -39170,8 +39299,12 @@
 	  return {
 	    routers: state.routers
 	  };
-	}, {
-	  createRouter: _routers.createRouter
+	}, function (dispatch) {
+	  return {
+	    createRouter: function createRouter(router) {
+	      dispatch((0, _routers.createRouter)(router));
+	    }
+	  };
 	}), _dec(_class = (_temp = _class2 = function (_React$Component) {
 	  (0, _inherits3.default)(CanvasContainer, _React$Component);
 
@@ -39187,16 +39320,23 @@
 	  (0, _createClass3.default)(CanvasContainer, [{
 	    key: 'render',
 	    value: function render() {
+	      var _props = this.props;
+	      var createRouter = _props.createRouter;
+	      var routers = _props.routers;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'blockArea' },
 	        _react2.default.createElement(
 	          'a',
-	          { className: 'btn btn-default' },
+	          { className: 'btn btn-default',
+	            onClick: createRouter.bind(null, {
+	              name: 'New router'
+	            }) },
 	          _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' }),
-	          'Add Router'
+	          ' Add Router'
 	        ),
-	        _react2.default.createElement(_ServerCanvas2.default, null)
+	        _react2.default.createElement(_ServerCanvas2.default, { routers: routers })
 	      );
 	    }
 	  }]);
@@ -39218,13 +39358,14 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CREATE_ROUTER = undefined;
+	exports.MOVE_ROUTER = exports.CREATE_ROUTER = undefined;
 
 	var _extends2 = __webpack_require__(565);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
 	exports.createRouter = createRouter;
+	exports.moveRouter = moveRouter;
 
 	var _nodeUuid = __webpack_require__(566);
 
@@ -39232,14 +39373,27 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var CREATE_ROUTER = exports.CREATE_ROUTER = 'CREATE_LANE';
+	var CREATE_ROUTER = exports.CREATE_ROUTER = 'CREATE_ROUTER';
 	function createRouter(router) {
 	  return {
 	    type: CREATE_ROUTER,
 	    router: (0, _extends3.default)({
 	      id: _nodeUuid2.default.v4(),
-	      endpoints: router.endpoints || []
+	      startPoint: '/',
+	      endpoints: []
 	    }, router)
+	  };
+	}
+
+	var MOVE_ROUTER = exports.MOVE_ROUTER = 'MOVE_ROUTER';
+	function moveRouter(_ref) {
+	  var sourceId = _ref.sourceId;
+	  var targetId = _ref.targetId;
+
+	  return {
+	    type: MOVE_ROUTER,
+	    sourceId: sourceId,
+	    targetId: targetId
 	  };
 	}
 
@@ -43358,7 +43512,6 @@
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _dec, _class, _class2, _temp;
-
 	// React DnD Functionality
 	// Sets up BlockArea as a place to drop items
 
@@ -43366,6 +43519,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _RouterBlock = __webpack_require__(465);
+
+	var _RouterBlock2 = _interopRequireDefault(_RouterBlock);
 
 	var _reactDnd = __webpack_require__(348);
 
@@ -43413,22 +43570,14 @@
 	      var _props = this.props;
 	      var isOverCurrent = _props.isOverCurrent;
 	      var connectDropTarget = _props.connectDropTarget;
-	      // const { hasDropped, hasDroppedOnChild } = this.state;
-
-	      var backgroundColor = void 0;
-	      if (isOverCurrent) {
-	        backgroundColor = '#E9F4F5';
-	      }
+	      var routers = _props.routers;
 
 	      return connectDropTarget(_react2.default.createElement(
 	        'div',
-	        { className: 'blockArea', style: { backgroundColor: backgroundColor } },
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'btn btn-default' },
-	          _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' }),
-	          ' Add Router'
-	        )
+	        { className: 'serverCanvas' },
+	        routers.map(function (router) {
+	          return _react2.default.createElement(_RouterBlock2.default, { key: router.id, id: router.id, data: router });
+	        })
 	      ));
 	    }
 	  }]);
@@ -43440,6 +43589,263 @@
 	  children: _react2.default.PropTypes.node
 	}, _temp)) || _class);
 	exports.default = CanvasContainer;
+
+/***/ },
+/* 590 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.changeCategory = changeCategory;
+	function changeCategory(category) {
+	  return {
+	    type: 'CHANGE_CATEGORY',
+	    category: category
+	  };
+	}
+	// export function editTodo(id, text) {
+	//   return {
+	//     type: 'EDIT_TODO',
+	//     id,
+	//     text,
+	//     date: Date.now()
+	//   };
+	// }
+	// export function deleteTodo(id) {
+	//   return {
+	//     type: 'DELETE_TODO',
+	//     id
+	//   };
+	// }
+
+/***/ },
+/* 591 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _toConsumableArray2 = __webpack_require__(593);
+
+	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+	exports.default = routeReducer;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import update from 'react/lib/update';
+
+	function routeReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'CREATE_ROUTER':
+	      return [].concat((0, _toConsumableArray3.default)(state), [action.router]);
+	    default:
+	      return state;
+	  }
+	}
+
+/***/ },
+/* 592 */,
+/* 593 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _from = __webpack_require__(594);
+
+	var _from2 = _interopRequireDefault(_from);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (arr) {
+	  if (Array.isArray(arr)) {
+	    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+	      arr2[i] = arr[i];
+	    }
+
+	    return arr2;
+	  } else {
+	    return (0, _from2.default)(arr);
+	  }
+	};
+
+/***/ },
+/* 594 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(595), __esModule: true };
+
+/***/ },
+/* 595 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(289);
+	__webpack_require__(596);
+	module.exports = __webpack_require__(267).Array.from;
+
+/***/ },
+/* 596 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var ctx            = __webpack_require__(268)
+	  , $export        = __webpack_require__(266)
+	  , toObject       = __webpack_require__(257)
+	  , call           = __webpack_require__(597)
+	  , isArrayIter    = __webpack_require__(598)
+	  , toLength       = __webpack_require__(305)
+	  , createProperty = __webpack_require__(599)
+	  , getIterFn      = __webpack_require__(600);
+
+	$export($export.S + $export.F * !__webpack_require__(602)(function(iter){ Array.from(iter); }), 'Array', {
+	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
+	    var O       = toObject(arrayLike)
+	      , C       = typeof this == 'function' ? this : Array
+	      , aLen    = arguments.length
+	      , mapfn   = aLen > 1 ? arguments[1] : undefined
+	      , mapping = mapfn !== undefined
+	      , index   = 0
+	      , iterFn  = getIterFn(O)
+	      , length, result, step, iterator;
+	    if(mapping)mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+	    // if object isn't iterable or it's array with default iterator - use simple case
+	    if(iterFn != undefined && !(C == Array && isArrayIter(iterFn))){
+	      for(iterator = iterFn.call(O), result = new C; !(step = iterator.next()).done; index++){
+	        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+	      }
+	    } else {
+	      length = toLength(O.length);
+	      for(result = new C(length); length > index; index++){
+	        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+	      }
+	    }
+	    result.length = index;
+	    return result;
+	  }
+	});
+
+
+/***/ },
+/* 597 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// call something on iterator step with safe closing on error
+	var anObject = __webpack_require__(272);
+	module.exports = function(iterator, fn, value, entries){
+	  try {
+	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+	  // 7.4.6 IteratorClose(iterator, completion)
+	  } catch(e){
+	    var ret = iterator['return'];
+	    if(ret !== undefined)anObject(ret.call(iterator));
+	    throw e;
+	  }
+	};
+
+/***/ },
+/* 598 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// check on default Array iterator
+	var Iterators  = __webpack_require__(295)
+	  , ITERATOR   = __webpack_require__(310)('iterator')
+	  , ArrayProto = Array.prototype;
+
+	module.exports = function(it){
+	  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+	};
+
+/***/ },
+/* 599 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $defineProperty = __webpack_require__(271)
+	  , createDesc      = __webpack_require__(279);
+
+	module.exports = function(object, index, value){
+	  if(index in object)$defineProperty.f(object, index, createDesc(0, value));
+	  else object[index] = value;
+	};
+
+/***/ },
+/* 600 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var classof   = __webpack_require__(601)
+	  , ITERATOR  = __webpack_require__(310)('iterator')
+	  , Iterators = __webpack_require__(295);
+	module.exports = __webpack_require__(267).getIteratorMethod = function(it){
+	  if(it != undefined)return it[ITERATOR]
+	    || it['@@iterator']
+	    || Iterators[classof(it)];
+	};
+
+/***/ },
+/* 601 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// getting tag from 19.1.3.6 Object.prototype.toString()
+	var cof = __webpack_require__(303)
+	  , TAG = __webpack_require__(310)('toStringTag')
+	  // ES3 wrong here
+	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
+
+	// fallback for IE11 Script Access Denied error
+	var tryGet = function(it, key){
+	  try {
+	    return it[key];
+	  } catch(e){ /* empty */ }
+	};
+
+	module.exports = function(it){
+	  var O, T, B;
+	  return it === undefined ? 'Undefined' : it === null ? 'Null'
+	    // @@toStringTag case
+	    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+	    // builtinTag case
+	    : ARG ? cof(O)
+	    // ES3 arguments fallback
+	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+	};
+
+/***/ },
+/* 602 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ITERATOR     = __webpack_require__(310)('iterator')
+	  , SAFE_CLOSING = false;
+
+	try {
+	  var riter = [7][ITERATOR]();
+	  riter['return'] = function(){ SAFE_CLOSING = true; };
+	  Array.from(riter, function(){ throw 2; });
+	} catch(e){ /* empty */ }
+
+	module.exports = function(exec, skipClosing){
+	  if(!skipClosing && !SAFE_CLOSING)return false;
+	  var safe = false;
+	  try {
+	    var arr  = [7]
+	      , iter = arr[ITERATOR]();
+	    iter.next = function(){ return {done: safe = true}; };
+	    arr[ITERATOR] = function(){ return iter; };
+	    exec(arr);
+	  } catch(e){ /* empty */ }
+	  return safe;
+	};
 
 /***/ }
 /******/ ]);

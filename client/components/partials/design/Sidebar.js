@@ -3,7 +3,7 @@ import Categories from './Categories';
 import Blocks from './Blocks';
 
 // Import Redux functions & related actions
-import { changeCategory } from './../../../actions/DesignActions.js';
+import { changeCategory } from './../../../actions/ui.js';
 import { connect } from 'react-redux';
 
 class Sidebar extends React.Component {
@@ -62,7 +62,7 @@ Sidebar.propTypes = {
 // Helper functions to add Redux store methods & state attributes to component
 function mapStateToProps(state) {
   return {
-    currentCategory: state.designer.currentCategory,
+    currentCategory: state.ui.currentCategory,
   };
 }
 

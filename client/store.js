@@ -2,10 +2,10 @@ import { createStore } from 'redux';
 
 // Redux Setup
 const defaultState = {
-  designer: {
+  ui: {
     currentCategory: 'SERVER',
-    routers: [],
   },
+  routers: [],
 };
 
 import Reducers from './reducers';

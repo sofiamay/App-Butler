@@ -8,9 +8,11 @@ import { connect } from 'react-redux';
 // Use Redux's connect() method to map to the class
 @connect(state => ({
   routers: state.routers,
-}), {
-  createRouter,
-})
+}), dispatch => ({
+  createRouter: (router) => {
+    dispatch(createRouter(router));
+  },
+}))
 export default class CanvasContainer extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
@@ -25,14 +27,17 @@ export default class CanvasContainer extends React.Component {
   }
 
   render() {
+    const { createRouter, routers } = this.props;
     return (
       <div className="blockArea">
-      <a className="btn btn-default">
-      <i className="fa fa-plus" aria-hidden="true"></i>
-       Add Router
+      <a className="btn btn-default"
+        onClick={createRouter.bind(null, {
+          name: 'New router',
+        })}>
+      <i className="fa fa-plus" aria-hidden="true"></i> Add Router
       </a>
 
-      <ServerCanvas />
+      <ServerCanvas routers={routers} />
       </div>
     );
   }
