@@ -4,8 +4,4 @@ export function changeCategory(category) {
     category,
   };
 }
-export function updateConfig(updateObj) {
-  return {
-    
-  };
-}
+
