@@ -19,7 +19,10 @@ class Sidebar extends React.Component {
     this.state = {
       open: true,
     };
+    this.submitConfig = this.submitConfig.bind(this);
+    this.togglePanel = this.togglePanel.bind(this);
   }
+
   // Methods for opening & closing sidebar
   // Redux wasn't used here since it's irrelevant to the global state
   getSidebarWidth() {
@@ -40,6 +43,12 @@ class Sidebar extends React.Component {
     });
   }
 
+  // Method to post serverConfig
+  submitConfig() {
+    console.log('store.serverconfig: This will be sent to the server');
+    console.log(this.props.serverConfig);
+  }
+
   render() {
     let sidebarWidth = { width: this.getSidebarWidth() };
     let displayContent = { display: this.displayContent() };
@@ -47,11 +56,13 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar" style={sidebarWidth}>
         <div className="sidebar-top">
-        <a onClick={this.togglePanel.bind(this)} className="toggleLink"><i className={carrots} aria-hidden="true"></i>
-        <i className={carrots} aria-hidden="true"></i></a>
+        <a onClick={this.togglePanel} className="toggleLink">
+          <i className={carrots} aria-hidden="true"></i>
+          <i className={carrots} aria-hidden="true"></i>
+        </a>
         </div>
         <div className="sidebar-content" style={displayContent}>
-          <Form updateConfig={this.props.updateConfig} submitConfig={this.props.updateConfig} />
+          <Form updateConfig={this.props.updateConfig} submitConfig={this.submitConfig} />
         </div>
       </div>
     );
@@ -59,7 +70,8 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  
+  updateConfig: React.PropTypes.func.isRequired,
+  serverConfig: React.PropTypes.object,
 };
 
 export default Sidebar;

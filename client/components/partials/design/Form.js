@@ -9,8 +9,8 @@ class Form extends React.Component {
   }
 
   selectServerType = (event) => {
-    this.setState({ server: event.target.value });
-    this.props.updateConfig({ server: event.target.value });
+    this.setState({ serverType: event.target.value });
+    this.props.updateConfig({ serverType: event.target.value });
   }
 
   updateServerConfig = (event) => {
@@ -33,7 +33,7 @@ class Form extends React.Component {
             Port<br />
             <input type="text" name="port" onBlur={this.updateServerConfig} /><br />
             Express name
-            <input type="text" name="express-instantiation"
+            <input type="text" name="expressName"
               placeholder="app=express()"
               onBlur={this.updateServerConfig}
             />
