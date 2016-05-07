@@ -16,28 +16,27 @@ import { DragDropContext } from 'react-dnd';
 export default class Design extends React.Component {
   constructor(props) {
     super(props);
-    // Holds the state of the server config
     this.state = {
     };
   }
 
-  updateServerConfig = (options) => {
-    let stateUpdate = {};
-    Object.keys(options).forEach((key) => {
-      stateUpdate[key] = options[key];
-    });
-    this.setState({ stateUpdate });
-  }
+  // updateServerConfig = (options) => {
+  //   let stateUpdate = {};
+  //   Object.keys(options).forEach((key) => {
+  //     stateUpdate[key] = options[key];
+  //   });
+  //   this.setState({ stateUpdate });
+  // }
 
-  submitServerConfig = () => {
-    console.log(this.state);
-    if (this.state.server === 'express') {
-      console.log('server type looks good');
-    } else {
-      console.log('form error!');
-    }
-    console.log('Send to server!');
-  }
+  // submitServerConfig = () => {
+  //   console.log(this.state);
+  //   if (this.state.server === 'express') {
+  //     console.log('server type looks good');
+  //   } else {
+  //     console.log('form error!');
+  //   }
+  //   console.log('Send to server!');
+  // }
 
   render() {
     return (
@@ -45,9 +44,7 @@ export default class Design extends React.Component {
         <Nav />
         <div className="content">
           <div className="row">
-          <Sidebar>
-            <Form updateConfig={this.updateServerConfig} submitConfig={this.submitServerConfig} />
-          </Sidebar>
+          <Sidebar />
           <CanvasContainer />
         </div>
         </div>

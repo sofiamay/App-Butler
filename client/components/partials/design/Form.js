@@ -48,7 +48,7 @@ class Form extends React.Component {
   }
 
   render() {
-    let currentServerDisplay = this.currentServerDisplay();
+    const currentServerDisplay = this.currentServerDisplay();
     return (
       <form>
         <div>

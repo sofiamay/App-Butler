@@ -1,5 +1,18 @@
 import React from 'react';
+import Form from './Form.js';
 
+// Redux Actions & Methods
+import { updateConfig } from './../../../actions/serverConfig.js';
+import { connect } from 'react-redux';
+
+// Use Redux's connect() method to map to the class
+@connect(state => ({
+  serverConfig: state.serverConfig,
+}), dispatch => ({
+  updateConfig: (config) => {
+    dispatch(updateConfig(config));
+  },
+}))
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +51,7 @@ class Sidebar extends React.Component {
         <i className={carrots} aria-hidden="true"></i></a>
         </div>
         <div className="sidebar-content" style={displayContent}>
-          {this.props.children}
+          <Form updateConfig={this.props.updateConfig} submitConfig={this.props.updateConfig} />
         </div>
       </div>
     );
@@ -46,7 +59,7 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  children: React.PropTypes.element.isRequired,
+  
 };
 
 export default Sidebar;
