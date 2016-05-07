@@ -6,6 +6,12 @@ const defaultState = {
     currentCategory: 'SERVER',
   },
   routers: [],
+  serverConfig: {
+    appName: null,
+    serverType: null,
+    port: null,
+    expressName: null,
+  },
 };
 
 import Reducers from './reducers';

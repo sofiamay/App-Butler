@@ -4,7 +4,6 @@ import React from 'react';
 import Nav from './partials/Nav.js';
 import Sidebar from './partials/design/Sidebar.js';
 import CanvasContainer from './partials/design/CanvasContainer.js';
-import BlockArea from './partials/design/BlockArea.js';
 import Form from './partials/design/Form.js';
 
 
