@@ -9,16 +9,19 @@ export function buildFile(fileConfig, userConfig) {
   return new Error('Undefined file type');
 }
 
-export function buildAllFiles(request, response) {
+export function buildAllFiles(request) {
   const files = [];
-  request.session.files.forEach(fileName => {
-    files.push(buildFile(request.session.files[fileName], request.body.data));
-  });
-  // for (let fileName in request.session.files) {
+  // request.session.files.forEach(fileName => {
   //   files.push(buildFile(request.session.files[fileName], request.body.data));
-  // }
+  // });
+  for (const fileName in request.session.files) {
+    if (fileName) {
+      files.push(buildFile(request.session.files[fileName], request.body.data));
+    }
+  }
   return files;
 }
+
 export function fileToGitHub(fileConfig, userConfig, fileName) {
   const file = buildFile(fileConfig, userConfig);
   const encodedFile = new Buffer(file).toString('base64');
