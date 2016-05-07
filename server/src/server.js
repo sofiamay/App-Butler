@@ -53,17 +53,17 @@ router(server, express);
 //   // });
 // });
 
-// ////// STARTSSL ///////////
-const privateKey = fs.readFileSync(`${__dirname}/../../dyland.key`);
-const certificate = fs.readFileSync(`${__dirname}/../../server.pem`);
+// ////// STARTSSL /////////// DO NOT DELETE REQUIRED FOR HTTPS
+// const privateKey = fs.readFileSync(`${__dirname}/../../dyland.key`);
+// const certificate = fs.readFileSync(`${__dirname}/../../server.pem`);
 
-https.createServer({
-  key: privateKey,
-  cert: certificate,
-  passphrase: 'appbutler',
-}, server).listen(1337, () => {
-  console.log(`Server running at ${port}`);
-});
+// https.createServer({
+//   key: privateKey,
+//   cert: certificate,
+//   passphrase: 'appbutler',
+// }, server).listen(1337, () => {
+//   console.log(`Server running at ${port}`);
+// });
 // /////////////////////////////
 
 // const lex = LEX.testing().create({
