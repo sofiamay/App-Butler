@@ -4,7 +4,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      server: null,
+      serverType: null,
     };
   }
 
@@ -26,7 +26,7 @@ class Form extends React.Component {
   }
 
   currentServerDisplay = () => {
-    switch (this.state.server) {
+    switch (this.state.serverType) {
       case 'express':
         return (
           <div className="express">
