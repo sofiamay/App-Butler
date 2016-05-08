@@ -1,9 +1,4 @@
 import React from 'react';
-import Endpoints from './Endpoints.js';
-
-// Redux Functionality
-import { createEndpoint } from './../../../actions/routers.js';
-import { connect } from 'react-redux';
 
 // React DnD Functionality
 // Sets up BlockArea as a place to drop items
@@ -30,22 +25,15 @@ const boxSource = {
   },
 };
 
-@connect(state => ({
-  routers: state.routers,
-}), dispatch => ({
-  createEndpoint: (endpoint) => {
-    dispatch(createEndpoint(endpoint));
-  },
-}))
 @DropTarget('endpoint', blockTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   isOverCurrent: monitor.isOver({ shallow: true }),
 }))
-@DragSource('router', boxSource, (connect) => ({
+@DragSource('endpoint', boxSource, (connect) => ({
   connectDragSource: connect.dragSource(),
 }))
-export default class RouterBlock extends React.Component {
+export default class Endpoint extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
     isOver: React.PropTypes.bool.isRequired,
@@ -60,7 +48,7 @@ export default class RouterBlock extends React.Component {
   }
 
   render() {
-    const { isOverCurrent, connectDropTarget, data, id, createEndpoint} = this.props;
+    const { isOverCurrent, connectDropTarget } = this.props;
 
     return connectDropTarget(
       <div className="block block-lg">
@@ -70,13 +58,6 @@ export default class RouterBlock extends React.Component {
         <div className="block-info">
         <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
         <span className="block-text">{this.props.data.name}</span>
-        <Endpoints endpoints={data.endpoints} />
-        <a className="btn btn-default"
-          onClick={createEndpoint.bind(null, {
-            routerId: id,
-          })}>
-        <i className="fa fa-plus" aria-hidden="true"></i> Add Endpoint
-        </a>
         </div>
       </div>
     );

@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import Reducers from './reducers';
 
 // Redux Setup
 const defaultState = {
@@ -14,5 +15,4 @@ const defaultState = {
   },
 };
 
-import Reducers from './reducers';
-export default createStore(Reducers, defaultState);
+export default createStore(Reducers, defaultState, window.devToolsExtension ? window.devToolsExtension() : f => f);

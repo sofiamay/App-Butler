@@ -21,3 +21,17 @@ export function moveRouter({ sourceId, targetId }) {
     targetId,
   };
 }
+
+export const CREATE_ENDPOINT = 'CREATE_ENDPOINT';
+export function createEndpoint(endpoint) {
+  return {
+    type: CREATE_ENDPOINT,
+    routerId: endpoint.routerId,
+    endpoint: {
+      id: uuid.v4(),
+      endpoint: '/myNewEndpoint',
+      methods: [],
+      ...endpoint,
+    },
+  };
+}

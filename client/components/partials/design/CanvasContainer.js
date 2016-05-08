@@ -30,7 +30,7 @@ export default class CanvasContainer extends React.Component {
     const { createRouter, routers } = this.props;
     return (
       <div className="blockArea">
-      <a className="btn btn-default"
+      <a className="btn btn-primary"
         onClick={createRouter.bind(null, {
           name: 'New router',
         })}>
