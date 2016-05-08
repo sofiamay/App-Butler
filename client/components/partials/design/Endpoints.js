@@ -15,11 +15,11 @@ export default class RouterBlock extends React.Component {
   render() {
     const { endpoints, routerId } = this.props;
     return (
-      <ul>
+      <div className="endpointsContainer">
         {endpoints.map(endpoint => (
           <Endpoint data={endpoint} routerId={routerId} />
           ))}
-      </ul>
+      </div>
       );
   }
 }

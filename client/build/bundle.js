@@ -43617,8 +43617,8 @@
 	      var routerId = _props.routerId;
 
 	      return _react2.default.createElement(
-	        'ul',
-	        null,
+	        'div',
+	        { className: 'endpointsContainer' },
 	        endpoints.map(function (endpoint) {
 	          return _react2.default.createElement(_Endpoint2.default, { data: endpoint, routerId: routerId });
 	        })
@@ -43730,7 +43730,7 @@
 
 	      return connectDropTarget(_react2.default.createElement(
 	        'div',
-	        { className: 'block block-lg' },
+	        { className: 'block block-endpoint ' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'block-settings' },
@@ -43743,12 +43743,12 @@
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'block-icon' },
-	            _react2.default.createElement('i', { className: 'fa fa-random', 'aria-hidden': 'true' })
+	            _react2.default.createElement('i', { className: 'fa fa-code-fork', 'aria-hidden': 'true' })
 	          ),
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'block-text' },
-	            this.props.data.name
+	            this.props.data.endpoint
 	          )
 	        )
 	      ));

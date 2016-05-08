@@ -80,6 +80,10 @@ hr {
   padding-top: 7px;
 }
 
+.endpointsContainer {
+  margin: 10px 0;
+}
+
 .noMatch {
   width: 100%;
   margin-top: 300px;
@@ -143,6 +147,19 @@ hr {
   background-color: #1da8ff;
   padding: 5px;
   margin-right: 10px;
+  vertical-align: top;
+}
+
+.block-endpoint {
+  display: block;
+  box-sizing: border-box;
+  min-height: 50px;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  background-color: #FFFFFF;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .block-settings {

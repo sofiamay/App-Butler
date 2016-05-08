@@ -51,13 +51,13 @@ export default class Endpoint extends React.Component {
     const { isOverCurrent, connectDropTarget } = this.props;
 
     return connectDropTarget(
-      <div className="block block-lg">
+      <div className="block block-endpoint ">
         <div className="block-settings">
         <i className="fa fa-info-circle" aria-hidden="true"></i><i className="fa fa-sliders" aria-hidden="true"></i>
         </div>
         <div className="block-info">
-        <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
-        <span className="block-text">{this.props.data.name}</span>
+        <span className="block-icon"><i className="fa fa-code-fork" aria-hidden="true"></i></span>
+        <span className="block-text">{this.props.data.endpoint}</span>
         </div>
       </div>
     );
