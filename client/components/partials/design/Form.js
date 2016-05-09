@@ -30,9 +30,9 @@ class Form extends React.Component {
       case 'express':
         return (
           <div className="express">
-            Port<br />
+            <div className="serverLabel">Port</div>
             <input type="text" name="port" onBlur={this.updateServerConfig} /><br />
-            Express name
+            <div className="serverLabel">Express name</div>
             <input type="text" name="expressName"
               placeholder="app=express()"
               onBlur={this.updateServerConfig}
@@ -50,13 +50,13 @@ class Form extends React.Component {
   render() {
     const currentServerDisplay = this.currentServerDisplay();
     return (
-      <form>
+      <form className="serverSettings">
         <div>
-          App Name
+          <div className="serverLabel">App Name</div>
           <input type="text" name="appName" required onBlur={this.updateServerConfig} />
         </div>
         <div>
-          Server Type<br />
+          <div className="serverLabel">Server Type</div>
           <select onChange={this.selectServerType}>
             <option value="null"></option>
             <option value="express">Express</option>
@@ -64,7 +64,7 @@ class Form extends React.Component {
         </div>
         <hr />
         {currentServerDisplay}
-        <button onClick={this.submitServerConfig} name="submitConfig">Build Server</button>
+        <button onClick={this.submitServerConfig} name="submitConfig" className="btn btn-submit">Build Server</button>
       </form>
     );
   }
