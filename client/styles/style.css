@@ -39,6 +39,7 @@ hr {
   height: 100%;
   width: 100%;
   display: table;
+  table-layout: fixed;
 }
 
 .row {
@@ -83,6 +84,10 @@ hr {
 .serverCanvas {
   padding-top: 7px;
   overflow: scroll;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .endpointsContainer {
@@ -119,6 +124,9 @@ hr {
 
 .routerContainer {
   height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
 }
 
 /* Button Styling */
