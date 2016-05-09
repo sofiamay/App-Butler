@@ -11,11 +11,19 @@ import NoMatch from './components/NoMatch.js';
 
 import Store from './store.js';
 
+const AuthCheck = (nextState, redirect) => {
+  if (!window.localStorage.user) {
+    redirect({
+      pathname: '/*',
+    });
+  }
+};
+
 render((
   <Provider store={Store}>
     <Router history={hashHistory}>
       <Route path="/" component={Index} />
-      <Route path="/design" component={Design} />
+      <Route path="/design" component={Design} onEnter={AuthCheck} />
       <Route path="/*" component={NoMatch} />
     </Router>
   </Provider>
