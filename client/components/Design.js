@@ -25,10 +25,8 @@ export default class Design extends React.Component {
       <div className="container">
         <Nav />
         <div className="content">
-          <div className="row">
           <Sidebar />
           <CanvasContainer />
-        </div>
         </div>
       </div>
    );
