@@ -35,19 +35,6 @@ class Form extends React.Component {
     const { fields: { serverType } } = this.props;
     serverType.onChange(event.target.value);
     this.setState({ serverType: event.target.value });
-    this.props.updateConfig({ serverType: event.target.value });
-  }
-
-  updateServerConfig = (event) => {
-    const updateObj = {};
-    updateObj[event.target.name] = event.target.value;
-    return this.props.updateConfig(updateObj);
-  }
-
-  submitServerConfig = (event) => {
-    event.preventDefault();
-    this.props.submitConfig();
-    return false;
   }
 
   testSubmitButton = (data) => {
@@ -61,12 +48,12 @@ class Form extends React.Component {
         return (
           <div className="express">
             <div className="serverLabel">Port</div>
-            <input type="text" name="port" onBlur={this.updateServerConfig} {...port} /><br />
+            <input type="text" name="port" {...port} /><br />
             {port.touched && port.error && <div>{port.error}</div>}
             <div className="serverLabel">Express name</div>
             <input type="text" name="expressName"
               placeholder="app=express()"
-              onBlur={this.updateServerConfig} {...expressName}
+              {...expressName}
             />
             {expressName.touched && expressName.error && <div>{expressName.error}</div>}
           </div>
@@ -86,7 +73,7 @@ class Form extends React.Component {
       <form className="serverSettings">
         <div>
           <div className="serverLabel">App Name</div>
-          <input type="text" name="appName" required onBlur={this.updateServerConfig} {...appName} />
+          <input type="text" name="appName" required {...appName} />
           {appName.touched && appName.error && <div>{appName.error}</div>}
         </div>
         <div>
@@ -108,8 +95,9 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  updateConfig: React.PropTypes.func.isRequired,
-  submitConfig: React.PropTypes.func.isRequired,
+  fields: React.PropTypes.object.isRequired,
+  handleSubmit: React.PropTypes.func.isRequired,
+  submitting: React.PropTypes.bool.isRequired,
 };
 
 Form = reduxForm({

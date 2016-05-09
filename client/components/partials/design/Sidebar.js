@@ -1,25 +1,12 @@
 import React from 'react';
 import Form from './Form.js';
 
-// Redux Actions & Methods
-import { updateConfig } from './../../../actions/serverConfig.js';
-import { connect } from 'react-redux';
-
-// Use Redux's connect() method to map to the class
-@connect(state => ({
-  serverConfig: state.serverConfig,
-}), dispatch => ({
-  updateConfig: (config) => {
-    dispatch(updateConfig(config));
-  },
-}))
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: true,
     };
-    this.submitConfig = this.submitConfig.bind(this);
     this.togglePanel = this.togglePanel.bind(this);
   }
 
@@ -43,12 +30,6 @@ class Sidebar extends React.Component {
     });
   }
 
-  // Method to post serverConfig
-  submitConfig() {
-    console.log('store.serverconfig: This will be sent to the server');
-    console.log(this.props.serverConfig);
-  }
-
   render() {
     let sidebarWidth = { width: this.getSidebarWidth() };
     let displayContent = { display: this.displayContent() };
@@ -62,7 +43,7 @@ class Sidebar extends React.Component {
         </a>
         </div>
         <div className="sidebar-content" style={displayContent}>
-          <Form updateConfig={this.props.updateConfig} submitConfig={this.submitConfig} />
+          <Form />
         </div>
       </div>
     );
@@ -70,8 +51,7 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  updateConfig: React.PropTypes.func.isRequired,
-  serverConfig: React.PropTypes.object,
+
 };
 
 export default Sidebar;
