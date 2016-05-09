@@ -71,12 +71,12 @@ export default class RouterBlock extends React.Component {
         <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
         <span className="block-text">{this.props.data.name}</span>
         <Endpoints endpoints={data.endpoints} />
-        <a className="btn btn-default"
+        <button className="btn btn-default"
           onClick={createEndpoint.bind(null, {
             routerId: id,
           })}>
         <i className="fa fa-plus" aria-hidden="true"></i> Add Endpoint
-        </a>
+        </button>
         </div>
       </div>
     );

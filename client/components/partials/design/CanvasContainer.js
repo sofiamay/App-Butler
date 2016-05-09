@@ -30,12 +30,12 @@ export default class CanvasContainer extends React.Component {
     const { createRouter, routers } = this.props;
     return (
       <div className="blockArea">
-      <a className="btn btn-primary"
+      <button className="btn btn-primary"
         onClick={createRouter.bind(null, {
           name: 'New router',
         })}>
       <i className="fa fa-plus" aria-hidden="true"></i> Add Router
-      </a>
+      </button>
 
       <ServerCanvas routers={routers} />
       </div>
