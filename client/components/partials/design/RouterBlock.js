@@ -63,6 +63,7 @@ export default class RouterBlock extends React.Component {
     const { isOverCurrent, connectDropTarget, data, id, createEndpoint} = this.props;
 
     return connectDropTarget(
+      <div className="routerContainer">
       <div className="block block-lg">
         <div className="block-settings">
         <i className="fa fa-info-circle" aria-hidden="true"></i><i className="fa fa-sliders" aria-hidden="true"></i>
@@ -78,6 +79,7 @@ export default class RouterBlock extends React.Component {
         <i className="fa fa-plus" aria-hidden="true"></i> Add Endpoint
         </button>
         </div>
+      </div>
       </div>
     );
   }

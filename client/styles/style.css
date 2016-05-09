@@ -82,6 +82,7 @@ hr {
 
 .serverCanvas {
   padding-top: 7px;
+  overflow: scroll;
 }
 
 .endpointsContainer {
@@ -114,6 +115,10 @@ hr {
   text-transform: uppercase;
   font-size: 14px;
   padding-bottom: 3px;
+}
+
+.routerContainer {
+  height: 100%;
 }
 
 /* Button Styling */
