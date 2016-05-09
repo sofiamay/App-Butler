@@ -13,6 +13,7 @@ const defaultState = {
     port: null,
     expressName: null,
   },
+  form: {},
 };
 
 export default createStore(Reducers, defaultState, window.devToolsExtension ? window.devToolsExtension() : f => f);
