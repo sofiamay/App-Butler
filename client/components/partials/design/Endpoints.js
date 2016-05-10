@@ -5,6 +5,8 @@ export default class RouterBlock extends React.Component {
   static propTypes = {
     endpoints: React.PropTypes.array,
     routerId: React.PropTypes.string,
+    moveEndpoint: React.PropTypes.func,
+    routerIndex: React.PropTypes.number,
   }
 
   constructor(props) {
@@ -13,11 +15,17 @@ export default class RouterBlock extends React.Component {
   }
 
   render() {
-    const { endpoints, routerId } = this.props;
+    const { endpoints, routerId, moveEndpoint, routerIndex } = this.props;
     return (
       <div className="endpointsContainer">
-        {endpoints.map(endpoint => (
-          <Endpoint data={endpoint} routerId={routerId} />
+        {endpoints.map((endpoint, index) => (
+          <Endpoint key={endpoint.id}
+            data={endpoint}
+            routerId={routerId}
+            endpointIndex={index}
+            routerIndex={routerIndex}
+            onMove={moveEndpoint}
+          />
           ))}
       </div>
       );

@@ -2,7 +2,7 @@ import React from 'react';
 import Endpoints from './Endpoints.js';
 
 // Redux Functionality
-import { createEndpoint } from './../../../actions/routers.js';
+import { createEndpoint, moveEndpoint } from './../../../actions/routers.js';
 import { connect } from 'react-redux';
 
 // React DnD Functionality
@@ -36,6 +36,9 @@ const boxSource = {
   createEndpoint: (endpoint) => {
     dispatch(createEndpoint(endpoint));
   },
+  moveEndpoint: (data) => {
+    dispatch(moveEndpoint(data));
+  },
 }))
 @DropTarget('endpoint', blockTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
@@ -48,10 +51,9 @@ const boxSource = {
 export default class RouterBlock extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
-    isOver: React.PropTypes.bool.isRequired,
-    isOverCurrent: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.node,
     data: React.PropTypes.object,
+    routerIndex: React.PropTypes.number,
+    id: React.PropTypes.string,
   }
 
   constructor(props) {
@@ -60,7 +62,7 @@ export default class RouterBlock extends React.Component {
   }
 
   render() {
-    const { isOverCurrent, connectDropTarget, data, id, createEndpoint} = this.props;
+    const { connectDropTarget, data, id, createEndpoint, moveEndpoint, routerIndex } = this.props;
 
     return connectDropTarget(
       <div className="routerContainer">
@@ -71,13 +73,20 @@ export default class RouterBlock extends React.Component {
         <div className="block-info">
         <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
         <span className="block-text">{this.props.data.name}</span>
-        <Endpoints endpoints={data.endpoints} />
-        <button className="btn btn-default"
-          onClick={createEndpoint.bind(null, {
-            routerId: id,
-          })}>
-        <i className="fa fa-plus" aria-hidden="true"></i> Add Endpoint
+        <div style={{ marginTop: '7px' }}>
+          <button className="btn btn-default"
+            onClick={createEndpoint.bind(null, {
+              routerId: id,
+            })}>
+          <i className="fa fa-plus" aria-hidden="true"></i> Add Endpoint
         </button>
+        </div>
+        <Endpoints
+          endpoints={data.endpoints}
+          routerId={data.id}
+          routerIndex={routerIndex}
+          moveEndpoint={moveEndpoint}
+        />
         </div>
       </div>
       </div>

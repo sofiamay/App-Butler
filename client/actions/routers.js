@@ -35,3 +35,17 @@ export function createEndpoint(endpoint) {
     },
   };
 }
+
+export const MOVE_ENDPOINT = 'MOVE_ENDPOINT';
+export function moveEndpoint({ sourceId, targetId, sourceEndpointIndex, targetEndpointIndex, sourceRouterIndex, targetRouterIndex }) {
+  console.log('All the things: ', sourceId, targetId, sourceEndpointIndex, targetEndpointIndex, sourceRouterIndex, targetRouterIndex);
+  return {
+    type: MOVE_ENDPOINT,
+    sourceId,
+    targetId,
+    sourceEndpointIndex,
+    targetEndpointIndex,
+    sourceRouterIndex,
+    targetRouterIndex,
+  };
+}
