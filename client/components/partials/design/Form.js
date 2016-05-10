@@ -18,6 +18,9 @@ const validate = values => {
   if (values.expressName && values.expressName.length > 15) {
     errors.appName = 'Must be 15 characters or less';
   }
+  if (!values.serverType) {
+    errors.serverType = 'Please select a serverType';
+  }
   return errors;
 };
 
@@ -68,7 +71,7 @@ class Form extends React.Component {
 
   render() {
     const currentServerDisplay = this.currentServerDisplay();
-    const { fields: { appName }, handleSubmit, submitting } = this.props;
+    const { fields: { appName, serverType }, handleSubmit, submitting } = this.props;
     return (
       <form className="serverSettings">
         <div>
@@ -83,6 +86,7 @@ class Form extends React.Component {
             <option value="express">Express</option>
           </select>
         </div>
+        {serverType.touched && serverType.error && <div>{serverType.error}</div>}
         <hr />
         {currentServerDisplay}
         <button disabled={submitting} onClick={handleSubmit(this.testSubmitButton)}
