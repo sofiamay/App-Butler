@@ -212,3 +212,8 @@ hr {
 .block-icon i {
   font-size: 16px;
 }
+
+/*The error class is applied to both text input boxes and divs containing error messages*/
+.error {
+/*GO REID GO!!!*/
+}

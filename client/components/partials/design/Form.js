@@ -10,7 +10,7 @@ const validate = values => {
   } else if (values.appName.length > 15) {
     errors.appName = 'Must be 15 characters or less';
   }
-  if (!/^\s*\d{1,4}\s*$/.test(values.port)) {
+  if (!/^[\s*\d{1,4}\s*]?$/.test(values.port)) {
     errors.port = 'Port must be an integer between 0 and 9999';
   } else if (values.port.length > 5) {
     errors.port = 'Must be 5 characters or less';
@@ -51,14 +51,23 @@ class Form extends React.Component {
         return (
           <div className="express">
             <div className="serverLabel">Port</div>
-            <input type="text" name="port" {...port} /><br />
+            <div>
+              <input className={(port.touched && port.error) ? 'error' : null}
+                type="text" name="port" {...port}
+              />
+              <br />
+            </div>
             {port.touched && port.error && <div>{port.error}</div>}
             <div className="serverLabel">Express name</div>
-            <input type="text" name="expressName"
+            <div><input className={(expressName.touched && expressName.error) ? 'error' : null}
+              type="text" name="expressName"
               placeholder="app=express()"
               {...expressName}
             />
-            {expressName.touched && expressName.error && <div>{expressName.error}</div>}
+            </div>
+            {expressName.touched && expressName.error &&
+              <div className="error">{expressName.error}</div>
+            }
           </div>
           );
       default:
@@ -76,17 +85,21 @@ class Form extends React.Component {
       <form className="serverSettings">
         <div>
           <div className="serverLabel">App Name</div>
-          <input type="text" name="appName" required {...appName} />
-          {appName.touched && appName.error && <div>{appName.error}</div>}
+          <div>
+            <input className={(appName.touched && appName.error) ? 'error' : null}
+              type="text" name="appName" required {...appName}
+            />
+          </div>
+          {appName.touched && appName.error && <div className="error">{appName.error}</div>}
         </div>
         <div>
           <div className="serverLabel">Server Type</div>
-          <select onChange={this.selectServerType} >
+          <div><select onChange={this.selectServerType} >
             <option value="null"></option>
             <option value="express">Express</option>
-          </select>
+          </select></div>
         </div>
-        {serverType.touched && serverType.error && <div>{serverType.error}</div>}
+        {serverType.touched && serverType.error && <div className="error">{serverType.error}</div>}
         <hr />
         {currentServerDisplay}
         <button disabled={submitting} onClick={handleSubmit(this.testSubmitButton)}
