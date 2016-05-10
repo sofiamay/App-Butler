@@ -26,7 +26,6 @@ export default function routeReducer(state = [], action) {
       // We need to make a copy of the source to remove it
       const sourceEndpoint = state[sourceRouterIndex].endpoints[sourceEndpointIndex];
       // Target references are automatically updated for each move action
-      const targetId = action.targetId;
       const targetRouterIndex = action.targetRouterIndex;
       const targetEndpointIndex = action.targetEndpointIndex;
 
