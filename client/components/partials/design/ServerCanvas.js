@@ -27,9 +27,7 @@ const blockTarget = {
 export default class CanvasContainer extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
-    isOver: React.PropTypes.bool.isRequired,
-    isOverCurrent: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.node,
+    routers: React.PropTypes.array,
   }
 
   constructor(props) {
@@ -41,11 +39,11 @@ export default class CanvasContainer extends React.Component {
   }
 
   render() {
-    const { isOverCurrent, connectDropTarget, routers } = this.props;
+    const { connectDropTarget, routers } = this.props;
     return connectDropTarget(
       <div className="serverCanvas">
-        {routers.map(router => (
-          <RouterBlock key={router.id} id={router.id} data={router} />
+        {routers.map((router, index) => (
+          <RouterBlock key={router.id} id={router.id} data={router} routerIndex={index} />
         ))}
       </div>
     );

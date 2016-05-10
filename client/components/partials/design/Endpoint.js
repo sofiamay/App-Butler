@@ -5,41 +5,54 @@ import React from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
 
 // Settings for Target areafor React DnD
-const blockTarget = {
-  drop(props, monitor, component) {
-    const hasDroppedOnChild = monitor.didDrop();
-    if (hasDroppedOnChild) {
-      return;
+
+const endpointSource = {
+  beginDrag({ data, routerIndex, endpointIndex }) {
+    return {
+      id: data.id,
+      routerIndex,
+      endpointIndex,
+    };
+  },
+};
+
+const endpointTarget = {
+  hover(targetProps, monitor) {
+    const targetId = targetProps.data.id;
+    const targetRouterIndex = targetProps.routerIndex;
+    const targetEndpointIndex = targetProps.endpointIndex;
+
+    const sourceProps = monitor.getItem();
+    const sourceRouterIndex = sourceProps.routerIndex;
+    const sourceEndpointIndex = sourceProps.endpointIndex;
+    const sourceId = sourceProps.id;
+
+    if (sourceId !== targetId) {
+      targetProps.onMove({
+        sourceId,
+        targetId,
+        sourceEndpointIndex,
+        targetEndpointIndex,
+        sourceRouterIndex,
+        targetRouterIndex,
+      });
     }
-
-    component.setState({
-      hasDropped: true,
-      hasDroppedOnChild,
-    });
   },
 };
 
-const boxSource = {
-  beginDrag() {
-    return {};
-  },
-};
-
-@DropTarget('endpoint', blockTarget, (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  isOverCurrent: monitor.isOver({ shallow: true }),
-}))
-@DragSource('endpoint', boxSource, (connect) => ({
+@DragSource('endpoint', endpointSource, (connect) => ({
   connectDragSource: connect.dragSource(),
+}))
+@DropTarget('endpoint', endpointTarget, (connect) => ({
+  connectDropTarget: connect.dropTarget(),
 }))
 export default class Endpoint extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
-    isOver: React.PropTypes.bool.isRequired,
-    isOverCurrent: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.node,
+    connectDragSource: React.PropTypes.func.isRequired,
     data: React.PropTypes.object,
+    routerIndex: React.PropTypes.number,
+    endpointIndex: React.PropTypes.number,
   }
 
   constructor(props) {
@@ -48,18 +61,19 @@ export default class Endpoint extends React.Component {
   }
 
   render() {
-    const { isOverCurrent, connectDropTarget } = this.props;
+    const { connectDragSource, connectDropTarget } = this.props;
 
-    return connectDropTarget(
-      <div className="block block-endpoint ">
+    return connectDragSource(connectDropTarget(
+      <div className="block block-endpoint">
         <div className="block-settings">
-        <i className="fa fa-info-circle" aria-hidden="true"></i><i className="fa fa-sliders" aria-hidden="true"></i>
+        <i className="fa fa-info-circle" aria-hidden="true"></i>
+        <i className="fa fa-sliders" aria-hidden="true"></i>
         </div>
         <div className="block-info">
         <span className="block-icon"><i className="fa fa-code-fork" aria-hidden="true"></i></span>
         <span className="block-text">{this.props.data.endpoint}</span>
         </div>
       </div>
-    );
+    ));
   }
 }

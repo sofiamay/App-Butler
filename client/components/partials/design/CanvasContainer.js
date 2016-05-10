@@ -14,13 +14,6 @@ import { connect } from 'react-redux';
   },
 }))
 export default class CanvasContainer extends React.Component {
-  static propTypes = {
-    connectDropTarget: React.PropTypes.func.isRequired,
-    isOver: React.PropTypes.bool.isRequired,
-    isOverCurrent: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.node,
-  }
-
   constructor(props) {
     super(props);
     this.state = {};
