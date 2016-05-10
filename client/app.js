@@ -26,25 +26,19 @@ const getCookie = cookieName => {
   return '';
 };
 
-const AuthCheck = (nextState, redirect) => {
+const AuthCheck = (nextState, redirect, callback) => {
   // Check database to validate user cookie
   fetch('/api/users', {
     method: 'GET',
     credentials: 'same-origin',
   }).then(res => res.json()).then(user => {
-    console.log(user === null);
     if (!user) {
-      console.log('USER does not exist');
-      console.log(redirect);
       redirect({
         pathname: '/*',
       });
-    } else if (user.id !== Number(getCookie('id'))) {
-      console.log('REDIRECT');
-      redirect({
-        pathname: '/*',
-      });
+      callback();
     }
+    callback();
   });
 };
 

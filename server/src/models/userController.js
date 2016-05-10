@@ -3,11 +3,10 @@ import User from './user';
 module.exports = {
   getUser: (req, res) => {
     User.findOne({ githubID: req.cookies.user }, (err, person) => {
-      if (err) {
-        console.log(err);
-        res.status(404).send();
+      if (!person) {
+        res.json(false);
       } else {
-        res.json(person);
+        res.json(person.id === Number(req.cookies.id));
       }
     });
   },
