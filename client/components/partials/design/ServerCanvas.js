@@ -2,7 +2,7 @@ import React from 'react';
 import RouterBlock from './RouterBlock.js';
 // React DnD Functionality
 // Sets up BlockArea as a place to drop items
-import { DropTarget } from 'react-dnd';
+import { DropTarget as dropTarget } from 'react-dnd';
 
 // Settings for Target areafor React DnD
 const blockTarget = {
@@ -19,7 +19,7 @@ const blockTarget = {
   },
 };
 
-@DropTarget('router', blockTarget, (connect, monitor) => ({
+@dropTarget('router', blockTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   isOverCurrent: monitor.isOver({ shallow: true }),

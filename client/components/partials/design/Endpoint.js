@@ -2,7 +2,7 @@ import React from 'react';
 
 // React DnD Functionality
 // Sets up BlockArea as a place to drop items
-import { DragSource, DropTarget } from 'react-dnd';
+import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
 
 // Settings for Target areafor React DnD
 
@@ -40,10 +40,11 @@ const endpointTarget = {
   },
 };
 
-@DragSource('endpoint', endpointSource, (connect) => ({
+@dragSource('endpoint', endpointSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging(),
 }))
-@DropTarget('endpoint', endpointTarget, (connect) => ({
+@dropTarget('endpoint', endpointTarget, (connect) => ({
   connectDropTarget: connect.dropTarget(),
 }))
 export default class Endpoint extends React.Component {
@@ -53,6 +54,7 @@ export default class Endpoint extends React.Component {
     data: React.PropTypes.object,
     routerIndex: React.PropTypes.number,
     endpointIndex: React.PropTypes.number,
+    isDragging: React.PropTypes.bool,
   }
 
   constructor(props) {
@@ -61,10 +63,9 @@ export default class Endpoint extends React.Component {
   }
 
   render() {
-    const { connectDragSource, connectDropTarget } = this.props;
-
+    const { connectDragSource, connectDropTarget, isDragging } = this.props;
     return connectDragSource(connectDropTarget(
-      <div className="block block-endpoint">
+      <div className="block block-endpoint" style={{ opacity: isDragging ? 0 : 1 }}>
         <div className="block-settings">
         <i className="fa fa-info-circle" aria-hidden="true"></i>
         <i className="fa fa-sliders" aria-hidden="true"></i>

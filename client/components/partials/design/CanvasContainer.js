@@ -14,6 +14,11 @@ import { connect } from 'react-redux';
   },
 }))
 export default class CanvasContainer extends React.Component {
+  static propTypes = {
+    createRouter: React.PropTypes.func.isRequired,
+    routers: React.PropTypes.array,
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -27,7 +32,8 @@ export default class CanvasContainer extends React.Component {
           <button className="btn btn-primary"
             onClick={createRouter.bind(null, {
               name: 'New router',
-            })}>
+            })}
+          >
           <i className="fa fa-plus" aria-hidden="true"></i> Add Router
           </button>
         </div>
