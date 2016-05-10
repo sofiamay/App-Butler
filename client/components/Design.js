@@ -20,24 +20,6 @@ export default class Design extends React.Component {
     };
   }
 
-  // updateServerConfig = (options) => {
-  //   let stateUpdate = {};
-  //   Object.keys(options).forEach((key) => {
-  //     stateUpdate[key] = options[key];
-  //   });
-  //   this.setState({ stateUpdate });
-  // }
-
-  // submitServerConfig = () => {
-  //   console.log(this.state);
-  //   if (this.state.server === 'express') {
-  //     console.log('server type looks good');
-  //   } else {
-  //     console.log('form error!');
-  //   }
-  //   console.log('Send to server!');
-  // }
-
   render() {
     return (
       <div className="container">

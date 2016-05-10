@@ -7,12 +7,7 @@ const defaultState = {
     currentCategory: 'SERVER',
   },
   routers: [],
-  serverConfig: {
-    appName: null,
-    serverType: null,
-    port: null,
-    expressName: null,
-  },
+  form: {},
 };
 
 export default createStore(Reducers, defaultState, window.devToolsExtension ? window.devToolsExtension() : f => f);
