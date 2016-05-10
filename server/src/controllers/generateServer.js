@@ -10,23 +10,30 @@ export function generateExpressServer(request, response) {
   };
   const builtFiles = buildAllFiles(request, response);
   // Send these files to github!
-  return JSON.stringify(builtFiles); // response.send(JSON.stringify(builtFiles));
+  return response.send(JSON.stringify(builtFiles));
 }
 
 export function generateServer(request, response) {
   const reqData = request.body.data;
   if (reqData && reqData.serverType && reqData.serverType === 'node-express') {
     // generate express server
-    const data = generateExpressServer(request, response);
-    const newConfig = new Config({ data });
-    newConfig.save((err) => {
-      if (err) {
-        response.json(err);
-      }
-      response.json(newConfig);
-    });
-    response.send(generateExpressServer(request, response));
+    return generateExpressServer(request, response);
   }
-
   return response.status(400).send('No server type on request');
 }
+
+
+export function createConfig(request, response) {
+  const newConfig = new Config({
+    serverType: request.body.serverType,
+    port: request.body.port,
+    expressName: request.body.expressName,
+  });
+  newConfig.save((err) => {
+    if (err) {
+      response.json(err);
+    }
+    response.send(JSON.stringify(newConfig));
+  });
+}
+
