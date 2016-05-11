@@ -15,7 +15,7 @@ module.exports = (app, express) => {
     res.cookie('logged_in', true);
     res.cookie('user_session', req.user.token);
     res.cookie('id', req.user.id);
-    res.redirect('/');
+    res.redirect('/#/design');
   });
 
   app.get('/api/users', getUser);
