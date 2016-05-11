@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 
 export default {
   handleLogin: passport.authenticate('github'),
-  authenticateLogin: passport.authenticate('github', { failureRedirect: '/login' }),
+  authenticateLogin: passport.authenticate('github', { failureRedirect: '/' }),
 };
 
 
