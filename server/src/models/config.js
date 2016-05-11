@@ -5,7 +5,10 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 const configSchema = new Schema({
   // user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', childPath: 'githubID' },
-  data: { type: String },
+  appName: String,
+  port: Number,
+  expressName: String,
+  serverType: String,
 });
 
 configSchema.pre('save', (next) => {
