@@ -25,9 +25,10 @@ export function generateServer(request, response) {
 
 export function createConfig(request, response) {
   const newConfig = new Config({
-    serverType: request.body.serverType,
+    appName: request.body.appName,
     port: request.body.port,
     expressName: request.body.expressName,
+    serverType: request.body.serverType,
   });
   newConfig.save((err) => {
     if (err) {
