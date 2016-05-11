@@ -2,7 +2,12 @@ import React from 'react';
 import Endpoints from './Endpoints.js';
 
 // Redux Functionality
-import { createEndpoint, mountEndpoint, moveEndpoint } from './../../../actions/routers.js';
+import {
+  moveRouter,
+  createEndpoint,
+  mountEndpoint,
+  moveEndpoint,
+} from './../../../actions/routers.js';
 import { connect } from 'react-redux';
 
 // React DnD Functionality
@@ -10,9 +15,10 @@ import { connect } from 'react-redux';
 import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
 
 const routerSource = {
-  beginDrag({ id }) {
+  beginDrag({ id, routerIndex }) {
     return {
       id,
+      routerIndex,
       isRouter: true,
     };
   },
@@ -34,12 +40,22 @@ const routerTarget = {
         sourceEndpointIndex,
       });
     }
+
+    if (sourceProps.isRouter && sourceId !== targetId) {
+      targetProps.moveRouter({
+        targetId,
+        sourceId,
+      });
+    }
   },
 };
 
 @connect(state => ({
   routers: state.routers,
 }), dispatch => ({
+  moveRouter: (endpoint) => {
+    dispatch(moveRouter(endpoint));
+  },
   createEndpoint: (endpoint) => {
     dispatch(createEndpoint(endpoint));
   },
@@ -67,6 +83,7 @@ export default class RouterBlock extends React.Component {
     data: React.PropTypes.object,
     routerIndex: React.PropTypes.number,
     id: React.PropTypes.string,
+    isDragging: React.PropTypes.bool,
   }
 
   constructor(props) {
@@ -75,11 +92,11 @@ export default class RouterBlock extends React.Component {
   }
 
   render() {
-    const { connectDropTarget, connectDragSource, data, id, createEndpoint, moveEndpoint, routerIndex } = this.props;
+    const { connectDropTarget, connectDragSource, data, id, isDragging, createEndpoint, moveEndpoint, routerIndex } = this.props;
 
     return connectDragSource(connectDropTarget(
       <div className="routerContainer">
-      <div className="block block-lg">
+      <div className="block block-lg" style={{ opacity: isDragging ? 0 : 1 }}>
         <div className="block-settings">
         <i className="fa fa-info-circle" aria-hidden="true"></i>
         <i className="fa fa-sliders" aria-hidden="true"></i>

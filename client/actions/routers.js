@@ -14,11 +14,12 @@ export function createRouter(router) {
 }
 
 export const MOVE_ROUTER = 'MOVE_ROUTER';
-export function moveRouter({ sourceId, targetId }) {
+export function moveRouter({ sourceId, targetId, targetIndex }) {
   return {
     type: MOVE_ROUTER,
     sourceId,
     targetId,
+    targetIndex,
   };
 }
 

@@ -1,4 +1,17 @@
 // Some Reducers factored out into functions to reduce complexity
+const moveRouter = (state, action) => {
+  const { sourceId, targetId } = action;
+  const sourceRouterIndex = state.findIndex(router => router.id === sourceId);
+  const sourceRouter = state[sourceRouterIndex];
+
+  const newState = state.slice();
+  newState.splice(sourceRouterIndex, 1);
+
+  const targetRouterIndex = state.findIndex(router => router.id === targetId);
+  newState.splice(targetRouterIndex, 0, sourceRouter);
+  console.log('newState', newState);
+  return newState;
+};
 
 const mountEndpoint = (state, action) => {
   const { targetId, sourceId } = action;
@@ -99,6 +112,8 @@ export default function routeReducer(state = [], action) {
   switch (action.type) {
     case 'CREATE_ROUTER':
       return [...state, action.router];
+    case 'MOVE_ROUTER':
+      return moveRouter(state, action);
     case 'CREATE_ENDPOINT':
       return state.slice().map(router => {
         if (router.id === action.routerId) {
