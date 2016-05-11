@@ -2,31 +2,38 @@ import React from 'react';
 import Endpoints from './Endpoints.js';
 
 // Redux Functionality
-import { createEndpoint, moveEndpoint } from './../../../actions/routers.js';
+import { createEndpoint, mountEndpoint, moveEndpoint } from './../../../actions/routers.js';
 import { connect } from 'react-redux';
 
 // React DnD Functionality
 // Sets up BlockArea as a place to drop items
-import { DragSource, DropTarget } from 'react-dnd';
+import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
 
-// Settings for Target areafor React DnD
-const blockTarget = {
-  drop(props, monitor, component) {
-    const hasDroppedOnChild = monitor.didDrop();
-    if (hasDroppedOnChild) {
-      return;
-    }
-
-    component.setState({
-      hasDropped: true,
-      hasDroppedOnChild,
-    });
+const routerSource = {
+  beginDrag({ id }) {
+    return {
+      id,
+      isRouter: true,
+    };
   },
 };
 
-const boxSource = {
-  beginDrag() {
-    return {};
+const routerTarget = {
+  hover(targetProps, monitor) {
+    const targetId = targetProps.id;
+    const sourceProps = monitor.getItem();
+    const sourceId = sourceProps.id;
+
+    if (!sourceProps.isRouter && !targetProps.data.endpoints.length) {
+      const sourceRouterIndex = sourceProps.routerIndex;
+      const sourceEndpointIndex = sourceProps.endpointIndex;
+      targetProps.mountEndpoint({
+        targetId,
+        sourceId,
+        sourceRouterIndex,
+        sourceEndpointIndex,
+      });
+    }
   },
 };
 
@@ -39,18 +46,24 @@ const boxSource = {
   moveEndpoint: (data) => {
     dispatch(moveEndpoint(data));
   },
+  mountEndpoint: (data) => {
+    dispatch(mountEndpoint(data));
+  },
 }))
-@DropTarget('endpoint', blockTarget, (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  isOverCurrent: monitor.isOver({ shallow: true }),
-}))
-@DragSource('router', boxSource, (connect) => ({
+@dragSource('router', routerSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging(),
+}))
+@dropTarget(['endpoint', 'router'], routerTarget, (connect) => ({
+  connectDropTarget: connect.dropTarget(),
 }))
 export default class RouterBlock extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
+    connectDragSource: React.PropTypes.func.isRequired,
+    createEndpoint: React.PropTypes.func.isRequired,
+    moveEndpoint: React.PropTypes.func.isRequired,
+    mountEndpoint: React.PropTypes.func.isRequired,
     data: React.PropTypes.object,
     routerIndex: React.PropTypes.number,
     id: React.PropTypes.string,
@@ -62,13 +75,14 @@ export default class RouterBlock extends React.Component {
   }
 
   render() {
-    const { connectDropTarget, data, id, createEndpoint, moveEndpoint, routerIndex } = this.props;
+    const { connectDropTarget, connectDragSource, data, id, createEndpoint, moveEndpoint, routerIndex } = this.props;
 
-    return connectDropTarget(
+    return connectDragSource(connectDropTarget(
       <div className="routerContainer">
       <div className="block block-lg">
         <div className="block-settings">
-        <i className="fa fa-info-circle" aria-hidden="true"></i><i className="fa fa-sliders" aria-hidden="true"></i>
+        <i className="fa fa-info-circle" aria-hidden="true"></i>
+        <i className="fa fa-sliders" aria-hidden="true"></i>
         </div>
         <div className="block-info">
         <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
@@ -77,9 +91,10 @@ export default class RouterBlock extends React.Component {
           <button className="btn btn-default"
             onClick={createEndpoint.bind(null, {
               routerId: id,
-            })}>
+            })}
+          >
           <i className="fa fa-plus" aria-hidden="true"></i> Add Endpoint
-        </button>
+          </button>
         </div>
         <Endpoints
           endpoints={data.endpoints}
@@ -90,6 +105,6 @@ export default class RouterBlock extends React.Component {
         </div>
       </div>
       </div>
-    );
+    ));
   }
 }

@@ -35,10 +35,31 @@ export function createEndpoint(endpoint) {
     },
   };
 }
+export const MOUNT_ENDPOINT = 'MOUNT_ENDPOINT';
+export function mountEndpoint({
+  sourceId,
+  targetId,
+  sourceRouterIndex,
+  sourceEndpointIndex,
+}) {
+  return {
+    type: MOUNT_ENDPOINT,
+    sourceId,
+    targetId,
+    sourceRouterIndex,
+    sourceEndpointIndex,
+  };
+}
 
 export const MOVE_ENDPOINT = 'MOVE_ENDPOINT';
-export function moveEndpoint({ sourceId, targetId, sourceEndpointIndex, targetEndpointIndex, sourceRouterIndex, targetRouterIndex }) {
-  console.log('All the things: ', sourceId, targetId, sourceEndpointIndex, targetEndpointIndex, sourceRouterIndex, targetRouterIndex);
+export function moveEndpoint({
+  sourceId,
+  targetId,
+  sourceEndpointIndex,
+  targetEndpointIndex,
+  sourceRouterIndex,
+  targetRouterIndex,
+}) {
   return {
     type: MOVE_ENDPOINT,
     sourceId,
