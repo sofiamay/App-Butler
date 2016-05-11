@@ -10,7 +10,7 @@ const validate = values => {
   } else if (values.appName.length > 15) {
     errors.appName = 'Must be 15 characters or less';
   }
-  if (!/^[\s*\d{1,4}\s*]?$/.test(values.port)) {
+  if (!/^\d{1,4}\s*$/.test(values.port) && values.port !== '') {
     errors.port = 'Port must be an integer between 0 and 9999';
   } else if (values.port.length > 5) {
     errors.port = 'Must be 5 characters or less';

@@ -51,8 +51,6 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  updateConfig: React.PropTypes.func,
-  serverConfig: React.PropTypes.object,
 };
 
 export default Sidebar;
