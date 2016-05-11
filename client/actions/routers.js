@@ -13,6 +13,14 @@ export function createRouter(router) {
   };
 }
 
+export const DELETE_ROUTER = 'DELETE_ROUTER';
+export function deleteRouter(id) {
+  return {
+    type: DELETE_ROUTER,
+    id,
+  };
+}
+
 export const MOVE_ROUTER = 'MOVE_ROUTER';
 export function moveRouter({ sourceId, targetId, targetIndex }) {
   return {

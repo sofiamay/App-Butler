@@ -221,8 +221,15 @@ hr {
   text-align: right;
 }
 
-.block-settings i {
+.block-settings a {
   margin-left: 7px;
+  padding: 0 3px;
+}
+
+.block-settings a:hover {
+  background: #FFFFFF;
+  color: #1da8ff;
+  border-radius: 3px;
 }
 
 .block-icon {

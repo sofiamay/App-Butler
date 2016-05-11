@@ -4,6 +4,7 @@ import Endpoints from './Endpoints.js';
 // Redux Functionality
 import {
   moveRouter,
+  deleteRouter,
   createEndpoint,
   mountEndpoint,
   moveEndpoint,
@@ -56,6 +57,9 @@ const routerTarget = {
   moveRouter: (endpoint) => {
     dispatch(moveRouter(endpoint));
   },
+  deleteRouter: (endpoint) => {
+    dispatch(deleteRouter(endpoint));
+  },
   createEndpoint: (endpoint) => {
     dispatch(createEndpoint(endpoint));
   },
@@ -92,14 +96,18 @@ export default class RouterBlock extends React.Component {
   }
 
   render() {
-    const { connectDropTarget, connectDragSource, data, id, isDragging, createEndpoint, moveEndpoint, routerIndex } = this.props;
+    const { connectDropTarget, connectDragSource, data, id, isDragging, createEndpoint, moveEndpoint, deleteRouter, routerIndex } = this.props;
 
     return connectDragSource(connectDropTarget(
       <div className="routerContainer">
       <div className="block block-lg" style={{ opacity: isDragging ? 0 : 1 }}>
         <div className="block-settings">
         <i className="fa fa-info-circle" aria-hidden="true"></i>
-        <i className="fa fa-sliders" aria-hidden="true"></i>
+        <a
+          onClick={deleteRouter.bind(null, id)}
+        >
+          <i className="fa fa-remove" aria-hidden="true"></i>
+        </a>
         </div>
         <div className="block-info">
         <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>

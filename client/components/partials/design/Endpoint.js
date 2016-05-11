@@ -66,7 +66,7 @@ export default class Endpoint extends React.Component {
   }
 
   render() {
-    const { connectDragSource, connectDropTarget, isDragging, ...props } = this.props;
+    const { connectDragSource, connectDropTarget, isDragging } = this.props;
     return connectDragSource(connectDropTarget(
       <div className="block block-endpoint" style={{ opacity: isDragging ? 0 : 1 }}>
         <div className="block-settings">

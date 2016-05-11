@@ -9,7 +9,6 @@ const moveRouter = (state, action) => {
 
   const targetRouterIndex = state.findIndex(router => router.id === targetId);
   newState.splice(targetRouterIndex, 0, sourceRouter);
-  console.log('newState', newState);
   return newState;
 };
 
@@ -114,6 +113,8 @@ export default function routeReducer(state = [], action) {
       return [...state, action.router];
     case 'MOVE_ROUTER':
       return moveRouter(state, action);
+    case 'DELETE_ROUTER':
+      return state.filter(router => router.id !== action.id);
     case 'CREATE_ENDPOINT':
       return state.slice().map(router => {
         if (router.id === action.routerId) {
