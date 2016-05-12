@@ -111,6 +111,13 @@ export default function routeReducer(state = [], action) {
   switch (action.type) {
     case 'CREATE_ROUTER':
       return [...state, action.router];
+    case 'UPDATE_ROUTER':
+      return state.map(router => {
+        if (router.id === action.id) {
+          return Object.assign({}, router, action.updates);
+        }
+        return router;
+      });
     case 'MOVE_ROUTER':
       return moveRouter(state, action);
     case 'DELETE_ROUTER':

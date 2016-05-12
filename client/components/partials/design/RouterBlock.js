@@ -1,5 +1,6 @@
 import React from 'react';
 import Endpoints from './Endpoints.js';
+import Editable from './Editable.js';
 
 // Redux Functionality
 import {
@@ -10,6 +11,7 @@ import {
   mountEndpoint,
   moveEndpoint,
   deleteEndpoint,
+  updateRouter,
 } from './../../../actions/routers.js';
 import { connect } from 'react-redux';
 
@@ -56,6 +58,9 @@ const routerTarget = {
 @connect(state => ({
   routers: state.routers,
 }), dispatch => ({
+  updateRouter: (endpoint) => {
+    dispatch(updateRouter(endpoint));
+  },
   moveRouter: (endpoint) => {
     dispatch(moveRouter(endpoint));
   },
@@ -110,6 +115,7 @@ export default class RouterBlock extends React.Component {
     const {
       connectDropTarget,
       connectDragSource,
+      updateRouter,
       data,
       id,
       isDragging,
@@ -132,8 +138,27 @@ export default class RouterBlock extends React.Component {
         </a>
         </div>
         <div className="block-info">
-        <span className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></span>
-        <span className="block-text">{this.props.data.name}</span>
+        <div className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></div>
+        <div className="block-text">
+          <Editable
+            editing={data.editing}
+            value={data.name}
+            removeSpaces={false}
+            onValueClick={
+              () => updateRouter({
+                id,
+                updates: { editing: true },
+              }
+              )}
+            update={
+              (update) => updateRouter({
+                id,
+                updates: { editing: false, name: update },
+              }
+              )}
+            id={data.id}
+          />
+        </div>
         <div style={{ marginTop: '7px' }}>
           <button className="btn btn-default"
             onClick={createEndpoint.bind(null, {

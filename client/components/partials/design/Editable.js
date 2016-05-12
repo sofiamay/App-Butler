@@ -6,7 +6,6 @@ export default class Editable extends React.Component {
     onValueClick: React.PropTypes.func.isRequired,
     editing: React.PropTypes.bool.isRequired,
     update: React.PropTypes.func.isRequired,
-    routerIndex: React.PropTypes.number,
     id: React.PropTypes.string.isRequired,
     removeSpaces: React.PropTypes.bool,
   }
@@ -35,7 +34,12 @@ export default class Editable extends React.Component {
     />
   );
   renderValue = () => (
-    <span onClick={() => this.props.onValueClick(this.props.id)} className="value">{this.props.value}</span>
+    <span
+      onClick={() => this.props.onValueClick(this.props.id)}
+      className="value"
+    >
+    {this.props.value}
+    </span>
   );
 
   render() {
