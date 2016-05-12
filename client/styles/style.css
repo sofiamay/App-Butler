@@ -129,6 +129,7 @@ hr {
 
 .error[type="text"] {
   border-bottom: 1px solid #ec1f1f;
+  text-transform: none !important;
 }
 
 .serverSettings input:focus {

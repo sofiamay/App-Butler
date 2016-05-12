@@ -67,11 +67,11 @@ export function updateEndpoint({ updates, routerIndex, id }) {
 }
 
 export const DELETE_ENDPOINT = 'DELETE_ENDPOINT';
-export function deleteEndpoint({ id, routerId }) {
+export function deleteEndpoint({ id, routerIndex }) {
   return {
     type: DELETE_ENDPOINT,
     id,
-    routerId,
+    routerIndex,
   };
 }
 

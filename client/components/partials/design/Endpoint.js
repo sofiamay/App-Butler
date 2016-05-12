@@ -67,12 +67,17 @@ export default class Endpoint extends React.Component {
   }
 
   render() {
-    const { connectDragSource, connectDropTarget, isDragging, data, methods } = this.props;
+    const { connectDragSource, connectDropTarget, isDragging, data, methods, routerIndex } = this.props;
     return connectDragSource(connectDropTarget(
       <div className="block block-endpoint" style={{ opacity: isDragging ? 0 : 1 }}>
         <div className="block-settings">
         <i className="fa fa-info-circle" aria-hidden="true"></i>
         <i className="fa fa-sliders" aria-hidden="true"></i>
+        <a
+          onClick={() => methods.deleteEndpoint({ id: data.id, routerIndex })}
+        >
+          <i className="fa fa-remove" aria-hidden="true"></i>
+        </a>
         </div>
         <div className="block-info">
         <div className="block-icon"><i className="fa fa-code-fork" aria-hidden="true"></i></div>

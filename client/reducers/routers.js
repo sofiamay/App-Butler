@@ -145,6 +145,14 @@ export default function routeReducer(state = [], action) {
         }
         return router;
       });
+    case 'DELETE_ENDPOINT':
+      return state.map((router, index) => {
+        if (index === action.routerIndex) {
+          const newEndpoints = router.endpoints.filter(endpoint => endpoint.id !== action.id);
+          return Object.assign({}, router, { endpoints: newEndpoints });
+        }
+        return router;
+      });
     case 'MOUNT_ENDPOINT':
       return mountEndpoint(state, action);
     case 'MOVE_ENDPOINT':
