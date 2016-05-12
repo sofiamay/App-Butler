@@ -14,6 +14,15 @@ export function createRouter(router) {
   };
 }
 
+export const UPDATE_ROUTER = 'UPDATE_ROUTER';
+export function updateRouter({ updates, id }) {
+  return {
+    type: UPDATE_ROUTER,
+    updates,
+    id,
+  };
+}
+
 export const DELETE_ROUTER = 'DELETE_ROUTER';
 export function deleteRouter(id) {
   return {
