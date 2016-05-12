@@ -8,17 +8,27 @@ export function createRouter(router) {
       id: uuid.v4(),
       startPoint: '/',
       endpoints: [],
+      editing: false,
       ...router,
     },
   };
 }
 
+export const DELETE_ROUTER = 'DELETE_ROUTER';
+export function deleteRouter(id) {
+  return {
+    type: DELETE_ROUTER,
+    id,
+  };
+}
+
 export const MOVE_ROUTER = 'MOVE_ROUTER';
-export function moveRouter({ sourceId, targetId }) {
+export function moveRouter({ sourceId, targetId, targetIndex }) {
   return {
     type: MOVE_ROUTER,
     sourceId,
     targetId,
+    targetIndex,
   };
 }
 
@@ -31,14 +41,56 @@ export function createEndpoint(endpoint) {
       id: uuid.v4(),
       endpoint: '/myNewEndpoint',
       methods: [],
+      editing: false,
       ...endpoint,
     },
   };
 }
 
+export const UPDATE_ENDPOINT = 'UPDATE_ENDPOINT';
+export function updateEndpoint({ updates, routerIndex, id }) {
+  return {
+    type: UPDATE_ENDPOINT,
+    updates,
+    routerIndex,
+    id,
+  };
+}
+
+export const DELETE_ENDPOINT = 'DELETE_ENDPOINT';
+export function deleteEndpoint({ id, routerId }) {
+  return {
+    type: DELETE_ENDPOINT,
+    id,
+    routerId,
+  };
+}
+
+export const MOUNT_ENDPOINT = 'MOUNT_ENDPOINT';
+export function mountEndpoint({
+  sourceId,
+  targetId,
+  sourceRouterIndex,
+  sourceEndpointIndex,
+}) {
+  return {
+    type: MOUNT_ENDPOINT,
+    sourceId,
+    targetId,
+    sourceRouterIndex,
+    sourceEndpointIndex,
+  };
+}
+
 export const MOVE_ENDPOINT = 'MOVE_ENDPOINT';
-export function moveEndpoint({ sourceId, targetId, sourceEndpointIndex, targetEndpointIndex, sourceRouterIndex, targetRouterIndex }) {
-  console.log('All the things: ', sourceId, targetId, sourceEndpointIndex, targetEndpointIndex, sourceRouterIndex, targetRouterIndex);
+export function moveEndpoint({
+  sourceId,
+  targetId,
+  sourceEndpointIndex,
+  targetEndpointIndex,
+  sourceRouterIndex,
+  targetRouterIndex,
+}) {
   return {
     type: MOVE_ENDPOINT,
     sourceId,
