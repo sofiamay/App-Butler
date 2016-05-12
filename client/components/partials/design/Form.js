@@ -53,7 +53,7 @@ class Form extends React.Component {
             <div className="serverLabel">Port</div>
             <div>
               <input className={(port.touched && port.error) ? 'error' : null}
-                type="text" name="port" {...port}
+                type="text" name="port" placeholder="8000" {...port}
               />
               <br />
             </div>
@@ -87,20 +87,20 @@ class Form extends React.Component {
           <div className="serverLabel">App Name</div>
           <div>
             <input className={(appName.touched && appName.error) ? 'error' : null}
-              type="text" name="appName" required {...appName}
+              type="text" name="appName" placeholder="MyApp" required {...appName}
             />
           </div>
           {appName.touched && appName.error && <div className="error">{appName.error}</div>}
         </div>
         <div>
           <div className="serverLabel">Server Type</div>
-          <div><select onChange={this.selectServerType} >
+          <div style={{ marginBottom: '5px' }}><select onChange={this.selectServerType} >
             <option value="null"></option>
             <option value="express">Express</option>
           </select></div>
         </div>
         {serverType.touched && serverType.error && <div className="error">{serverType.error}</div>}
-        <hr />
+        
         {currentServerDisplay}
         <button disabled={submitting} onClick={handleSubmit(this.testSubmitButton)}
           name="submitConfig" className="btn btn-submit"

@@ -109,22 +109,38 @@ hr {
   font-size: 50px;
 }
 
+.express {
+  margin-bottom: 5px;
+}
+
 .serverSettings input {
-  outline: none;
-  border: 1px rgba(0, 0, 0, 0.8);
-  border-radius: 3px;
-  padding: 5px;
+  background: transparent;
   font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  outline: none;
+  padding: 0;
+  padding-bottom: 5px;
+  border: none;
+  border-bottom: 1px solid #6c6b6b;
   color: #333;
   margin-bottom: 10px;
+  transition: border .2s;
+}
+
+.error[type="text"] {
+  border-bottom: 1px solid #ec1f1f;
+}
+
+.serverSettings input:focus {
+  border-bottom: 1px solid #1da8ff;
 }
 
 .serverLabel {
   font-family: 'Roboto', sans-serif;
-  color: #333;
+  color: #1da8ff;
   text-transform: uppercase;
   font-size: 14px;
-  padding-bottom: 3px;
+  padding: 3px 0;
 }
 
 .routerContainer {
@@ -288,7 +304,12 @@ hr {
 
 /*The error class is applied to both text input boxes and divs containing error messages*/
 .error {
-/*GO REID GO!!!*/
+  font-family: 'Roboto', sans-serif;
+  color: #ec1f1f;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding-bottom: 3px;
+  margin-top: -3px;
 }
 
 .jumbotron {
