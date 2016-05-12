@@ -1,6 +1,10 @@
 import React from 'react';
 import Form from './Form.js';
+import { connect } from 'react-redux';
 
+@connect(state => ({
+  routers: state.routers,
+}))
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +47,7 @@ class Sidebar extends React.Component {
         </a>
         </div>
         <div className="sidebar-content" style={displayContent}>
-          <Form />
+          <Form routers={this.props.routers} />
         </div>
       </div>
     );
@@ -51,6 +55,7 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
+  routers: React.PropTypes.array,
 };
 
 export default Sidebar;
