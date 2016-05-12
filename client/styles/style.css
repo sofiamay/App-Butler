@@ -109,22 +109,39 @@ hr {
   font-size: 50px;
 }
 
+.express {
+  margin-bottom: 5px;
+}
+
 .serverSettings input {
-  outline: none;
-  border: 1px rgba(0, 0, 0, 0.8);
-  border-radius: 3px;
-  padding: 5px;
+  background: transparent;
   font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  outline: none;
+  padding: 0;
+  padding-bottom: 5px;
+  border: none;
+  border-bottom: 1px solid #6c6b6b;
   color: #333;
   margin-bottom: 10px;
+  transition: border .2s;
+}
+
+.error[type="text"] {
+  border-bottom: 1px solid #ec1f1f;
+  text-transform: none !important;
+}
+
+.serverSettings input:focus {
+  border-bottom: 1px solid #1da8ff;
 }
 
 .serverLabel {
   font-family: 'Roboto', sans-serif;
-  color: #333;
+  color: #1da8ff;
   text-transform: uppercase;
   font-size: 14px;
-  padding-bottom: 3px;
+  padding: 3px 0;
 }
 
 .routerContainer {
@@ -219,6 +236,12 @@ hr {
 
 .block-settings {
   text-align: right;
+  min-height: 25px;
+  margin-bottom: 5px;
+}
+
+.block-name {
+  float: left;
 }
 
 .block-settings a {
@@ -235,19 +258,65 @@ hr {
 .block-icon {
   margin-right: 5px;
   float: left;
+  height: 25px;
 }
 
 .block-icon i {
   font-size: 16px;
 }
 
-.block-text .value{
+.block-text {
+  height: 25px;
+}
+
+.value{
   cursor: text;
+}
+
+.endpointName {
+  outline: none;
+  padding: 0;
+  padding-bottom: 5px;
+  border: none;
+  border-bottom: 1px solid #1da8ff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  margin: 0;
+  animation: endpointName .2s;
+}
+
+@keyframes endpointName {
+  from { border-bottom: 1px solid transparent; }
+  to   { border-bottom: 1px solid #1da8ff; }
+}
+
+.routerName {
+  outline: none;
+  padding: 0;
+  padding-bottom: 5px;
+  border: none;
+  background: transparent;
+  color: #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  margin: 0;
+  animation: routerName .2s;
+}
+
+@keyframes routerName {
+  from { border-bottom: 1px solid transparent; }
+  to   { border-bottom: 1px solid #FFFFFF; }
 }
 
 /*The error class is applied to both text input boxes and divs containing error messages*/
 .error {
-/*GO REID GO!!!*/
+  font-family: 'Roboto', sans-serif;
+  color: #ec1f1f;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding-bottom: 3px;
+  margin-top: -3px;
 }
 
 .jumbotron {

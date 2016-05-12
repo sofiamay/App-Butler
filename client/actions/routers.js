@@ -8,9 +8,19 @@ export function createRouter(router) {
       id: uuid.v4(),
       startPoint: '/',
       endpoints: [],
-      editing: false,
+      editingStartPoint: false,
+      editingName: true,
       ...router,
     },
+  };
+}
+
+export const UPDATE_ROUTER = 'UPDATE_ROUTER';
+export function updateRouter({ updates, id }) {
+  return {
+    type: UPDATE_ROUTER,
+    updates,
+    id,
   };
 }
 
@@ -41,7 +51,7 @@ export function createEndpoint(endpoint) {
       id: uuid.v4(),
       endpoint: '/myNewEndpoint',
       methods: [],
-      editing: false,
+      editing: true,
       ...endpoint,
     },
   };
@@ -58,11 +68,11 @@ export function updateEndpoint({ updates, routerIndex, id }) {
 }
 
 export const DELETE_ENDPOINT = 'DELETE_ENDPOINT';
-export function deleteEndpoint({ id, routerId }) {
+export function deleteEndpoint({ id, routerIndex }) {
   return {
     type: DELETE_ENDPOINT,
     id,
-    routerId,
+    routerIndex,
   };
 }
 
