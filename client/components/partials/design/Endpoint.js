@@ -75,11 +75,12 @@ export default class Endpoint extends React.Component {
         <i className="fa fa-sliders" aria-hidden="true"></i>
         </div>
         <div className="block-info">
-        <span className="block-icon"><i className="fa fa-code-fork" aria-hidden="true"></i></span>
-        <span className="block-text">
+        <div className="block-icon"><i className="fa fa-code-fork" aria-hidden="true"></i></div>
+        <div className="block-text">
           <Editable
             editing={data.editing}
             value={data.endpoint}
+            removeSpaces={true}
             onValueClick={
               (id) => methods.updateEndpoint({
                 id,
@@ -97,7 +98,7 @@ export default class Endpoint extends React.Component {
             routerIndex={this.props.routerIndex}
             id={data.id}
           />
-        </span>
+        </div>
         </div>
       </div>
     ));

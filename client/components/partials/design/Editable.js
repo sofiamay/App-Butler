@@ -8,13 +8,14 @@ export default class Editable extends React.Component {
     update: React.PropTypes.func.isRequired,
     routerIndex: React.PropTypes.number,
     id: React.PropTypes.string.isRequired,
+    removeSpaces: React.PropTypes.bool,
   }
 
   finishEdit = (e) => {
     const value = e.target.value;
 
     if (this.props.update && value.trim()) {
-      this.props.update(value);
+      this.props.update(this.props.removeSpaces ? value.replace(/ /g, '') : value);
     }
   };
   checkEnter = (e) => {
@@ -34,9 +35,7 @@ export default class Editable extends React.Component {
     />
   );
   renderValue = () => (
-    <div onClick={() => this.props.onValueClick(this.props.id)}>
-      <span className="value">{this.props.value}</span>
-    </div>
+    <span onClick={() => this.props.onValueClick(this.props.id)} className="value">{this.props.value}</span>
   );
 
   render() {
