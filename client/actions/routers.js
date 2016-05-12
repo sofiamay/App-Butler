@@ -9,7 +9,7 @@ export function createRouter(router) {
       startPoint: '/',
       endpoints: [],
       editingStartPoint: false,
-      editingName: false,
+      editingName: true,
       ...router,
     },
   };
@@ -51,7 +51,7 @@ export function createEndpoint(endpoint) {
       id: uuid.v4(),
       endpoint: '/myNewEndpoint',
       methods: [],
-      editing: false,
+      editing: true,
       ...endpoint,
     },
   };
