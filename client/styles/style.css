@@ -245,6 +245,26 @@ hr {
   cursor: text;
 }
 
+.endpointName {
+  outline: none;
+  padding: 5px;
+  border: none;
+  border-bottom: 1px solid #1da8ff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+.routerName {
+  outline: none;
+  padding: 5px;
+  border: none;
+  background: transparent;
+  color: #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
 /*The error class is applied to both text input boxes and divs containing error messages*/
 .error {
 /*GO REID GO!!!*/

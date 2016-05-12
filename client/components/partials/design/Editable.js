@@ -8,6 +8,7 @@ export default class Editable extends React.Component {
     update: React.PropTypes.func.isRequired,
     id: React.PropTypes.string.isRequired,
     removeSpaces: React.PropTypes.bool,
+    inputClass: React.PropTypes.string,
   }
 
   finishEdit = (e) => {
@@ -22,17 +23,21 @@ export default class Editable extends React.Component {
       this.finishEdit(e);
     }
   };
-  renderEdit = () => (
-    <input type="text"
-      ref={
-        (e) => e ? e.selectionStart = this.props.value.length : null
-      }
-      autoFocus={true}
-      defaultValue={this.props.value}
-      onBlur={this.finishEdit}
-      onKeyPress={this.checkEnter}
-    />
-  );
+  renderEdit = () => {
+    const inputClass = this.props.inputClass || '';
+    return (
+      <input type="text"
+        ref={
+          (e) => e ? e.selectionStart = this.props.value.length : null
+        }
+        className={inputClass}
+        autoFocus={true}
+        defaultValue={this.props.value}
+        onBlur={this.finishEdit}
+        onKeyPress={this.checkEnter}
+      />
+    );
+  };
   renderValue = () => (
     <span
       onClick={() => this.props.onValueClick(this.props.id)}

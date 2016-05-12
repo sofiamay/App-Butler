@@ -142,6 +142,7 @@ export default class RouterBlock extends React.Component {
         <div className="block-text">
           <Editable
             editing={data.editing}
+            inputClass={'routerName'}
             value={data.name}
             removeSpaces={false}
             onValueClick={

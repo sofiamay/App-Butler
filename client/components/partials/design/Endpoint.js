@@ -79,7 +79,7 @@ export default class Endpoint extends React.Component {
         <div className="block-text">
           <Editable
             editing={data.editing}
-            customClass={'routerName'}
+            inputClass={'endpointName'}
             value={data.endpoint}
             removeSpaces={true}
             onValueClick={
