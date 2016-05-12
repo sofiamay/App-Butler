@@ -1,7 +1,6 @@
 import { buildMainFile } from '../../../../server/build/controllers/expressBuild/buildMainFile.js';
 // const GH_TOKEN = require('/../../token.js');
 
-const http = require('https');
 import request from 'request';
 
 export function buildFile(fileConfig, userConfig) {
