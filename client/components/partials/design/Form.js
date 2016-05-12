@@ -40,8 +40,28 @@ class Form extends React.Component {
     this.setState({ serverType: event.target.value });
   }
 
-  testSubmitButton = (data) => {
-    console.log('The data', data);
+  testSubmitButton = (formData) => {
+    // console.log('The data', formData);
+    // console.log(this.props.routers);
+    const jsonData = {
+      serverType: formData,
+      serverSettings: {
+        port: formData.port,
+        expressName: formData.appName,
+      },
+      routes: this.props.routers,
+    };
+    console.log(jsonData);
+    window.localStorage.data = jsonData;
+    fetch('/serve', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(jsonData),
+    }).then(res => res.json()).then(data => {
+      console.log(data);
+    });
   }
 
   currentServerDisplay = () => {
@@ -115,6 +135,7 @@ Form.propTypes = {
   fields: React.PropTypes.object.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
   submitting: React.PropTypes.bool.isRequired,
+  routers: React.PropTypes.array,
 };
 
 Form = reduxForm({
