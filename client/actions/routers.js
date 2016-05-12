@@ -8,7 +8,8 @@ export function createRouter(router) {
       id: uuid.v4(),
       startPoint: '/',
       endpoints: [],
-      editing: false,
+      editingStartPoint: false,
+      editingName: false,
       ...router,
     },
   };

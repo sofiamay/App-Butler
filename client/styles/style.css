@@ -236,6 +236,12 @@ hr {
 
 .block-settings {
   text-align: right;
+  min-height: 25px;
+  margin-bottom: 5px;
+}
+
+.block-name {
+  float: left;
 }
 
 .block-settings a {
@@ -263,7 +269,7 @@ hr {
   height: 25px;
 }
 
-.block-text .value{
+.value{
   cursor: text;
 }
 

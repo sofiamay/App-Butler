@@ -130,6 +130,27 @@ export default class RouterBlock extends React.Component {
       <div className="routerContainer">
       <div className="block block-lg" style={{ opacity: isDragging ? 0 : 1 }}>
         <div className="block-settings">
+          <div className="block-name">
+            <Editable
+              editing={data.editingName}
+              inputClass={'routerName'}
+              value={data.name}
+              removeSpaces={false}
+              onValueClick={
+                () => updateRouter({
+                  id,
+                  updates: { editingName: true },
+                }
+                )}
+              update={
+                (update) => updateRouter({
+                  id,
+                  updates: { editingName: false, name: update },
+                }
+                )}
+              id={data.id}
+            />
+          </div>
         <i className="fa fa-info-circle" aria-hidden="true"></i>
         <a
           onClick={deleteRouter.bind(null, id)}
@@ -141,20 +162,20 @@ export default class RouterBlock extends React.Component {
         <div className="block-icon"><i className="fa fa-random" aria-hidden="true"></i></div>
         <div className="block-text">
           <Editable
-            editing={data.editing}
+            editing={data.editingStartPoint}
             inputClass={'routerName'}
-            value={data.name}
+            value={data.startPoint}
             removeSpaces={false}
             onValueClick={
               () => updateRouter({
                 id,
-                updates: { editing: true },
+                updates: { editingStartPoint: true },
               }
               )}
             update={
               (update) => updateRouter({
                 id,
-                updates: { editing: false, name: update },
+                updates: { editingStartPoint: false, startPoint: update },
               }
               )}
             id={data.id}
