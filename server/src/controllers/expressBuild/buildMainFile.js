@@ -15,8 +15,9 @@ function addServerListen(name, port) {
 
 export function buildMainFile(fileConfig, userConfig) {
   let file = '';
+  console.log(userConfig);
   const expressName = userConfig.serverSettings.expressName || 'app';
-  const name = userConfig.appName || 'myApp';
+  const name = userConfig.serverSettings.appName || 'myApp';
   const port = userConfig.serverSettings.port || 8000;
   // instantiate express
   file += addExpress(expressName);

@@ -40,19 +40,17 @@ class Form extends React.Component {
     this.setState({ serverType: event.target.value });
   }
 
-  testSubmitButton = (formData) => {
-    // console.log('The data', formData);
-    // console.log(this.props.routers);
+  sendData = (formData) => {
     const jsonData = {
-      serverType: formData,
+      serverType: formData.serverType,
       serverSettings: {
         port: formData.port,
-        expressName: formData.appName,
+        expressName: formData.expressName,
+        appName: formData.appName,
       },
       routes: this.props.routers,
     };
-    console.log(jsonData);
-    window.localStorage.data = jsonData;
+
     fetch('/serve', {
       method: 'POST',
       headers: {
@@ -122,7 +120,7 @@ class Form extends React.Component {
         {serverType.touched && serverType.error && <div className="error">{serverType.error}</div>}
         
         {currentServerDisplay}
-        <button disabled={submitting} onClick={handleSubmit(this.testSubmitButton)}
+        <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server
         </button>
