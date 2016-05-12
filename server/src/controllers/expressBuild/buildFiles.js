@@ -4,7 +4,11 @@ import request from 'request';
 
 export function buildFile(fileConfig, userConfig) {
   // build main server file
-  if (fileConfig.type === 'main') { return buildMainFile(fileConfig, userConfig); }
+  if (fileConfig.type === 'main') {
+    return buildMainFile(fileConfig, userConfig);
+  } else if (fileConfig.type === 'router') {
+    return buildRouterFile(fileConfig, userConfig);
+  }
   return new Error('Undefined file type');
 }
 

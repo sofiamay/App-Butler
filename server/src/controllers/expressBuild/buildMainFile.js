@@ -5,8 +5,11 @@ function addExpress(expressName) {
 }
 
 // use imported middleware
-function addMiddleware() {
-  return '';
+function requireRouters(routers) {
+  let fileString = '';
+  routers.forEach(router => {
+    fileString += `var ${router.name} = require('./{router.name}');`;
+  });
 }
 
 function addServerListen(name, port) {
@@ -18,10 +21,11 @@ export function buildMainFile(fileConfig, userConfig) {
   const expressName = userConfig.serverSettings.expressName || 'app';
   const name = userConfig.serverSettings.appName || 'myApp';
   const port = userConfig.serverSettings.port || 8000;
+  const routers = userConfig.routers || [];
   // instantiate express
   file += addExpress(expressName);
-  // check for middleware
-  if (userConfig.middleware) { file += addMiddleware(); }
+  // require router files
+  file += requireRouters(routers);
   // server listen
   file += addServerListen(name, port);
   return file;
