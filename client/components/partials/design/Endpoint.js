@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Editable from './Editable';
 // React DnD Functionality
 // Sets up BlockArea as a place to drop items
 import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
@@ -54,7 +54,8 @@ export default class Endpoint extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
     connectDragSource: React.PropTypes.func.isRequired,
-    data: React.PropTypes.object,
+    data: React.PropTypes.object.isRequired,
+    methods: React.PropTypes.object.isRequired,
     routerIndex: React.PropTypes.number,
     endpointIndex: React.PropTypes.number,
     isDragging: React.PropTypes.bool,
@@ -66,7 +67,7 @@ export default class Endpoint extends React.Component {
   }
 
   render() {
-    const { connectDragSource, connectDropTarget, isDragging } = this.props;
+    const { connectDragSource, connectDropTarget, isDragging, data, methods } = this.props;
     return connectDragSource(connectDropTarget(
       <div className="block block-endpoint" style={{ opacity: isDragging ? 0 : 1 }}>
         <div className="block-settings">
@@ -75,7 +76,28 @@ export default class Endpoint extends React.Component {
         </div>
         <div className="block-info">
         <span className="block-icon"><i className="fa fa-code-fork" aria-hidden="true"></i></span>
-        <span className="block-text">{this.props.data.endpoint}</span>
+        <span className="block-text">
+          <Editable
+            editing={data.editing}
+            value={data.endpoint}
+            onValueClick={
+              (id) => methods.updateEndpoint({
+                id,
+                routerIndex: this.props.routerIndex,
+                updates: { editing: true },
+              }
+              )}
+            update={
+              (update) => methods.updateEndpoint({
+                id: data.id,
+                routerIndex: this.props.routerIndex,
+                updates: { editing: false, endpoint: update },
+              }
+              )}
+            routerIndex={this.props.routerIndex}
+            id={data.id}
+          />
+        </span>
         </div>
       </div>
     ));

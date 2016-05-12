@@ -8,6 +8,7 @@ export function createRouter(router) {
       id: uuid.v4(),
       startPoint: '/',
       endpoints: [],
+      editing: false,
       ...router,
     },
   };
@@ -40,10 +41,31 @@ export function createEndpoint(endpoint) {
       id: uuid.v4(),
       endpoint: '/myNewEndpoint',
       methods: [],
+      editing: false,
       ...endpoint,
     },
   };
 }
+
+export const UPDATE_ENDPOINT = 'UPDATE_ENDPOINT';
+export function updateEndpoint({ updates, routerIndex, id }) {
+  return {
+    type: UPDATE_ENDPOINT,
+    updates,
+    routerIndex,
+    id,
+  };
+}
+
+export const DELETE_ENDPOINT = 'DELETE_ENDPOINT';
+export function deleteEndpoint({ id, routerId }) {
+  return {
+    type: DELETE_ENDPOINT,
+    id,
+    routerId,
+  };
+}
+
 export const MOUNT_ENDPOINT = 'MOUNT_ENDPOINT';
 export function mountEndpoint({
   sourceId,

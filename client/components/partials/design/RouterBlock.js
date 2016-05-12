@@ -6,8 +6,10 @@ import {
   moveRouter,
   deleteRouter,
   createEndpoint,
+  updateEndpoint,
   mountEndpoint,
   moveEndpoint,
+  deleteEndpoint,
 } from './../../../actions/routers.js';
 import { connect } from 'react-redux';
 
@@ -69,6 +71,14 @@ const routerTarget = {
   mountEndpoint: (data) => {
     dispatch(mountEndpoint(data));
   },
+  endpointMethods: {
+    updateEndpoint: (data) => {
+      dispatch(updateEndpoint(data));
+    },
+    deleteEndpoint: (data) => {
+      dispatch(deleteEndpoint(data));
+    },
+  },
 }))
 @dragSource('router', routerSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
@@ -84,6 +94,7 @@ export default class RouterBlock extends React.Component {
     createEndpoint: React.PropTypes.func.isRequired,
     moveEndpoint: React.PropTypes.func.isRequired,
     mountEndpoint: React.PropTypes.func.isRequired,
+    endpointMethods: React.PropTypes.object,
     data: React.PropTypes.object,
     routerIndex: React.PropTypes.number,
     id: React.PropTypes.string,
@@ -96,7 +107,18 @@ export default class RouterBlock extends React.Component {
   }
 
   render() {
-    const { connectDropTarget, connectDragSource, data, id, isDragging, createEndpoint, moveEndpoint, deleteRouter, routerIndex } = this.props;
+    const {
+      connectDropTarget,
+      connectDragSource,
+      data,
+      id,
+      isDragging,
+      createEndpoint,
+      moveEndpoint,
+      deleteRouter,
+      routerIndex,
+      endpointMethods,
+    } = this.props;
 
     return connectDragSource(connectDropTarget(
       <div className="routerContainer">
@@ -123,6 +145,7 @@ export default class RouterBlock extends React.Component {
         </div>
         <Endpoints
           endpoints={data.endpoints}
+          endpointMethods={endpointMethods}
           routerId={data.id}
           routerIndex={routerIndex}
           moveEndpoint={moveEndpoint}

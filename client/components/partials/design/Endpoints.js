@@ -3,10 +3,11 @@ import Endpoint from './Endpoint.js';
 
 export default class RouterBlock extends React.Component {
   static propTypes = {
-    endpoints: React.PropTypes.array,
-    routerId: React.PropTypes.string,
-    moveEndpoint: React.PropTypes.func,
-    routerIndex: React.PropTypes.number,
+    endpoints: React.PropTypes.array.isRequired,
+    routerId: React.PropTypes.string.isRequired,
+    moveEndpoint: React.PropTypes.func.isRequired,
+    routerIndex: React.PropTypes.number.isRequired,
+    endpointMethods: React.PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -15,7 +16,7 @@ export default class RouterBlock extends React.Component {
   }
 
   render() {
-    const { endpoints, routerId, moveEndpoint, routerIndex } = this.props;
+    const { endpoints, routerId, moveEndpoint, routerIndex, endpointMethods } = this.props;
     return (
       <div className="endpointsContainer">
         {endpoints.map((endpoint, index) => (
@@ -25,6 +26,7 @@ export default class RouterBlock extends React.Component {
             endpointIndex={index}
             routerIndex={routerIndex}
             onMove={moveEndpoint}
+            methods={endpointMethods}
           />
           ))}
       </div>
