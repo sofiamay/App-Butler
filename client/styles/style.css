@@ -235,10 +235,15 @@ hr {
 .block-icon {
   margin-right: 5px;
   float: left;
+  height: 25px;
 }
 
 .block-icon i {
   font-size: 16px;
+}
+
+.block-text {
+  height: 25px;
 }
 
 .block-text .value{
@@ -247,22 +252,38 @@ hr {
 
 .endpointName {
   outline: none;
-  padding: 5px;
+  padding: 0;
+  padding-bottom: 5px;
   border: none;
   border-bottom: 1px solid #1da8ff;
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
+  margin: 0;
+  animation: endpointName .2s;
+}
+
+@keyframes endpointName {
+  from { border-bottom: 1px solid transparent; }
+  to   { border-bottom: 1px solid #1da8ff; }
 }
 
 .routerName {
   outline: none;
-  padding: 5px;
+  padding: 0;
+  padding-bottom: 5px;
   border: none;
   background: transparent;
   color: #FFFFFF;
   border-bottom: 1px solid #FFFFFF;
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
+  margin: 0;
+  animation: routerName .2s;
+}
+
+@keyframes routerName {
+  from { border-bottom: 1px solid transparent; }
+  to   { border-bottom: 1px solid #FFFFFF; }
 }
 
 /*The error class is applied to both text input boxes and divs containing error messages*/
