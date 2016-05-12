@@ -87,7 +87,7 @@ class Form extends React.Component {
           <div className="serverLabel">App Name</div>
           <div>
             <input className={(appName.touched && appName.error) ? 'error' : null}
-              type="text" name="appName" placeholder="MyApp" required {...appName}
+              type="text" name="appName" placeholder="MyApp" required {...appName} autoFocus
             />
           </div>
           {appName.touched && appName.error && <div className="error">{appName.error}</div>}
