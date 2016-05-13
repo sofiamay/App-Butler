@@ -17,6 +17,7 @@ export default class CanvasContainer extends React.Component {
   static propTypes = {
     createRouter: React.PropTypes.func.isRequired,
     routers: React.PropTypes.array,
+    createPrompt: React.PropTypes.func,
   }
 
   constructor(props) {
@@ -38,7 +39,7 @@ export default class CanvasContainer extends React.Component {
           </button>
         </div>
 
-      <ServerCanvas routers={routers} />
+      <ServerCanvas routers={routers} createPrompt={this.props.createPrompt} />
       </div>
     );
   }

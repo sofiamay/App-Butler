@@ -4,6 +4,7 @@ import RouterBlock from './RouterBlock.js';
 export default class CanvasContainer extends React.Component {
   static propTypes = {
     routers: React.PropTypes.array,
+    createPrompt: React.PropTypes.func,
   }
 
   constructor(props) {
@@ -12,11 +13,17 @@ export default class CanvasContainer extends React.Component {
   }
 
   render() {
-    const { routers } = this.props;
+    const { routers, createPrompt } = this.props;
     return (
       <div className="serverCanvas">
         {routers.map((router, index) => (
-          <RouterBlock key={router.id} id={router.id} data={router} routerIndex={index} />
+          <RouterBlock
+            key={router.id}
+            id={router.id}
+            data={router}
+            routerIndex={index}
+            createPrompt={createPrompt}
+          />
         ))}
       </div>
     );

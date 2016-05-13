@@ -1,23 +1,41 @@
 import React from 'react';
+import Popup from 'react-popup';
 
 // Import Required Components
 import Nav from './partials/Nav.js';
 import Sidebar from './partials/design/Sidebar.js';
 import CanvasContainer from './partials/design/CanvasContainer.js';
-import Form from './partials/design/Form.js';
-
 
 // Import React DnD
 import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
+import { DragDropContext as dragDropContext } from 'react-dnd';
 
 // Decorate Design Component as a Drop Context
-@DragDropContext(HTML5Backend)
+@dragDropContext(HTML5Backend)
 export default class Design extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     };
+  }
+
+  createPrompt(text, btnText, cb) {
+    console.log('did stuff');
+    Popup.create({
+      title: null,
+      content: text,
+      buttons: {
+        left: ['cancel'],
+        right: [{
+          text: btnText,
+          className: 'warning', // optional
+          action(popup) {
+            cb();
+            popup.close();
+          },
+        }],
+      },
+    });
   }
 
   render() {
@@ -26,8 +44,12 @@ export default class Design extends React.Component {
         <Nav />
         <div className="content">
           <Sidebar />
-          <CanvasContainer />
+          <CanvasContainer createPrompt={this.createPrompt} />
         </div>
+        <Popup
+          className="mm-popup"
+          btnClass="btn-popup"
+        />
       </div>
    );
   }
