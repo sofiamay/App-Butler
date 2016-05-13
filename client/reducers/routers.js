@@ -123,7 +123,7 @@ export default function routeReducer(state = [], action) {
     case 'DELETE_ROUTER':
       return state.filter(router => router.id !== action.id);
     case 'CREATE_ENDPOINT':
-      return state.slice().map(router => {
+      return state.map(router => {
         if (router.id === action.routerId) {
           const newRouter = Object.assign({}, router);
           newRouter.endpoints.push(action.endpoint);
