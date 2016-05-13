@@ -2,6 +2,8 @@ import React from 'react';
 import Endpoints from './Endpoints.js';
 import Editable from './Editable.js';
 
+import Popup from 'react-popup';
+
 // Redux Functionality
 import {
   moveRouter,
@@ -96,6 +98,7 @@ export default class RouterBlock extends React.Component {
   static propTypes = {
     connectDropTarget: React.PropTypes.func.isRequired,
     connectDragSource: React.PropTypes.func.isRequired,
+    deleteRouter: React.PropTypes.func,
     createEndpoint: React.PropTypes.func.isRequired,
     moveEndpoint: React.PropTypes.func.isRequired,
     mountEndpoint: React.PropTypes.func.isRequired,
@@ -104,11 +107,23 @@ export default class RouterBlock extends React.Component {
     routerIndex: React.PropTypes.number,
     id: React.PropTypes.string,
     isDragging: React.PropTypes.bool,
+    createPrompt: React.PropTypes.func,
   }
 
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  confirmDelete(id) {
+    this.props.createPrompt(
+      'Warning! Deleting a router is permanent.',
+      'Delete Router',
+      () => {
+        this.props.deleteRouter(id);
+        console.log('callbackfired');
+      }
+    );
   }
 
   render() {
@@ -153,7 +168,7 @@ export default class RouterBlock extends React.Component {
           </div>
         <i className="fa fa-info-circle" aria-hidden="true"></i>
         <a
-          onClick={deleteRouter.bind(null, id)}
+          onClick={() => this.confirmDelete(id)}
         >
           <i className="fa fa-remove" aria-hidden="true"></i>
         </a>
