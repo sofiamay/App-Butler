@@ -95,6 +95,19 @@ hr {
   white-space: nowrap;
 }
 
+.serverCanvas::-webkit-scrollbar {
+    height: 12px;
+}
+
+.serverCanvas::-webkit-scrollbar-track {
+    background: #1069a0;
+}
+ 
+.serverCanvas::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #6fc6fc;
+}
+
 .endpointsContainer {
   margin: 10px 0;
 }
