@@ -53,3 +53,6 @@ See [contributing.md](contributing.md) for contribution and github workflow guid
 
 <hr>
 
+## Architecture
+### High Level Architecture
+![](http://i.imgur.com/oZEjl3d.png?1)
