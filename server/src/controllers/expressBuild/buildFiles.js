@@ -10,7 +10,7 @@ export function buildFile(fileConfig, userConfig) {
     return buildMainFile(fileConfig, userConfig);
   } else if (fileConfig.type === 'router') {
     return fileConfig.router.routes.forEach((value) => {
-      buildRouterFile(value.method, value.endPoint, value.action);
+      buildRouterFile(value.endPoint, value.method, value.action);
     });
   }
   return new Error('Undefined file type');
