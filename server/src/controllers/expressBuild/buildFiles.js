@@ -1,6 +1,6 @@
-import { buildMainFile } from '../../../../server/build/controllers/expressBuild/buildMainFile.js';
+import { buildMainFile } from './buildMainFile.js';
 
-import { buildRouterFiles } from '../../../../server/build/controllers/expressBuild/buildRouterFiles.js';
+import { buildRouterFile } from './buildRouterFile.js';
 
 import request from 'request';
 
@@ -8,9 +8,9 @@ export function buildFile(fileConfig, userConfig) {
   // build main server file
   if (fileConfig.type === 'main') {
     return buildMainFile(fileConfig, userConfig);
-  } else if (fileConfig.type === 'main') {
+  } else if (fileConfig.type === 'router') {
     return fileConfig.router.routes.forEach((value) => {
-      buildRouterFiles(value.method, value.endPoint, value.action);
+      buildRouterFile(value.method, value.endPoint, value.action);
     });
   }
   return new Error('Undefined file type');
