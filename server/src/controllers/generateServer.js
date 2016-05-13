@@ -71,8 +71,9 @@ export function generateFiles(request, response) {
   // generate express server
   return generate(request, response);
 }
+
 export function generateServer(request, response) {
-  const reqData = request.body;
+  const reqData = request.body.data;
   if (!reqData.serverType) {
     return response.status(400).send('No server type on request');
   }
@@ -95,5 +96,4 @@ export function createConfig(request, response) {
     }
     response.json(newConfig);
   });
->>>>>>> Handle errors
 }
