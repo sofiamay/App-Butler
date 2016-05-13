@@ -11,7 +11,7 @@ export function generateExpressServer(request, response) {
   for (let router in request.session.routers) {
     request.session.files[router.name] = { type: 'router', name: router.name };
   }
-  const builtFiles = buildAllFiles(request);
+  const builtFiles = buildAllFiles(request, response);
   // Send these files to github!
   return response.send(JSON.stringify(builtFiles));
 }

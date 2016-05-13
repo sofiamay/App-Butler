@@ -42,13 +42,15 @@ class Form extends React.Component {
 
   sendData = (formData) => {
     const jsonData = {
-      serverType: formData.serverType,
-      serverSettings: {
-        port: formData.port,
-        expressName: formData.expressName,
-        appName: formData.appName,
+      data: {
+        serverType: formData.serverType,
+        serverSettings: {
+          port: formData.port,
+          expressName: formData.expressName,
+          appName: formData.appName,
+        },
+        routes: this.props.routers,
       },
-      routes: this.props.routers,
     };
 
     fetch('/serve', {

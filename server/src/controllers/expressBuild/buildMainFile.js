@@ -10,6 +10,7 @@ function requireRouters(routers) {
   routers.forEach(router => {
     fileString += `var ${router.name} = require('./{router.name}');`;
   });
+  return fileString;
 }
 
 function addServerListen(name, port) {
@@ -19,7 +20,7 @@ function addServerListen(name, port) {
 export function buildMainFile(fileConfig, userConfig) {
   let file = '';
   const expressName = userConfig.serverSettings.expressName || 'app';
-  const name = userConfig.serverSettings.appName || 'myApp';
+  const name = userConfig.appName || 'myApp';
   const port = userConfig.serverSettings.port || 8000;
   const routers = userConfig.routers || [];
   // instantiate express
