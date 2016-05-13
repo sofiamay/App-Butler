@@ -188,12 +188,12 @@ hr {
   margin: 10px 0;
 }
 
-.btn-default {
+.btn-default, .btn-popup--cancel {
   background: #FFFFFF;
   color: #333;
 }
 
-.btn-default:hover {
+.btn-default:hover, .btn-popup--cancel:hover {
   background: #e6e6e6;
 }
 
@@ -212,7 +212,7 @@ hr {
 }
 
 .btn-popup--warning:hover {
-  background: #FF5252;
+  background: #FF8A80;
   color: #FFFFFF;
 }
 
@@ -395,7 +395,8 @@ hr {
   overflow: auto;
   border: 1px solid #B8C8CC;
   border-radius: 3px;
-  background: #FFFFFF; 
+  background: #FFFFFF;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
 
 .mm-popup__box__body {
@@ -409,4 +410,11 @@ hr {
 
 .mm-popup__box__footer{
   padding: 40px 20px 20px;
+}
+.mm-popup__box__footer__left-space {
+  float: left;
+}
+
+.mm-popup__box__footer__left-space {
+  float: right;
 }
