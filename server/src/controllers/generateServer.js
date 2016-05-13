@@ -17,7 +17,7 @@ export function generateExpressServer(request, response) {
 }
 
 export function generateServer(request, response) {
-  const reqData = request.body;
+  const reqData = request.body.data;
   if (reqData && reqData.serverType && reqData.serverType === 'express') {
     // generate express server
     return generateExpressServer(request, response);

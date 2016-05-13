@@ -49,7 +49,7 @@ class Form extends React.Component {
           expressName: formData.expressName,
           appName: formData.appName,
         },
-        routes: this.props.routers,
+        routers: this.props.routers,
       },
     };
 
