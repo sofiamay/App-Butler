@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/SpontaneousPlankton/AppButler.svg?branch=master)](https://travis-ci.org/SpontaneousPlankton/AppButler)
 # Butler
 Visualize your backend while creating it
 
