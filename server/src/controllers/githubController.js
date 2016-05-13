@@ -30,12 +30,11 @@ export function createRepo(options) {
   });
 }
 
-export function fileToGitHub(file, fileName, fileConfig) {
-  // const file = buildFile(fileConfig, userConfig);
+export function createFile(file, settings) {
   const encodedFile = new Buffer(file).toString('base64');
   const options = {
     method: 'PUT',
-    url: `https://api.github.com/repos/dylanksys/${fileConfig.serverSettings.appName}/contents/${fileName}`,
+    url: `https://api.github.com/repos/${settings.userName}/${settings.appName}/contents/${settings.fileName}`,
     headers: {
       authorization: 'token TOKEN',
       'content-type': 'application/json',
@@ -45,16 +44,20 @@ export function fileToGitHub(file, fileName, fileConfig) {
     body: JSON.stringify({
       message: 'Initial Commit',
       content: encodedFile,
-      committer: { name: 'AppButler', email: 'AppButler@AppButler.io' },
+      committer: {
+        name: settings.name,
+        email: settings.email,
+      },
       json: true,
     }),
   };
 
-  request(options, (err, res, body) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('File generated');
-    }
+  return new Promise((resolve, reject) => {
+    request(options, (err, res) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(res);
+    });
   });
 }
