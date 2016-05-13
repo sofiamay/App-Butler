@@ -9,6 +9,7 @@ export function generate(request, response) {
       name: 'server',
     },
   };
+<<<<<<< 9b330322893870899290010747836ceb665988ad
 
   request.session.files.npm = {
     type: 'packageJSON',
@@ -32,6 +33,13 @@ export function generate(request, response) {
     router.appName = request.body.data.appName;
   });
 
+=======
+  // for (const router in request.session.routers) {
+  //   if (router) {
+  //     request.session.files[router.name] = { type: 'router', name: router.name };
+  //   }
+  // }
+>>>>>>> Add more error handlers, fix json structure
   const builtFiles = buildAllFiles(request, response);
   // Send these files to github!
   // Make repo (naming handled in controller)
@@ -75,10 +83,17 @@ export function generate(request, response) {
   });
 }
 
+<<<<<<< 9b330322893870899290010747836ceb665988ad
 export function generateFiles(request, response) {
   const reqData = request.body.data;
   if (!reqData) {
     return response.status(400).send(new Error('No server type on request'));
+=======
+export function generateServer(request, response) {
+  const reqData = request.body.data;
+  if (!reqData.serverType) {
+    return response.status(400).send('No server type on request');
+>>>>>>> Add more error handlers, fix json structure
   }
 
   // generate express server
