@@ -1,6 +1,11 @@
+<<<<<<< 35a092096d257c71fae0abafd38704774a99b80d
 import { buildMainFile } from './buildMainFile.js';
 import { buildRouterFile } from './buildRouterFile.js';
 import { buildPackageJSON } from './buildPackageJSON.js';
+=======
+import { buildMainFile } from '../../../../server/build/controllers/expressBuild/buildMainFile.js';
+import request from 'request';
+>>>>>>> Fix sessionFiles, start to create dynamic fileToGithub
 
 export function buildFile(fileConfig, userConfig) {
   // fileConfig: files to be generated specified in request.session.files
@@ -11,11 +16,15 @@ export function buildFile(fileConfig, userConfig) {
   } else if (fileConfig.type === 'packageJSON') {
     return buildPackageJSON(fileConfig, userConfig);
   } else if (fileConfig.type === 'router') {
+<<<<<<< 35a092096d257c71fae0abafd38704774a99b80d
     const files = [];
     userConfig.routers.forEach((router) => {
       files.push(buildRouterFile(fileConfig, router));
     });
     return files;
+=======
+    // return buildRouterFile(fileConfig, userConfig);
+>>>>>>> Fix sessionFiles, start to create dynamic fileToGithub
   }
   return new Error('Undefined file type');
 }
@@ -23,6 +32,7 @@ export function buildFile(fileConfig, userConfig) {
 export function buildAllFiles(req, res) {
   const files = [];
   if (!req.session.files) {
+<<<<<<< 35a092096d257c71fae0abafd38704774a99b80d
 <<<<<<< 9b330322893870899290010747836ceb665988ad
     return res.status(400).json(new Error('Req.session.files not defined'));
   }
@@ -45,17 +55,20 @@ export function buildAllFiles(req, res) {
   return files;
 =======
     return res.status(400).json('Req.session.files not defined');
+=======
+    return res.status(400).json(new Error('Req.session.files not defined'));
+>>>>>>> Fix sessionFiles, start to create dynamic fileToGithub
   }
   for (const fileName in req.session.files) {
     if (fileName) {
       files.push(buildFile(req.session.files[fileName], req.body.data));
     }
   }
+  console.log(files);
   return files;
 }
 
 export function fileToGitHub(file, fileName, fileConfig, userConfig) {
-  // const file = buildFile(fileConfig, userConfig);
   const encodedFile = new Buffer(file).toString('base64');
 
   const repoOptions = {
