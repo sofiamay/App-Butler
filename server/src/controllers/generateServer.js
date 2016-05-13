@@ -71,3 +71,29 @@ export function generateFiles(request, response) {
   // generate express server
   return generate(request, response);
 }
+export function generateServer(request, response) {
+  const reqData = request.body;
+  if (!reqData.serverType) {
+    return response.status(400).send('No server type on request');
+  }
+
+  // generate express server
+  return generateExpressServer(request, response);
+}
+
+
+export function createConfig(request, response) {
+  const newConfig = new Config({
+    appName: request.body.appName,
+    port: request.body.port,
+    expressName: request.body.expressName,
+    serverType: request.body.serverType,
+  });
+  newConfig.save((err) => {
+    if (err) {
+      return response.status(500).json(err);
+    }
+    response.json(newConfig);
+  });
+>>>>>>> Handle errors
+}
