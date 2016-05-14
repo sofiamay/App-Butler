@@ -418,3 +418,31 @@ hr {
 .mm-popup__box__footer__left-space {
   float: right;
 }
+
+/* Success Page */
+.successBanner {
+  width: 100%;
+  height: 175px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 60px;
+  color: #333;
+  text-align: center;
+  line-height: 175px;
+  background: #E1F5FE;
+}
+
+.successBanner-check {
+  padding: 10px 15px;
+  margin-right: 10px;
+  background: #8BC34A;
+  color: #FFFFFF;
+  border-radius: 50%;
+}
+
+.successContent {
+  max-width: 800px;
+  padding-top: 10px;
+  margin: auto;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
