@@ -42,7 +42,7 @@ export default class Design extends React.Component {
       <div className="container">
         <Nav />
         <div className="content">
-          <Sidebar />
+          <Sidebar showGithubForm={this.createPrompt} />
           <CanvasContainer createPrompt={this.createPrompt} />
         </div>
         <Popup

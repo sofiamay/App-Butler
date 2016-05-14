@@ -47,7 +47,7 @@ class Sidebar extends React.Component {
         </a>
         </div>
         <div className="sidebar-content" style={displayContent}>
-          <Form routers={this.props.routers} />
+          <Form routers={this.props.routers} showGithubForm={this.props.showGithubForm}/>
         </div>
       </div>
     );
@@ -56,6 +56,7 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = {
   routers: React.PropTypes.array,
+  showGithubForm: React.PropTypes.func,
 };
 
 export default Sidebar;

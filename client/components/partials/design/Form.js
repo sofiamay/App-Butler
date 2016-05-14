@@ -167,8 +167,6 @@ export default class Form extends React.Component {
     );
   }
 }
-<<<<<<< HEAD
-=======
 
 Form.propTypes = {
   fields: React.PropTypes.object.isRequired,
@@ -184,8 +182,4 @@ Form = reduxForm({
 })(Form);
 
 export default Form;
-<<<<<<< HEAD
 
->>>>>>> Create a redux-form component that stores github info
-=======
->>>>>>> Update Form component
