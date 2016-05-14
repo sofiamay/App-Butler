@@ -1,5 +1,4 @@
 import { buildAllFiles } from './expressBuild/buildFiles.js';
-import Config from './../models/config.js';
 import { createRepo, createFile } from './githubController.js';
 import { extend } from './../utils/utils';
 
