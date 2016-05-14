@@ -1,5 +1,5 @@
-import Config from '../../server/build/models/config.js';
-import configController from '../../server/build/controllers/configController.js';
+import Config from '../../server/src/models/config.js';
+import configController from '../../server/src/controllers/configController.js';
 
 let chai = require('chai');
 chai.should();
@@ -26,3 +26,4 @@ describe('Config Controller', () => {
     }
     mongoose.connect(dbURI, done);
   });
+});
