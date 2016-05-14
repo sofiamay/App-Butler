@@ -147,7 +147,7 @@ export default class RouterBlock extends React.Component {
               editing={data.editingName}
               inputClass={'routerName'}
               value={data.name}
-              removeSpaces={false}
+              removeSpaces={true}
               onValueClick={
                 () => updateRouter({
                   id,
@@ -177,7 +177,7 @@ export default class RouterBlock extends React.Component {
             editing={data.editingStartPoint}
             inputClass={'routerName'}
             value={data.startPoint}
-            removeSpaces={false}
+            removeSpaces={true}
             onValueClick={
               () => updateRouter({
                 id,

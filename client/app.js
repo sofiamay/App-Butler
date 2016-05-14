@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 // Components
 import Index from './components/Index.js';
 import Design from './components/Design.js';
+import Success from './components/Success.js';
 import NoMatch from './components/NoMatch.js';
 
 import Store from './store.js';
@@ -32,6 +33,7 @@ render((
     <Router history={hashHistory}>
       <Route path="/" component={Index} />
       <Route path="/design" component={Design} onEnter={AuthCheck} />
+      <Route path="/success" component={Success} onEnter={AuthCheck} />
       <Route path="/*" component={NoMatch} />
     </Router>
   </Provider>

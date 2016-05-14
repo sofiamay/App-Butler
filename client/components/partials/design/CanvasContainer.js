@@ -32,7 +32,7 @@ export default class CanvasContainer extends React.Component {
         <div className="canvasButtonContainer">
           <button className="btn btn-primary"
             onClick={createRouter.bind(null, {
-              name: 'New router',
+              name: 'newRouter',
             })}
           >
           <i className="fa fa-plus" aria-hidden="true"></i> Add Router
