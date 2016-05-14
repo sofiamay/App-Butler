@@ -46,6 +46,7 @@ describe('Routes', () => {
             port: 8000,
             expressName: 'app',
           },
+          routers: [],
         },
       };
       supertest(server)

@@ -62,7 +62,7 @@ export function generate(request, response) {
 
 export function generateFiles(request, response) {
   const reqData = request.body.data;
-  if (!reqData.serverType) {
+  if (!reqData) {
     return response.status(400).send(new Error('No server type on request'));
   }
 
