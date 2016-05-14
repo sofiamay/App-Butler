@@ -45,7 +45,7 @@ export function generate(request, response) {
             response.status(400).send(`Problem creating router files on your GitHub: Error: ${routerErr}`);
           });
         } else {
-          return;
+          return response.status(201).send('Repo Created');
         }
       };
       asyncRun(builtFiles[1], 0);
