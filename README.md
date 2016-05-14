@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/SpontaneousPlankton/AppButler.svg?branch=master)](https://travis-ci.org/SpontaneousPlankton/AppButler)
 # Butler
-Visualize your backend while creating it
+Butler provides an intuitive drag-and-drop UI for designing server architecture. It will generate a boilerplate from your configuration and send your files to github. Just clone your new repo and start coding!
+
+Butler currently only supports express.js servers.
 
 <hr>
 
@@ -14,6 +16,7 @@ Visualize your backend while creating it
 ## Table of Contents
 
 1. [Usage](#Usage)
+1. [Features](#Features)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -26,6 +29,21 @@ Visualize your backend while creating it
 
 ## Usage
 
+1. Navigate your browser to appButler.io.
+2. Login with Github. AppButler needs github authorization to create a new repo.
+3. Drag and drop components until you are satisfied with your server architecture.
+4. Click build to generate your boilerplate
+5. Start coding!
+
+<hr>
+
+## Features
+1. Support for express.js server generation
+2. Integration with Github 
+3. An intuitive UI to help you visualize and design your server architecture
+4. Ability to save and return to past server configurations
+
+
 <hr>
 
 ## Requirements
@@ -34,7 +52,7 @@ Visualize your backend while creating it
 - Express 
 - Mongo 3.2.x
   - Mongoose 4.4.x
-- React 
+- React
 - Redux 
 
 <hr>
@@ -48,6 +66,15 @@ From within the root directory:
 npm install
 npm run build
 ```
+
+## API
+
+| Method | Route   | Description                                    |
+|--------|---------|------------------------------------------------|
+| POST   | /serve  | Generates a boilerplate and sends it to github |
+| POST   | /config | Saves a new config                             |
+| POST   | /login  | Logs in user through Github  
+
 ## Contributing + Github Workflow
 
 See [contributing.md](contributing.md) for contribution and github workflow guidelines.
