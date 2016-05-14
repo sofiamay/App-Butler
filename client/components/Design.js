@@ -20,7 +20,6 @@ export default class Design extends React.Component {
   }
 
   createPrompt(text, btnText, cb) {
-    console.log('did stuff');
     Popup.create({
       title: null,
       content: text,
