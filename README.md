@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/SpontaneousPlankton/AppButler.svg?branch=master)](https://travis-ci.org/SpontaneousPlankton/AppButler)
 # Butler
-Butler provides an intuitive drag-and-drop UI for designing server architecture. It will generate a boilerplate from your configuration and send your files to github. Just clone your new repo and start coding!
+Butler provides an intuitive drag-and-drop UI for designing server architecture. It will generate a boilerplate from your configuration and send your files to github. Then clone your new repo and start coding!
 
-Butler currently only supports express.js servers.
+Note:Butler currently only supports express.js servers.
 
 <hr>
 
@@ -39,9 +39,9 @@ Butler currently only supports express.js servers.
 
 ## Features
 1. Support for express.js server generation
-2. Integration with Github 
-3. An intuitive UI to help you visualize and design your server architecture
-4. Ability to save and return to past server configurations
+1. Integration with Github 
+1. An intuitive UI to help you visualize and design your server architecture
+1. Ability to save and return to past server configurations
 
 
 <hr>
