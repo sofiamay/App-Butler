@@ -9,7 +9,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import { port } from '../../server/src/config.js';
-import { generateServer } from '../../server/build/controllers/generateServer';
+import { generateFiles } from '../../server/build/controllers/generateServer';
 
 const server = express();
 
@@ -20,7 +20,7 @@ server.use(session({
 }));
 
 server.use(bodyParser.json());
-server.post('/config', generateServer);
+server.post('/config', generateFiles);
 
 const runningServer = server.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}`);
@@ -46,6 +46,7 @@ describe('Routes', () => {
             port: 8000,
             expressName: 'app',
           },
+          routers: [],
         },
       };
       supertest(server)

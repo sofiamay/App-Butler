@@ -1,6 +1,5 @@
 import githubAuth from './../passport/githubAuth';
-import { createConfig } from '../controllers/generateServer';
-import { generateServer } from '../controllers/generateServer';
+import { createConfig, generateFiles } from '../controllers/generateServer';
 
 import { getUser } from './../models/userController';
 
@@ -11,6 +10,7 @@ module.exports = (app, express) => {
 
   app.get('/auth/github/callback', githubAuth.authenticateLogin, (req, res) => {
     // console.log(req.user); // User data and JWT token
+    res.cookie('email', req.user._json.email);
     res.cookie('user', req.user._json.login);
     res.cookie('logged_in', true);
     res.cookie('user_session', req.user.token);
@@ -22,7 +22,7 @@ module.exports = (app, express) => {
 
   app.post('/config', createConfig);
   app.post('/serve', (req, res) => {
-    generateServer(req, res);
+    generateFiles(req, res);
   });
 };
 

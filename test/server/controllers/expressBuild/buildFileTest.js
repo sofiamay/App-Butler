@@ -43,7 +43,7 @@ describe('File Builder', () => {
   describe('Build All files', () => {
     it('should build all files and save them to an array', () => {
       const response = httpMocks.createResponse();
-      expect(buildAllFiles(request, response)).to.contain('var app = require (\'express\');\n\napp.listen(8000, function () {console.log(\'myApp listening on port 8000\');\n');
+      expect(buildAllFiles(request, response)).to.contain('var express = require (\'express\');\n\n\nvar app = express();\n\n\napp.listen(8000, function () {\n\tconsole.log(\'myApp listening on port 8000\');\n};\n');
     });
   });
   it('should call not return an error when building the main server file', () => {
@@ -56,12 +56,12 @@ describe('File Builder', () => {
     });
 
     it('contains code that tells the server to listen', () => {
-      const str = 'app.listen(3000, function () {console.log(\'ACoolApp listening on port 3000\')';
+      const str = 'app.listen(3000, function () {\n\tconsole.log(\'ACoolApp listening on port 3000\')';
       expect(buildFile(fileConfig, userConfig).indexOf(str)).to.be.above(-1);
     });
 
     it('contains code that instantiates express', () => {
-      const str = 'var app = require (\'express\');';
+      const str = 'var express = require (\'express\');';
       expect(buildFile(fileConfig, userConfig).indexOf(str)).to.be.above(-1);
     });
 
@@ -74,7 +74,7 @@ describe('File Builder', () => {
           expressName: 'app',
         },
       };
-      const str = 'app.listen(8000, function () {console.log(\'ACoolApp listening on port 8000\')';
+      const str = 'app.listen(8000, function () {\n\tconsole.log(\'ACoolApp listening on port 8000\')';
       expect(buildFile(fileConfig, newUserConfig).indexOf(str)).to.be.above(-1);
     });
 

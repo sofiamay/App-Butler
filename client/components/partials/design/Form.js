@@ -44,10 +44,10 @@ class Form extends React.Component {
     const jsonData = {
       data: {
         serverType: formData.serverType,
+        appName: formData.appName,
         serverSettings: {
           port: formData.port,
           expressName: formData.expressName,
-          appName: formData.appName,
         },
         routers: this.props.routers,
       },
@@ -59,6 +59,7 @@ class Form extends React.Component {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(jsonData),
+      credentials: 'same-origin',
     }).then(res => res.json()).then(data => {
       console.log(data);
     });
@@ -120,7 +121,7 @@ class Form extends React.Component {
           </select></div>
         </div>
         {serverType.touched && serverType.error && <div className="error">{serverType.error}</div>}
-        
+
         {currentServerDisplay}
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"

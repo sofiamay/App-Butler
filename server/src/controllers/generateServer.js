@@ -1,28 +1,73 @@
-import { buildAllFiles } from '../../build/controllers/expressBuild/buildFiles.js';
-import Config from '../../build/models/config.js';
+import { buildAllFiles } from './expressBuild/buildFiles.js';
+import Config from './../models/config.js';
+import { createRepo, createFile } from './githubController.js';
+import { extend } from './../utils/utils';
 
-export function generateExpressServer(request, response) {
+export function generate(request, response) {
   request.session.files = {
     serverJS: {
       type: 'main',
-      name: 'server.js',
+      name: 'server',
     },
   };
-  for (let router in request.session.routers) {
-    request.session.files[router.name] = { type: 'router', name: router.name };
+
+  if (request.body.data.routers.length) {
+    request.session.files.routers = {
+      type: 'router',
+      name: request.body.data.routers,
+    };
   }
+
+  // copy cookies to body.data
+  request.body.data.cookies = {};
+  // TODO: remove userInfo parameter
+  extend(request.body.data.cookies, request.cookies);
+  // EMAIL BUG: fix '@'
+  // copy appName to routers obj
+  request.body.data.routers.forEach(router => {
+    router.appName = request.body.data.appName;
+  });
+
   const builtFiles = buildAllFiles(request, response);
   // Send these files to github!
-  return response.send(JSON.stringify(builtFiles));
+  // Make repo (naming handled in controller)
+  createRepo(request.body.data).then(() => {
+    // separate calls for every file
+    // builtFiles will always only be [serverFile, [routerFiles]]
+    createFile(builtFiles[0], request.body.data, request.body.data.cookies, 'server').then(() => {
+      // successfully created server file
+      const asyncRun = (filesArr, ind) => {
+        ind = ind || 0;
+        if (ind !== filesArr.length) {
+          createFile(filesArr[ind], request.body.data.routers[ind], request.body.data.cookies).then(() => {
+            asyncRun(filesArr, ind + 1);
+          }).catch((routerErr) => {
+            console.log(`Problem creating router files on your GitHub: Error: ${routerErr}`);
+            response.status(400).send(`Problem creating router files on your GitHub: Error: ${routerErr}`);
+          });
+        } else {
+          return;
+        }
+      };
+      asyncRun(builtFiles[1], 0);
+    }).catch(serverError => {
+      console.log(`Error creating server ${serverError}`);
+      response.status(400).send(`Error creating server: ${serverError}`);
+    });
+  }).catch((error) => {
+    console.log(`Problem creating repo on your GitHub: Error: ${error}`);
+    response.status(400).send(`Problem creating repo on your GitHub: Error: ${error}`);
+  });
 }
 
-export function generateServer(request, response) {
+export function generateFiles(request, response) {
   const reqData = request.body.data;
-  if (reqData && reqData.serverType && reqData.serverType === 'express') {
-    // generate express server
-    return generateExpressServer(request, response);
+  if (!reqData) {
+    return response.status(400).send(new Error('No server type on request'));
   }
-  return response.status(400).send('No server type on request');
+
+  // generate express server
+  return generate(request, response);
 }
 
 
@@ -35,9 +80,9 @@ export function createConfig(request, response) {
   });
   newConfig.save((err) => {
     if (err) {
-      response.json(err);
+      return response.status(500).json(err);
     }
-    response.send(JSON.stringify(newConfig));
+    return response.json(newConfig);
   });
 }
 
