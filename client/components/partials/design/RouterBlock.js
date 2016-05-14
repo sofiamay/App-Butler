@@ -119,7 +119,6 @@ export default class RouterBlock extends React.Component {
       'Delete Router',
       () => {
         this.props.deleteRouter(id);
-        console.log('callbackfired');
       }
     );
   }
