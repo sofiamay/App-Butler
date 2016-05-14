@@ -67,14 +67,6 @@ npm install
 npm run build
 ```
 
-## API
-
-| Method | Route   | Description                                    |
-|--------|---------|------------------------------------------------|
-| POST   | /serve  | Generates a boilerplate and sends it to github |
-| POST   | /config | Saves a new config                             |
-| POST   | /login  | Logs in user through Github  
-
 ## Contributing + Github Workflow
 
 See [contributing.md](contributing.md) for contribution and github workflow guidelines.
@@ -84,3 +76,13 @@ See [contributing.md](contributing.md) for contribution and github workflow guid
 ## Architecture
 ### High Level Architecture
 ![](http://i.imgur.com/oZEjl3d.png?1)
+
+<hr>
+
+## API
+
+| Method | Route   | Description                                    |
+|--------|---------|------------------------------------------------|
+| POST   | /serve  | Generates a boilerplate and sends it to github |
+| POST   | /config | Saves a new config                             |
+| POST   | /login  | Logs in user through Github  
