@@ -1,6 +1,7 @@
 import { buildAllFiles } from './expressBuild/buildFiles.js';
 import { createRepo, createFile } from './githubController.js';
 import { extend } from './../utils/utils';
+import { buildAllFiles } from '../../build/controllers/expressBuild/buildFiles.js';
 
 export function generate(request, response) {
   request.session.files = {
@@ -68,5 +69,3 @@ export function generateFiles(request, response) {
   // generate express server
   return generate(request, response);
 }
-
-
