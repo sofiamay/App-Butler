@@ -25,6 +25,6 @@ export function buildRouterFile(fileConfig, routerConfig) {
   // generate paths:
   file += generatePaths(startPoint, endpoints);
   // export:
-  file += '\nmodule.exports = router\n';
+  file += '\nmodule.exports = router;\n';
   return file;
 }
