@@ -9,4 +9,3 @@ export function createOne(request, response) {
     return response.json(newConfig);
   });
 }
-
