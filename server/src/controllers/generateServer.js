@@ -71,18 +71,3 @@ export function generateFiles(request, response) {
 }
 
 
-export function createConfig(request, response) {
-  const newConfig = new Config({
-    appName: request.body.appName,
-    port: request.body.port,
-    expressName: request.body.expressName,
-    serverType: request.body.serverType,
-  });
-  newConfig.save((err) => {
-    if (err) {
-      return response.status(500).json(err);
-    }
-    return response.json(newConfig);
-  });
-}
-
