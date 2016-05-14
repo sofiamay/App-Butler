@@ -2,8 +2,6 @@ import React from 'react';
 import Endpoints from './Endpoints.js';
 import Editable from './Editable.js';
 
-import Popup from 'react-popup';
-
 // Redux Functionality
 import {
   moveRouter,
@@ -168,7 +166,7 @@ export default class RouterBlock extends React.Component {
           </div>
         <i className="fa fa-info-circle" aria-hidden="true"></i>
         <a
-          onClick={() => this.confirmDelete(id)}
+          onClick={() => data.endpoints.length > 0 ? this.confirmDelete(id) : deleteRouter(id)}
         >
           <i className="fa fa-remove" aria-hidden="true"></i>
         </a>
@@ -198,7 +196,7 @@ export default class RouterBlock extends React.Component {
         </div>
         <div style={{ marginTop: '7px' }}>
           <button className="btn btn-default"
-            onClick={createEndpoint.bind(null, {
+            onClick={() => createEndpoint({
               routerId: id,
             })}
           >
