@@ -63,7 +63,11 @@ class Form extends React.Component {
       body: JSON.stringify(jsonData),
       credentials: 'same-origin',
     })
-    .then(hashHistory.push('/success'))
+    .then(response => {
+      if (response.ok) {
+        hashHistory.push('/success');
+      }
+    })
     .catch(err => console.log('darn:  ', err));
   }
 
