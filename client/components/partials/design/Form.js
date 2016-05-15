@@ -1,5 +1,7 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
+import { hashHistory } from 'react-router'
+
 export const fields = ['appName', 'port', 'expressName', 'serverType'];
 
 /* Form validation function */
@@ -60,9 +62,9 @@ class Form extends React.Component {
       },
       body: JSON.stringify(jsonData),
       credentials: 'same-origin',
-    }).then(res => res.json()).then(data => {
-      console.log(data);
-    });
+    })
+    .then(hashHistory.push('/success'))
+    .catch(err => console.log('darn:  ', err));
   }
 
   currentServerDisplay = () => {
