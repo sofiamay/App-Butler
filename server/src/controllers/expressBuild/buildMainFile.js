@@ -27,7 +27,7 @@ function requireRouters(routers) {
   let fileString = '';
   routers.forEach(router => {
     const name = camelize(router.name);
-    fileString += `var ${name} = require('./${name}');\n`;
+    fileString += `var ${name} = require('../routers/${name}');\n`;
   });
   return fileString;
 }
