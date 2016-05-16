@@ -4,12 +4,16 @@ import React from 'react';
 import Nav from './partials/Nav.js';
 
 export default class Index extends React.Component {
+  static propTypes = {
+    params: React.PropTypes.object.isRequired,
+  }
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   render() {
+    const { user, repoName } = this.props.params;
     return (
       <div className="container">
         <Nav />
@@ -18,10 +22,13 @@ export default class Index extends React.Component {
             <span className="successBanner-check">
               <i className="fa fa-check" aria-hidden="true"></i>
             </span>
-            Success!
+            Repo Created!
           </div>
           <div className="successContent">
             You can view your created repo at:
+            <a className="successRepo" target="_blank" href={ `https://github.com/${user}/${repoName}` }>
+            { ` github.com/${user}/${repoName}` }
+            </a>
           </div>
         </div>
       </div>
