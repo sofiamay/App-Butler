@@ -1,6 +1,6 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import { hashHistory } from 'react-router'
+import { hashHistory } from 'react-router';
 
 export const fields = ['appName', 'port', 'expressName', 'serverType'];
 
@@ -64,9 +64,9 @@ class Form extends React.Component {
       credentials: 'same-origin',
     })
     .then(response => {
-      if (response.ok) {
-        hashHistory.push('/success');
-      }
+      response.json().then(obj => {
+        hashHistory.push(`/success/${obj.user}/${obj.repoName}/`);
+      });
     })
     .catch(err => console.log('darn:  ', err));
   }

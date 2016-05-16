@@ -39,7 +39,7 @@ render((
     <Router history={hashHistory}>
       <Route path="/" component={Index} />
       <Route path="/design" component={Design} onEnter={AuthCheck} />
-      <Route path="/success" component={Success} onEnter={AuthCheck} />
+      <Route path="/success/:user/:repoName" component={Success} onEnter={AuthCheck} />
       <Route path="/*" component={NoMatch} />
     </Router>
   </Provider>
