@@ -2,7 +2,7 @@ import githubAuth from './../passport/githubAuth';
 import { generateFiles } from '../controllers/generateServer';
 import { createOne } from '../controllers/configController';
 
-import { getUser } from './../models/userController';
+import { getUser } from './../controllers/userController';
 
 module.exports = (app, express) => {
   app.use(express.static(`${__dirname}/../../../../client`));
