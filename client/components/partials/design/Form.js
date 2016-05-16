@@ -58,9 +58,9 @@ export default class Form extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      serverType: null,
-    };
+    // this.state = {
+    //   serverType: null,
+    // };
   }
 
   selectServerType = (event) => {
@@ -136,8 +136,8 @@ export default class Form extends React.Component {
   }
 
   render() {
-    const currentServerDisplay = this.currentServerDisplay();
-    const { fields: { appName, serverType }, handleSubmit, submitting } = this.props;
+    // const currentServerDisplay = this.currentServerDisplay();
+    const { fields: { appName, port, expressName }, handleSubmit, submitting } = this.props;
     return (
       <form className="serverSettings">
         <div>
@@ -149,16 +149,26 @@ export default class Form extends React.Component {
           </div>
           {appName.touched && appName.error && <div className="error">{appName.error}</div>}
         </div>
-        <div>
-          <div className="serverLabel">Server Type</div>
-          <div style={{ marginBottom: '5px' }}><select onChange={this.selectServerType} >
-            <option value="null"></option>
-            <option value="express">Express</option>
-          </select></div>
+        <div className="express">
+          <div className="serverLabel">Port</div>
+          <div>
+            <input className={(port.touched && port.error) ? 'error' : null}
+              type="text" name="port" placeholder="8000" {...port}
+            />
+            <br />
+          </div>
+          {port.touched && port.error && <div>{port.error}</div>}
+          <div className="serverLabel">Express name</div>
+          <div><input className={(expressName.touched && expressName.error) ? 'error' : null}
+            type="text" name="expressName"
+            placeholder="app=express()"
+            {...expressName}
+          />
+          </div>
+          {expressName.touched && expressName.error &&
+            <div className="error">{expressName.error}</div>
+          }
         </div>
-        {serverType.touched && serverType.error && <div className="error">{serverType.error}</div>}
-
-        {currentServerDisplay}
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server
