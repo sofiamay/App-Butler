@@ -1,6 +1,7 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { hashHistory } from 'react-router';
 
 // Import storage to reset it
@@ -10,6 +11,8 @@ import { connect } from 'react-redux';
 =======
 import showGithubForm from './GithubForm.js';
 >>>>>>> Create a redux-form component that stores github info
+=======
+>>>>>>> Get rid of github form component. Start integrating it into the regular form
 export const fields = ['appName', 'port', 'expressName', 'serverType'];
 
 /* Form validation function */
@@ -156,7 +159,7 @@ export default class Form extends React.Component {
         {serverType.touched && serverType.error && <div className="error">{serverType.error}</div>}
 
         {currentServerDisplay}
-        <button disabled={submitting} onClick={handleSubmit(this.popupForm)}
+        <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server
         </button>
@@ -172,7 +175,6 @@ Form.propTypes = {
   handleSubmit: React.PropTypes.func.isRequired,
   submitting: React.PropTypes.bool.isRequired,
   routers: React.PropTypes.array,
-  showGithubForm: React.PropTypes.func,
 };
 
 Form = reduxForm({
