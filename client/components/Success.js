@@ -27,7 +27,8 @@ export default class Index extends React.Component {
           <div className="successContent">
             You can view your created repo at:
             <a className="successRepo" target="_blank" href={ `https://github.com/${user}/${repoName}` }>
-            { ` github.com/${user}/${repoName}` } <i className="fa fa-external-link" aria-hidden="true"></i>
+            { ` github.com/${user}/${repoName} ` }
+            <i className="fa fa-external-link" aria-hidden="true"></i>
             </a>
           </div>
         </div>

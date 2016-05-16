@@ -2,6 +2,10 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import { hashHistory } from 'react-router';
 
+// Import storage to reset it
+import storage from '../../../storage.js';
+import { connect } from 'react-redux';
+
 export const fields = ['appName', 'port', 'expressName', 'serverType'];
 
 /* Form validation function */
@@ -26,9 +30,25 @@ const validate = values => {
   return errors;
 };
 
-/* React Component */
+@connect(null, dispatch => ({
+  resetState: () => {
+    dispatch({ type: 'RESET_STATE' });
+  },
+}))
+@reduxForm({
+  form: 'config',
+  fields,
+  validate,
+})
+export default class Form extends React.Component {
+  static propTypes = {
+    fields: React.PropTypes.object.isRequired,
+    handleSubmit: React.PropTypes.func.isRequired,
+    submitting: React.PropTypes.bool.isRequired,
+    routers: React.PropTypes.array,
+    resetState: React.PropTypes.func.isRequired,
+  };
 
-class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,6 +63,7 @@ class Form extends React.Component {
   }
 
   sendData = (formData) => {
+    const resetState = this.props.resetState;
     const jsonData = {
       data: {
         serverType: formData.serverType,
@@ -65,6 +86,8 @@ class Form extends React.Component {
     })
     .then(response => {
       response.json().then(obj => {
+        resetState();
+        storage.remove('app_state');
         hashHistory.push(`/success/${obj.user}/${obj.repoName}/`);
       });
     })
@@ -137,19 +160,3 @@ class Form extends React.Component {
     );
   }
 }
-
-Form.propTypes = {
-  fields: React.PropTypes.object.isRequired,
-  handleSubmit: React.PropTypes.func.isRequired,
-  submitting: React.PropTypes.bool.isRequired,
-  routers: React.PropTypes.array,
-};
-
-Form = reduxForm({
-  form: 'config',
-  fields,
-  validate,
-})(Form);
-
-export default Form;
-
