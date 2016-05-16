@@ -22,11 +22,13 @@ export default class Index extends React.Component {
             <span className="successBanner-check">
               <i className="fa fa-check" aria-hidden="true"></i>
             </span>
-            Success!
+            Repo Created!
           </div>
           <div className="successContent">
             You can view your created repo at:
-            <a target="_blank" href={ `https://github.com/${user}/${repoName}` }>{ `github.com/${user}/${repoName}` }</a>
+            <a className="successRepo" target="_blank" href={ `https://github.com/${user}/${repoName}` }>
+            { ` github.com/${user}/${repoName}` }
+            </a>
           </div>
         </div>
       </div>

@@ -429,6 +429,12 @@ hr {
   text-align: center;
   line-height: 175px;
   background: #E1F5FE;
+  animation: successIntro 2s;
+}
+
+@keyframes successIntro {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .successBanner-check {
@@ -444,5 +450,14 @@ hr {
   padding-top: 10px;
   margin: auto;
   font-family: 'Roboto', sans-serif;
+  font-size: 22px;
+  text-align: center;
+  color: #333;
+}
+
+.successRepo, .successRepo:visited {
+  color: #1da8ff;
+}
+.successRepo:hover {
   color: #333;
 }
