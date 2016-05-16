@@ -1,6 +1,9 @@
 import { createStore } from 'redux';
 import Reducers from './reducers';
 
+// Import local persisted state if available
+import storage from './storage.js';
+
 // Redux Setup
 const defaultState = {
   ui: {
@@ -10,4 +13,8 @@ const defaultState = {
   form: {},
 };
 
-export default createStore(Reducers, defaultState, window.devToolsExtension ? window.devToolsExtension() : f => f);
+export default createStore(
+  Reducers,
+  storage.get('app_state') || defaultState,
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+);

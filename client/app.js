@@ -10,7 +10,13 @@ import Design from './components/Design.js';
 import Success from './components/Success.js';
 import NoMatch from './components/NoMatch.js';
 
+// Redux Setup
 import Store from './store.js';
+import storage from './storage.js';
+
+Store.subscribe(() => {
+  storage.set('app_state', Store.getState());
+});
 
 const AuthCheck = (nextState, redirect, callback) => {
   // Check database to validate user cookie
