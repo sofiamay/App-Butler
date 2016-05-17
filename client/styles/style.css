@@ -41,6 +41,10 @@ hr {
   display:table-cell;
 }
 
+.logout {
+  float: right;
+}
+
 .content {
   display: table;
   width: 100%;
