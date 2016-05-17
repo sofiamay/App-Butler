@@ -47,7 +47,7 @@ export function createFile(file, settings, userInfo, overrideName) {
 
   const options = {
     method: 'PUT',
-    url: `https://api.github.com/repos/${userInfo.user}/${settings.appName}/contents/${fileName}.js`,
+    url: endpoint,
     headers: {
       authorization: `token ${decoded.token}`,
       'content-type': 'application/json',

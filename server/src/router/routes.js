@@ -21,7 +21,7 @@ module.exports = (app, express) => {
 
   app.get('/api/users', getUser);
 
-  app.post('/config', createConfig);
+  app.post('/config', createOne);
   app.post('/serve', generateFiles);
 };
 

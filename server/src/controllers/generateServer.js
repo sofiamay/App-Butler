@@ -29,12 +29,7 @@ export function generate(request, response) {
   // EMAIL BUG: fix '@'
   // copy appName to routers obj
   request.body.data.routers.forEach(router => {
-    request.session.files[router.id] = {
-      type: 'router',
-      name: router.name,
-      // startPoint: router.startPoint,
-      // endPoint: router.endpoints,
-    };
+    router.appName = request.body.data.appName;
   });
 
   const builtFiles = buildAllFiles(request, response);
@@ -45,23 +40,6 @@ export function generate(request, response) {
     // builtFiles will always only be [serverFile, package.json, [routerFiles]]
     createFile(builtFiles[0], request.body.data, request.body.data.cookies, 'server.js').then(() => {
       // successfully created server file
-      const asyncRun = (filesArr, ind) => {
-        ind = ind || 0;
-        if (ind !== filesArr.length) {
-          createFile(filesArr[ind], request.body.data.routers[ind], request.body.data.cookies).then(() => {
-            asyncRun(filesArr, ind + 1);
-          }).catch((routerErr) => {
-            console.log(`Problem creating router files on your GitHub: Error: ${routerErr}`);
-            response.status(400).send(`Problem creating router files on your GitHub: Error: ${routerErr}`);
-          });
-        } else {
-          return response.status(201).send({
-            user: request.cookies.user,
-            repoName: request.body.data.appName,
-          });
-        }
-      };
-      asyncRun(builtFiles[1], 0);
       // create package.json here:
       createFile(builtFiles[1], request.body.data, request.body.data.cookies, 'package.json').then(() => {
         // successfully created package.json
@@ -76,7 +54,10 @@ export function generate(request, response) {
               response.status(400).send(`Problem creating router files on your GitHub: Error: ${routerErr}`);
             });
           } else {
-            return;
+            return response.status(201).send({
+              user: request.cookies.user,
+              repoName: request.body.data.appName,
+            });
           }
         };
         asyncRun(builtFiles[2], 0);
@@ -102,30 +83,4 @@ export function generateFiles(request, response) {
 
   // generate express server
   return generate(request, response);
-}
-
-export function generateServer(request, response) {
-  const reqData = request.body.data;
-  if (!reqData.serverType) {
-    return response.status(400).send(new Error('No server type on request'));
-  }
-
-  // generate express server
-  return generateExpressServer(request, response);
-}
-
-
-export function createConfig(request, response) {
-  const newConfig = new Config({
-    appName: request.body.appName,
-    port: request.body.port,
-    expressName: request.body.expressName,
-    serverType: request.body.serverType,
-  });
-  newConfig.save((err) => {
-    if (err) {
-      return response.status(500).json(err);
-    }
-    return response.json(newConfig);
-  });
 }
