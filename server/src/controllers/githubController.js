@@ -5,6 +5,7 @@ export function createRepo(options) {
   if (!options) {
     throw new Error('Error: Options required for repo creation.');
   }
+  console.log(options);
   const decoded = jwt.verify(options.cookies.user_session, 'CHANGETHISFORPROD');
 
   const repoOptions = {
@@ -17,7 +18,9 @@ export function createRepo(options) {
       authorization: `token ${decoded.token}`,
     },
     body: {
-      name: `${options.appName}`,
+      name: options.appName,
+      description: options.github.description,
+      private: options.github.privacy,
     },
     json: true,
   };
