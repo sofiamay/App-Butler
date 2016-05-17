@@ -28,7 +28,7 @@ const validate = values => {
     errors.port = 'Must be 5 characters or less';
   }
   const githubErrors = {};
-  if (values.github.description.length > 200) {
+  if (values.github.description && values.github.description.length > 200) {
     githubErrors.description = 'Description should be 200 characters or fewer';
   }
   errors.github = githubErrors;
@@ -79,6 +79,7 @@ export default class Form extends React.Component {
         },
       },
     };
+    console.log(jsonData);
 
     fetch('/serve', {
       method: 'POST',

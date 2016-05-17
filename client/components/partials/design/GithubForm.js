@@ -2,7 +2,6 @@ import React from 'react';
 
 export default class GithubForm extends React.Component {
   static propTypes = {
-    repoName: React.PropTypes.object.isRequired,
     privacy: React.PropTypes.object.isRequired,
     description: React.PropTypes.object.isRequired,
   }
