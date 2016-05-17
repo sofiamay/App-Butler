@@ -13,8 +13,8 @@ module.exports = (app, express) => {
     // console.log(req.user); // User data and JWT token
     // user profile picture:
     res.cookie('avatar', req.user._json.avatar_url);
-    // user's profile:
-    res.cookie('profileUrl', req.user.profileUrl);
+    // user plan:
+    res.cookie('plan', req.user._json.plan.name);
 
     res.cookie('email', req.user._json.email);
     res.cookie('user', req.user._json.login);
