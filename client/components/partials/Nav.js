@@ -16,7 +16,7 @@ export default () => (
   <div className="navContainer">
     <div className="nav">
       <ul>
-        <li><Link to={'/design'}>Designer</Link></li>
+        <li><Link to={'/design'}>App Butler</Link></li>
       </ul>
       <a href="#" onClick={logout} className="logout"><span className="leave">Logout</span></a>
     </div>

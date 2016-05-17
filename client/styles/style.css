@@ -37,7 +37,6 @@ hr {
 
 .nav {
   background: #1da8ff;
-  padding: 5px;
   display:table-cell;
 }
 
@@ -64,12 +63,18 @@ hr {
 
 .nav ul li {
   display: inline;
-  line-height: 20px;
+  line-height: 30px;
 }
 
 .nav ul li a {
   font-family: 'Roboto', sans-serif;
   color: #FFFFFF;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.nav ul li a:hover {
+  background: rgba(255, 255, 255, .1);
 }
 
 .content {
