@@ -38,7 +38,6 @@ export function generate(request, response) {
   });
 
   const builtFiles = buildAllFiles(request, response);
-  console.log(builtFiles);
   // Send these files to github!
   // Make repo (naming handled in controller)
   createRepo(request.body.data).then(() => {

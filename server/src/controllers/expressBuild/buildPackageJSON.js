@@ -14,7 +14,7 @@ const addGitDetails = appDetails => {
   fileString += `\t"repository": {\n` +
     `\t\t"type": "git",\n` +
     `\t\t"url": "https://github.com/${appDetails.cookies.user}/${appDetails.appName}"\n` +
-    '},\n';
+    '\t},\n';
 
   return fileString;
 };
