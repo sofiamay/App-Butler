@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const logout = () => {
   const cookies = document.cookie.split(';');
@@ -14,6 +15,9 @@ const logout = () => {
 export default () => (
   <div className="navContainer">
     <div className="nav">
+      <ul>
+        <li><Link to={'/design'}>Designer</Link></li>
+      </ul>
       <a href="#" onClick={logout} className="logout"><span className="leave">Logout</span></a>
     </div>
   </div>
