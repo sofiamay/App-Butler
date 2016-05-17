@@ -30,6 +30,10 @@ hr {
   table-layout: fixed;
 }
 
+.container--blue {
+  background: #1da8ff;
+}
+
 .navContainer {
   height: 30px;
   display: table-row;
@@ -37,7 +41,6 @@ hr {
 
 .nav {
   background: #1da8ff;
-  padding: 5px;
   display:table-cell;
 }
 
@@ -47,12 +50,40 @@ hr {
   float: right;
 }
 
-.logout:hover span {
-  display: none;
+.nav ul {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  list-style: none;
 }
 
-.logout:hover:after {
-  content: 'Goodbye';
+.nav ul li {
+  display: inline;
+  line-height: 30px;
+}
+
+.nav ul li a {
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.nav ul li a:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
+.rightNav {
+  float: right;
+}
+
+.avatar {
+  display: inline-block;
+  height: 30px;
+  padding-left: 33px;
+  background-position: center left;
+  background-size: 28px 28px;
+  background-repeat: no-repeat;
 }
 
 .content {
@@ -474,4 +505,34 @@ hr {
 }
 .successRepo:hover {
   color: #333;
+}
+
+.successContent-button {
+  margin-top: 20px;
+}
+
+/* Loading Styling */
+.loadingContainer {
+  width: 100%;
+  padding-top: 50px;
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+  font-size: 50px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+  text-align: center;
+  animation: 2s infinite .3s textZoom;
+}
+
+@keyframes textZoom {
+  from { 
+    font-size: 50px; 
+  }
+
+  50% {
+    font-size: 70px;
+  }
+
+  to {
+    font-size: 50px;
+  }
 }

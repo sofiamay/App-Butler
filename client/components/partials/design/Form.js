@@ -66,6 +66,7 @@ export default class Form extends React.Component {
   }
 
   sendData = (formData) => {
+    hashHistory.push('/loading');
     const resetState = this.props.resetState;
     const jsonData = {
       data: {
