@@ -66,7 +66,6 @@ export default class Form extends React.Component {
   }
 
   sendData = (formData) => {
-    console.log(formData)
     const resetState = this.props.resetState;
     const jsonData = {
       data: {
@@ -84,7 +83,6 @@ export default class Form extends React.Component {
         },
       },
     };
-    console.log(jsonData);
 
     fetch('/serve', {
       method: 'POST',
