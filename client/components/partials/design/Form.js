@@ -7,34 +7,34 @@ import { hashHistory } from 'react-router';
 import storage from '../../../storage.js';
 import { connect } from 'react-redux';
 
-export const fields = ['appName',
+export const fields = [
+  'configName',
   'port',
-  'expressName',
   'github.repoName',
   'github.privacy',
   'github.description',
-  ];
+];
 
 /* Form validation function */
 const validate = values => {
   const errors = {};
-  if (!values.appName) {
-    errors.appName = 'Required';
-  } else if (values.appName.length > 15) {
-    errors.appName = 'Must be 15 characters or less';
+  if (!values.configName) {
+    errors.configName = 'Required';
+  } else if (values.configName.length > 15) {
+    errors.configName = 'Must be 15 characters or less';
   }
-  if (!/^\d{1,4}\s*$/.test(values.port) && values.port !== '') {
+  if (values.port && !/^\d{1,4}\s*$/.test(values.port)) {
     errors.port = 'Port must be an integer between 0 and 9999';
   } else if (values.port.length > 5) {
     errors.port = 'Must be 5 characters or less';
   }
-  if (values.expressName && values.expressName.length > 15) {
-    errors.appName = 'Must be 15 characters or less';
-  }
-
   const githubErrors = {};
-  if (!values.github.repoName) { githubErrors.repoName = 'Required'; }
-  if (!values.github.description) { githubErrors.description = 'Required'; }
+  if (values.github.description && values.github.description.length > 200) {
+    githubErrors.description = 'Description should be 200 characters or fewer';
+  }
+  if (!values.github.repoName) {
+    githubErrors.repoName = 'Required';
+  }
   errors.github = githubErrors;
   return errors;
 };
@@ -71,7 +71,7 @@ export default class Form extends React.Component {
     const jsonData = {
       data: {
         serverType: formData.serverType,
-        appName: formData.appName,
+        Name: formData.configName,
         serverSettings: {
           port: formData.port,
           expressName: formData.expressName,
@@ -84,6 +84,7 @@ export default class Form extends React.Component {
         },
       },
     };
+    console.log(jsonData);
 
     fetch('/serve', {
       method: 'POST',
@@ -104,37 +105,27 @@ export default class Form extends React.Component {
   }
 
   render() {
-    const { fields: { appName, port, expressName, github }, handleSubmit, submitting } = this.props;
+    const { fields: { configName, port, github }, handleSubmit, submitting } = this.props;
     return (
       <form className="serverSettings">
         <div>
           <div className="serverLabel">App Name</div>
           <div>
-            <input className={(appName.touched && appName.error) ? 'error' : null}
-              type="text" name="appName" placeholder="MyApp" required {...appName} autoFocus
+            {configName.touched && configName.error && <div className="error">{configName.error}</div>}
+            <input className={(configName.touched && configName.error) ? 'error' : null}
+              type="text" name="configName" placeholder="MyApp" required {...configName} autoFocus
             />
           </div>
-          {appName.touched && appName.error && <div className="error">{appName.error}</div>}
         </div>
         <div className="express">
           <div className="serverLabel">Port</div>
           <div>
+            {port.touched && port.error && <div className="error">{port.error}</div>}
             <input className={(port.touched && port.error) ? 'error' : null}
               type="text" name="port" placeholder="8000" {...port}
             />
             <br />
           </div>
-          {port.touched && port.error && <div>{port.error}</div>}
-          <div className="serverLabel">Express name</div>
-          <div><input className={(expressName.touched && expressName.error) ? 'error' : null}
-            type="text" name="expressName"
-            placeholder="app=express()"
-            {...expressName}
-          />
-          </div>
-          {expressName.touched && expressName.error &&
-            <div className="error">{expressName.error}</div>
-          }
         </div>
         <GithubForm {...github} />
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}

@@ -185,6 +185,15 @@ hr {
   transition: border .2s;
 }
 
+.githubForm {
+  position: relative;
+}
+.githubForm textarea {
+  background-color: transparent;
+  resize: none;
+  border: 0px;
+}
+
 .error[type="text"] {
   border-bottom: 1px solid #ec1f1f;
   text-transform: none !important;
@@ -405,6 +414,12 @@ hr {
 .github {
   height: 80px;
   top: 400px;
+}
+
+.github-icon {
+  position: absolute;
+  top: 70px;
+  right: 30px;
 }
 
 .butler {
