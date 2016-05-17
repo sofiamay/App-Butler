@@ -77,6 +77,11 @@ export default class Form extends React.Component {
           expressName: formData.expressName,
         },
         routers: this.props.routers,
+        github: {
+          repoName: formData.github.repoName,
+          privacy: formData.github.privacy || false,
+          description: formData.github.description,
+        },
       },
     };
     console.log(jsonData);
