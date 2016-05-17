@@ -1,4 +1,5 @@
 import React from 'react';
+import GithubForm from './GithubForm.js';
 import { reduxForm } from 'redux-form';
 import { hashHistory } from 'react-router';
 
@@ -6,8 +7,13 @@ import { hashHistory } from 'react-router';
 import storage from '../../../storage.js';
 import { connect } from 'react-redux';
 
-import showGithubForm from './GithubForm.js';
-export const fields = ['appName', 'port', 'expressName', 'serverType'];
+export const fields = ['appName',
+  'port',
+  'expressName',
+  'github.repoName',
+  'github.privacy',
+  'github.description',
+  ];
 
 /* Form validation function */
 const validate = values => {
@@ -25,9 +31,11 @@ const validate = values => {
   if (values.expressName && values.expressName.length > 15) {
     errors.appName = 'Must be 15 characters or less';
   }
-  if (!values.serverType) {
-    errors.serverType = 'Please select a serverType';
-  }
+
+  const githubErrors = {};
+  if (!values.github.repoName) { githubErrors.repoName = 'Required'; }
+  if (!values.github.description) { githubErrors.description = 'Required'; }
+  errors.github = githubErrors;
   return errors;
 };
 
@@ -57,13 +65,8 @@ export default class Form extends React.Component {
     };
   }
 
-  selectServerType = (event) => {
-    const { fields: { serverType } } = this.props;
-    serverType.onChange(event.target.value);
-    this.setState({ serverType: event.target.value });
-  }
-
   sendData = (formData) => {
+    console.log(formData)
     const resetState = this.props.resetState;
     const jsonData = {
       data: {
@@ -76,6 +79,7 @@ export default class Form extends React.Component {
         routers: this.props.routers,
       },
     };
+    console.log(jsonData);
 
     fetch('/serve', {
       method: 'POST',
@@ -95,44 +99,8 @@ export default class Form extends React.Component {
     .catch(err => console.log('darn:  ', err));
   }
 
-
-  currentServerDisplay = () => {
-    const { fields: { port, expressName } } = this.props;
-    switch (this.state.serverType) {
-      case 'express':
-        return (
-          <div className="express">
-            <div className="serverLabel">Port</div>
-            <div>
-              <input className={(port.touched && port.error) ? 'error' : null}
-                type="text" name="port" placeholder="8000" {...port}
-              />
-              <br />
-            </div>
-            {port.touched && port.error && <div>{port.error}</div>}
-            <div className="serverLabel">Express name</div>
-            <div><input className={(expressName.touched && expressName.error) ? 'error' : null}
-              type="text" name="expressName"
-              placeholder="app=express()"
-              {...expressName}
-            />
-            </div>
-            {expressName.touched && expressName.error &&
-              <div className="error">{expressName.error}</div>
-            }
-          </div>
-          );
-      default:
-        return (
-          <div>
-          </div>
-          );
-    }
-  }
-
   render() {
-    const currentServerDisplay = this.currentServerDisplay();
-    const { fields: { appName, serverType }, handleSubmit, submitting } = this.props;
+    const { fields: { appName, port, expressName, github }, handleSubmit, submitting } = this.props;
     return (
       <form className="serverSettings">
         <div>
@@ -144,16 +112,27 @@ export default class Form extends React.Component {
           </div>
           {appName.touched && appName.error && <div className="error">{appName.error}</div>}
         </div>
-        <div>
-          <div className="serverLabel">Server Type</div>
-          <div style={{ marginBottom: '5px' }}><select onChange={this.selectServerType} >
-            <option value="null"></option>
-            <option value="express">Express</option>
-          </select></div>
+        <div className="express">
+          <div className="serverLabel">Port</div>
+          <div>
+            <input className={(port.touched && port.error) ? 'error' : null}
+              type="text" name="port" placeholder="8000" {...port}
+            />
+            <br />
+          </div>
+          {port.touched && port.error && <div>{port.error}</div>}
+          <div className="serverLabel">Express name</div>
+          <div><input className={(expressName.touched && expressName.error) ? 'error' : null}
+            type="text" name="expressName"
+            placeholder="app=express()"
+            {...expressName}
+          />
+          </div>
+          {expressName.touched && expressName.error &&
+            <div className="error">{expressName.error}</div>
+          }
         </div>
-        {serverType.touched && serverType.error && <div className="error">{serverType.error}</div>}
-
-        {currentServerDisplay}
+        <GithubForm {...github} />
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server
@@ -162,19 +141,3 @@ export default class Form extends React.Component {
     );
   }
 }
-
-Form.propTypes = {
-  fields: React.PropTypes.object.isRequired,
-  handleSubmit: React.PropTypes.func.isRequired,
-  submitting: React.PropTypes.bool.isRequired,
-  routers: React.PropTypes.array,
-};
-
-Form = reduxForm({
-  form: 'config',
-  fields,
-  validate,
-})(Form);
-
-export default Form;
-
