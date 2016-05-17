@@ -475,3 +475,7 @@ hr {
 .successRepo:hover {
   color: #333;
 }
+
+.successContent-button {
+  margin-top: 20px;
+}

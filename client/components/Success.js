@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 // Shared partial components
 import Nav from './partials/Nav.js';
@@ -30,6 +31,9 @@ export default class Index extends React.Component {
             { ` github.com/${user}/${repoName} ` }
             <i className="fa fa-external-link" aria-hidden="true"></i>
             </a>
+            <div className="successContent-button">
+              <Link className="btn btn-submit" to={'/design'}>Create Another?</Link>
+            </div>
           </div>
         </div>
       </div>
