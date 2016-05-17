@@ -2,6 +2,7 @@ import React from 'react';
 
 export default class GithubForm extends React.Component {
   static propTypes = {
+    repoName: React.PropTypes.object.isRequired,
     privacy: React.PropTypes.object.isRequired,
     description: React.PropTypes.object.isRequired,
   }
@@ -22,10 +23,17 @@ export default class GithubForm extends React.Component {
   }
 
   render() {
-    const { description } = this.props;
+    const { repoName, description } = this.props;
     return (
       <div className="githubForm">
         <img src="../../../githubLogo.png" />
+        <div className="serverLabel">Repo Name</div>
+          <div>
+            {repoName.touched && repoName.error && <div className="error">{repoName.error}</div>}
+            <input
+              type="text" name="repoName" placeholder="MyNewRepo" required {...repoName} autoFocus
+            />
+        </div>
         <div>
           <div className="serverLabel">Repo Description</div>
           <div>

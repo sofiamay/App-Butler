@@ -8,8 +8,9 @@ import storage from '../../../storage.js';
 import { connect } from 'react-redux';
 
 export const fields = [
-  'appName',
+  'configName',
   'port',
+  'github.repoName',
   'github.privacy',
   'github.description',
 ];
@@ -17,10 +18,10 @@ export const fields = [
 /* Form validation function */
 const validate = values => {
   const errors = {};
-  if (!values.appName) {
-    errors.appName = 'Required';
-  } else if (values.appName.length > 15) {
-    errors.appName = 'Must be 15 characters or less';
+  if (!values.configName) {
+    errors.configName = 'Required';
+  } else if (values.configName.length > 15) {
+    errors.configName = 'Must be 15 characters or less';
   }
   if (!/^\d{1,4}\s*$/.test(values.port) && values.port !== '') {
     errors.port = 'Port must be an integer between 0 and 9999';
@@ -30,6 +31,9 @@ const validate = values => {
   const githubErrors = {};
   if (values.github.description && values.github.description.length > 200) {
     githubErrors.description = 'Description should be 200 characters or fewer';
+  }
+  if (values.github.repoName && values.github.repoName.length > 20) {
+    githubErrors.repoName = 'Name should be 20 characters or fewer';
   }
   errors.github = githubErrors;
   return errors;
@@ -67,13 +71,14 @@ export default class Form extends React.Component {
     const jsonData = {
       data: {
         serverType: formData.serverType,
-        appName: formData.appName,
+        appName: formData.configName,
         serverSettings: {
           port: formData.port,
           expressName: formData.expressName,
         },
         routers: this.props.routers,
         github: {
+          repoName: formData.github.repoName,
           privacy: formData.github.privacy || false,
           description: formData.github.description,
         },
@@ -100,15 +105,15 @@ export default class Form extends React.Component {
   }
 
   render() {
-    const { fields: { appName, port, github }, handleSubmit, submitting } = this.props;
+    const { fields: { configName, port, github }, handleSubmit, submitting } = this.props;
     return (
       <form className="serverSettings">
         <div>
           <div className="serverLabel">App Name</div>
           <div>
-            {appName.touched && appName.error && <div className="error">{appName.error}</div>}
-            <input className={(appName.touched && appName.error) ? 'error' : null}
-              type="text" name="appName" placeholder="MyApp" required {...appName} autoFocus
+            {configName.touched && configName.error && <div className="error">{configName.error}</div>}
+            <input className={(configName.touched && configName.error) ? 'error' : null}
+              type="text" name="configName" placeholder="MyApp" required {...configName} autoFocus
             />
           </div>
         </div>
