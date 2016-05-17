@@ -44,23 +44,30 @@ export function generate(request, response) {
       createFile(builtFiles[1], request.body.data, request.body.data.cookies, 'package.json').then(() => {
         // successfully created package.json
         // create router files here:
-        const asyncRun = (filesArr, ind) => {
-          ind = ind || 0;
-          if (ind !== filesArr.length) {
-            createFile(filesArr[ind], request.body.data.routers[ind], request.body.data.cookies).then(() => {
-              asyncRun(filesArr, ind + 1);
-            }).catch((routerErr) => {
-              console.log(`Problem creating router files on your GitHub: Error: ${routerErr}`);
-              response.status(400).send(`Problem creating router files on your GitHub: Error: ${routerErr}`);
-            });
-          } else {
-            return response.status(201).send({
-              user: request.cookies.user,
-              repoName: request.body.data.appName,
-            });
-          }
-        };
-        asyncRun(builtFiles[2], 0);
+        if (builtFiles[2]) {
+          const asyncRun = (filesArr, ind) => {
+            ind = ind || 0;
+            if (ind !== filesArr.length) {
+              createFile(filesArr[ind], request.body.data.routers[ind], request.body.data.cookies).then(() => {
+                asyncRun(filesArr, ind + 1);
+              }).catch((routerErr) => {
+                console.log(`Problem creating router files on your GitHub: Error: ${routerErr}`);
+                response.status(400).send(`Problem creating router files on your GitHub: Error: ${routerErr}`);
+              });
+            } else {
+              return response.status(201).send({
+                user: request.cookies.user,
+                repoName: request.body.data.appName,
+              });
+            }
+          };
+          asyncRun(builtFiles[2], 0);
+        } else {
+          return response.status(201).send({
+            user: request.cookies.user,
+            repoName: request.body.data.appName,
+          });
+        }
       }).catch(packageError => {
         console.log(`Error creating package.json: ${packageError}`);
         response.status(400).send(`Error creating package.json: ${packageError}`);
