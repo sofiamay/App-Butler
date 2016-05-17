@@ -7,12 +7,17 @@ export default class Editable extends React.Component {
     editing: React.PropTypes.bool.isRequired,
     update: React.PropTypes.func.isRequired,
     id: React.PropTypes.string.isRequired,
+    validate: React.PropTypes.func,
     removeSpaces: React.PropTypes.bool,
     inputClass: React.PropTypes.string,
   }
 
   finishEdit = (e) => {
     const value = e.target.value;
+    // If validation is present & returns false update w/ original val
+    if (this.props.validate && !this.props.validate(value)) {
+      return this.props.update(this.props.value);
+    }
 
     if (this.props.update && value.trim()) {
       this.props.update(this.props.removeSpaces ? value.replace(/ /g, '') : value);
