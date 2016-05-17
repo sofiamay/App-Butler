@@ -71,7 +71,7 @@ export default class Form extends React.Component {
     const jsonData = {
       data: {
         serverType: formData.serverType,
-        Name: formData.configName,
+        appName: formData.configName,
         serverSettings: {
           port: formData.port,
           expressName: formData.expressName,
