@@ -6,6 +6,21 @@ export function createRepo(options) {
     throw new Error('Error: Options required for repo creation.');
   }
 
+  let bodyData = {};
+
+  if (options.github.description === '') {
+    bodyData = {
+      name: options.appName,
+      private: options.github.privacy,
+    };
+  } else {
+    bodyData = {
+      name: options.appName,
+      description: options.github.description,
+      private: options.github.privacy,
+    };
+  }
+
   const decoded = jwt.verify(options.cookies.user_session, 'CHANGETHISFORPROD');
 
   const repoOptions = {
@@ -17,11 +32,7 @@ export function createRepo(options) {
       'content-type': 'application/json',
       authorization: `token ${decoded.token}`,
     },
-    body: {
-      name: options.appName,
-      description: options.github.description,
-      private: options.github.privacy,
-    },
+    body: bodyData,
     json: true,
   };
 
