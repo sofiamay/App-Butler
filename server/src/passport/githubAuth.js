@@ -4,7 +4,6 @@ import User from './../models/user.js';
 import { GITHUB_ID, GITHUB_SECRET } from './../GITHUBKEYS.js';
 import jwt from 'jsonwebtoken';
 
-
 export default {
   handleLogin: passport.authenticate('github'),
   authenticateLogin: passport.authenticate('github', { failureRedirect: '/' }),

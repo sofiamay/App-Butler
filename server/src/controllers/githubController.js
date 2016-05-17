@@ -59,7 +59,7 @@ export function createFile(file, settings, userInfo, overrideName) {
       content: encodedFile,
       committer: {
         name: userInfo.user,
-        email: userInfo.email,
+        email: decodeURIComponent(userInfo.email),
       },
       json: true,
     }),

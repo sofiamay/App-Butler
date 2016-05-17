@@ -41,6 +41,20 @@ hr {
   display:table-cell;
 }
 
+.logout {
+  color: aliceblue;
+  padding-right: 8px;
+  float: right;
+}
+
+.logout:hover span {
+  display: none;
+}
+
+.logout:hover:after {
+  content: 'Goodbye';
+}
+
 .content {
   display: table;
   width: 100%;
