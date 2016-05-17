@@ -12,11 +12,20 @@ export default class Editable extends React.Component {
     inputClass: React.PropTypes.string,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      failedValidation: false,
+    };
+  }
+
   finishEdit = (e) => {
     const value = e.target.value;
     // If validation is present & returns false update w/ original val
-    if (this.props.validate && !this.props.validate(value)) {
-      return this.props.update(this.props.value);
+    if (this.props.validate && !this.props.validate(value, this.props.id)) {
+      return this.setState({
+        failedValidation: true,
+      });
     }
 
     if (this.props.update && value.trim()) {
@@ -30,12 +39,13 @@ export default class Editable extends React.Component {
   };
   renderEdit = () => {
     const inputClass = this.props.inputClass || '';
+    const errorClass = this.state.failedValidation ? 'error' : null;
     return (
       <input type="text"
         ref={
           (e) => e ? e.selectionStart = this.props.value.length : null
         }
-        className={inputClass}
+        className={`${inputClass} ${errorClass}`}
         autoFocus={true}
         defaultValue={this.props.value}
         onBlur={this.finishEdit}

@@ -94,6 +94,7 @@ const routerTarget = {
 }))
 export default class RouterBlock extends React.Component {
   static propTypes = {
+    routers: React.PropTypes.array,
     connectDropTarget: React.PropTypes.func.isRequired,
     connectDragSource: React.PropTypes.func.isRequired,
     deleteRouter: React.PropTypes.func,
@@ -121,6 +122,20 @@ export default class RouterBlock extends React.Component {
         this.props.deleteRouter(id);
       }
     );
+  }
+
+  validateStartPoint(value, id) {
+    return this.props.routers.reduce((prev, router) => {
+      if (prev === false) {
+        return false;
+      }
+
+      if (router.id !== id && router.startPoint === value) {
+        return false;
+      }
+
+      return true;
+    });
   }
 
   render() {
@@ -175,6 +190,7 @@ export default class RouterBlock extends React.Component {
         <div className="block-text">
           <Editable
             editing={data.editingStartPoint}
+            validate={(...args) => this.validateStartPoint(...args)}
             inputClass={'routerName'}
             value={data.startPoint}
             removeSpaces={true}
