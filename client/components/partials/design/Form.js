@@ -23,7 +23,7 @@ const validate = values => {
   } else if (values.configName.length > 15) {
     errors.configName = 'Must be 15 characters or less';
   }
-  if (!/^\d{1,4}\s*$/.test(values.port) && values.port !== '') {
+  if (values.port && !/^\d{1,4}\s*$/.test(values.port)) {
     errors.port = 'Port must be an integer between 0 and 9999';
   } else if (values.port.length > 5) {
     errors.port = 'Must be 5 characters or less';
@@ -32,8 +32,8 @@ const validate = values => {
   if (values.github.description && values.github.description.length > 200) {
     githubErrors.description = 'Description should be 200 characters or fewer';
   }
-  if (values.github.repoName && values.github.repoName.length > 20) {
-    githubErrors.repoName = 'Name should be 20 characters or fewer';
+  if (!values.github.repoName) {
+    githubErrors.repoName = 'Required';
   }
   errors.github = githubErrors;
   return errors;
@@ -71,7 +71,7 @@ export default class Form extends React.Component {
     const jsonData = {
       data: {
         serverType: formData.serverType,
-        appName: formData.configName,
+        Name: formData.configName,
         serverSettings: {
           port: formData.port,
           expressName: formData.expressName,
@@ -120,7 +120,7 @@ export default class Form extends React.Component {
         <div className="express">
           <div className="serverLabel">Port</div>
           <div>
-            {port.touched && port.error && <div>{port.error}</div>}
+            {port.touched && port.error && <div className="error">{port.error}</div>}
             <input className={(port.touched && port.error) ? 'error' : null}
               type="text" name="port" placeholder="8000" {...port}
             />
