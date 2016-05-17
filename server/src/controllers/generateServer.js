@@ -9,8 +9,6 @@ export function generate(request, response) {
       name: 'server',
     },
   };
-<<<<<<< 35a092096d257c71fae0abafd38704774a99b80d
-<<<<<<< 9b330322893870899290010747836ceb665988ad
 
   request.session.files.npm = {
     type: 'packageJSON',
@@ -34,26 +32,6 @@ export function generate(request, response) {
     router.appName = request.body.data.appName;
   });
 
-=======
-  // for (const router in request.session.routers) {
-  //   if (router) {
-  //     request.session.files[router.name] = { type: 'router', name: router.name };
-  //   }
-  // }
->>>>>>> Add more error handlers, fix json structure
-=======
-
-  request.body.data.routers.forEach(router => {
-    request.session.files[router.id] = {
-      type: 'router',
-      name: router.name,
-      // startPoint: router.startPoint,
-      // endPoint: router.endpoints,
-    };
-  });
-  console.log(request.session.files);
-
->>>>>>> Fix sessionFiles, start to create dynamic fileToGithub
   const builtFiles = buildAllFiles(request, response);
   // Send these files to github!
   // Make repo (naming handled in controller)
@@ -97,43 +75,12 @@ export function generate(request, response) {
   });
 }
 
-<<<<<<< 9b330322893870899290010747836ceb665988ad
 export function generateFiles(request, response) {
   const reqData = request.body.data;
   if (!reqData) {
     return response.status(400).send(new Error('No server type on request'));
-=======
-export function generateServer(request, response) {
-  const reqData = request.body.data;
-  if (!reqData.serverType) {
-<<<<<<< 35a092096d257c71fae0abafd38704774a99b80d
-    return response.status(400).send('No server type on request');
->>>>>>> Add more error handlers, fix json structure
-=======
-    return response.status(400).send(new Error('No server type on request'));
->>>>>>> Fix sessionFiles, start to create dynamic fileToGithub
   }
 
   // generate express server
   return generate(request, response);
 }
-<<<<<<< 35a092096d257c71fae0abafd38704774a99b80d
-=======
-
-
-export function createConfig(request, response) {
-  const newConfig = new Config({
-    appName: request.body.appName,
-    port: request.body.port,
-    expressName: request.body.expressName,
-    serverType: request.body.serverType,
-  });
-  newConfig.save((err) => {
-    if (err) {
-      return response.status(500).json(err);
-    }
-    return response.json(newConfig);
-  });
-}
-
->>>>>>> Fix sessionFiles, start to create dynamic fileToGithub
