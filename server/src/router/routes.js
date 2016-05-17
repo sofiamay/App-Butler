@@ -11,6 +11,11 @@ module.exports = (app, express) => {
 
   app.get('/auth/github/callback', githubAuth.authenticateLogin, (req, res) => {
     // console.log(req.user); // User data and JWT token
+    // user profile picture:
+    res.cookie('avatar', req.user._json.avatar_url);
+    // user's profile:
+    res.cookie('profileUrl', req.user.profileUrl);
+
     res.cookie('email', req.user._json.email);
     res.cookie('user', req.user._json.login);
     res.cookie('logged_in', true);

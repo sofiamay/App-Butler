@@ -52,8 +52,7 @@ hr {
 }
 
 .logout:hover:after {
-  content: 'Logout';
-  color: red;
+  content: 'Goodbye';
 }
 
 .content {

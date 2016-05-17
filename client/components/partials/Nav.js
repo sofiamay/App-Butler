@@ -14,7 +14,7 @@ const logout = () => {
 export default () => (
   <div className="navContainer">
     <div className="nav">
-      <a href="#" onClick={logout} className="logout"><span className="leave">Leave</span></a>
+      <a href="#" onClick={logout} className="logout"><span className="leave">Logout</span></a>
     </div>
   </div>
 );
