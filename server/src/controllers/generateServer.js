@@ -10,7 +10,11 @@ export function generate(request, response) {
     },
   };
 
-<<<<<<< 4bb9460cbfc69a27c9e8fb8627b1a932b031ebc7
+  request.session.files.npm = {
+    type: 'packageJSON',
+    name: 'package.json',
+  };
+
   if (request.body.data.routers.length) {
     request.session.files.routers = {
       type: 'router',
@@ -25,10 +29,6 @@ export function generate(request, response) {
   // EMAIL BUG: fix '@'
   // copy appName to routers obj
   request.body.data.routers.forEach(router => {
-    router.appName = request.body.data.appName;
-  });
-=======
-  request.body.data.routers.forEach(router => {
     request.session.files[router.id] = {
       type: 'router',
       name: router.name,
@@ -36,16 +36,15 @@ export function generate(request, response) {
       // endPoint: router.endpoints,
     };
   });
-  console.log(request.session.files);
->>>>>>> Fix sessionFiles, start to create dynamic fileToGithub
 
   const builtFiles = buildAllFiles(request, response);
+  console.log(builtFiles);
   // Send these files to github!
   // Make repo (naming handled in controller)
   createRepo(request.body.data).then(() => {
     // separate calls for every file
-    // builtFiles will always only be [serverFile, [routerFiles]]
-    createFile(builtFiles[0], request.body.data, request.body.data.cookies, 'server').then(() => {
+    // builtFiles will always only be [serverFile, package.json, [routerFiles]]
+    createFile(builtFiles[0], request.body.data, request.body.data.cookies, 'server.js').then(() => {
       // successfully created server file
       const asyncRun = (filesArr, ind) => {
         ind = ind || 0;
@@ -64,8 +63,30 @@ export function generate(request, response) {
         }
       };
       asyncRun(builtFiles[1], 0);
+      // create package.json here:
+      createFile(builtFiles[1], request.body.data, request.body.data.cookies, 'package.json').then(() => {
+        // successfully created package.json
+        // create router files here:
+        const asyncRun = (filesArr, ind) => {
+          ind = ind || 0;
+          if (ind !== filesArr.length) {
+            createFile(filesArr[ind], request.body.data.routers[ind], request.body.data.cookies).then(() => {
+              asyncRun(filesArr, ind + 1);
+            }).catch((routerErr) => {
+              console.log(`Problem creating router files on your GitHub: Error: ${routerErr}`);
+              response.status(400).send(`Problem creating router files on your GitHub: Error: ${routerErr}`);
+            });
+          } else {
+            return;
+          }
+        };
+        asyncRun(builtFiles[2], 0);
+      }).catch(packageError => {
+        console.log(`Error creating package.json: ${packageError}`);
+        response.status(400).send(`Error creating package.json: ${packageError}`);
+      });
     }).catch(serverError => {
-      console.log(`Error creating server ${serverError}`);
+      console.log(`Error creating server or generating router files: ${serverError}`);
       response.status(400).send(`Error creating server: ${serverError}`);
     });
   }).catch((error) => {

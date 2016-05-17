@@ -33,9 +33,17 @@ export function createRepo(options) {
 }
 
 export function createFile(file, settings, userInfo, overrideName) {
-  const fileName = overrideName || settings.name;
+  const fileName = `${overrideName}` || `${settings.name}.js`;
   const encodedFile = new Buffer(file).toString('base64');
   const decoded = jwt.verify(userInfo.user_session, 'CHANGETHISFORPROD');
+  let endpoint = '';
+
+  if (!settings.routers) {
+    // for router files:
+    endpoint = `https://api.github.com/repos/${userInfo.user}/${settings.appName}/contents/routers/${fileName}`;
+  } else {
+    endpoint = `https://api.github.com/repos/${userInfo.user}/${settings.appName}/contents/${fileName}`;
+  }
 
   const options = {
     method: 'PUT',
