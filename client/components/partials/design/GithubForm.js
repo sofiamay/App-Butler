@@ -10,11 +10,15 @@ export default class GithubForm extends React.Component {
     super(props);
     this.state = {};
   }
+  componentWillMount = () => {
+    const { privacy } = this.props;
+    privacy.onChange(false);
+  }
 
   handleClick = (event) => {
     const { privacy } = this.props;
-    if (event.target.checked) {
-      privacy.onChange(true);
+    if (event.target.checked) { privacy.onChange(true); } else {
+      privacy.onChange(false);
     }
   }
 
