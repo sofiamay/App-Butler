@@ -110,31 +110,31 @@ export default class Form extends React.Component {
         <div>
           <div className="serverLabel">App Name</div>
           <div>
+            {appName.touched && appName.error && <div className="error">{appName.error}</div>}
             <input className={(appName.touched && appName.error) ? 'error' : null}
               type="text" name="appName" placeholder="MyApp" required {...appName} autoFocus
             />
           </div>
-          {appName.touched && appName.error && <div className="error">{appName.error}</div>}
         </div>
         <div className="express">
           <div className="serverLabel">Port</div>
           <div>
+            {port.touched && port.error && <div>{port.error}</div>}
             <input className={(port.touched && port.error) ? 'error' : null}
               type="text" name="port" placeholder="8000" {...port}
             />
             <br />
           </div>
-          {port.touched && port.error && <div>{port.error}</div>}
           <div className="serverLabel">Express name</div>
+          {expressName.touched && expressName.error &&
+            <div className="error">{expressName.error}</div>
+          }
           <div><input className={(expressName.touched && expressName.error) ? 'error' : null}
             type="text" name="expressName"
             placeholder="app=express()"
             {...expressName}
           />
           </div>
-          {expressName.touched && expressName.error &&
-            <div className="error">{expressName.error}</div>
-          }
         </div>
         <GithubForm {...github} />
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
