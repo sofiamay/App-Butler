@@ -30,6 +30,10 @@ hr {
   table-layout: fixed;
 }
 
+.container--blue {
+  background: #1da8ff;
+}
+
 .navContainer {
   height: 30px;
   display: table-row;
@@ -500,4 +504,30 @@ hr {
 
 .successContent-button {
   margin-top: 20px;
+}
+
+/* Loading Styling */
+.loadingContainer {
+  width: 100%;
+  padding-top: 50px;
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+  font-size: 50px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+  text-align: center;
+  animation: 2s infinite .3s textZoom;
+}
+
+@keyframes textZoom {
+  from { 
+    font-size: 50px; 
+  }
+
+  50% {
+    font-size: 70px;
+  }
+
+  to {
+    font-size: 50px;
+  }
 }
