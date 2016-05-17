@@ -25,7 +25,7 @@ const validate = values => {
   }
   if (values.port && !/^\d{1,4}\s*$/.test(values.port)) {
     errors.port = 'Port must be an integer between 0 and 9999';
-  } else if (values.port.length > 5) {
+  } else if (values.port && values.port.length > 5) {
     errors.port = 'Must be 5 characters or less';
   }
   const githubErrors = {};
