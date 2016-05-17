@@ -50,14 +50,6 @@ hr {
   float: right;
 }
 
-.logout:hover span {
-  display: none;
-}
-
-.logout:hover:after {
-  content: 'Goodbye';
-}
-
 .nav ul {
   margin: 0;
   padding: 0;
@@ -79,6 +71,19 @@ hr {
 
 .nav ul li a:hover {
   background: rgba(255, 255, 255, .1);
+}
+
+.rightNav {
+  float: right;
+}
+
+.avatar {
+  display: inline-block;
+  height: 30px;
+  padding-left: 33px;
+  background-position: center left;
+  background-size: 28px 28px;
+  background-repeat: no-repeat;
 }
 
 .content {
