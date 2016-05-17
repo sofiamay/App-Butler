@@ -13,7 +13,7 @@ const generatePaths = (startPoint, endpoints) => {
 
 export function buildRouterFile(fileConfig, routerConfig) {
   let file = '';
-  // const startPoint = (routerConfig.startPoint[routerConfig.startPoint.length - 1] === '/') ? routerConfig.startPoint : (routerConfig.startPoint += '/');
+
   const startPoint = routerConfig.startPoint;
 
   const endpoints = routerConfig.endpoints;

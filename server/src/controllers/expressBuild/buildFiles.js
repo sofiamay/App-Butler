@@ -1,5 +1,6 @@
 import { buildMainFile } from './buildMainFile.js';
 import { buildRouterFile } from './buildRouterFile.js';
+import { buildPackageJSON } from './buildPackageJSON.js';
 
 export function buildFile(fileConfig, userConfig) {
   // fileConfig: files to be generated specified in request.session.files
@@ -7,6 +8,8 @@ export function buildFile(fileConfig, userConfig) {
   // build main server file
   if (fileConfig.type === 'main') {
     return buildMainFile(fileConfig, userConfig);
+  } else if (fileConfig.type === 'packageJSON') {
+    return buildPackageJSON(fileConfig, userConfig);
   } else if (fileConfig.type === 'router') {
     const files = [];
     userConfig.routers.forEach((router) => {
