@@ -42,7 +42,18 @@ hr {
 }
 
 .logout {
+  color: aliceblue;
+  padding-right: 8px;
   float: right;
+}
+
+.logout:hover span {
+  display: none;
+}
+
+.logout:hover:after {
+  content: 'Logout';
+  color: red;
 }
 
 .content {
