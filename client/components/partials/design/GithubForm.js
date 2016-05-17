@@ -23,28 +23,19 @@ export default class GithubForm extends React.Component {
   }
 
   render() {
-    const { repoName, description } = this.props;
+    const { description } = this.props;
     return (
       <div className="githubForm">
-        <img src="../../../GitHubSM.png" className="github-icon" />
+        <img src="../../../githubLogo.png" />
         <div>
-          <div className="serverLabel">Repo Name</div>
-          <div>
-            {repoName.touched && repoName.error && <div className="error">{repoName.error}</div>}
-            <input
-              type="text" name="repoName" placeholder="MyNewRepo" required {...repoName} autoFocus
-            />
-          </div>
-        </div>
-        <div className="serverLabel"><input type="checkbox" onClick={this.handleClick} />Make private?</div>
-        <div>
-          <div className="serverLabel">Description</div>
+          <div className="serverLabel">Repo Description</div>
           <div>
             {description.touched && description.error && <div className="error">{description.error}</div>}
             <textarea
               cols="25" rows="4" name="description" placeholder="a description" {...description}
             />
           </div>
+          <div className="serverLabel"><input type="checkbox" onClick={this.handleClick} />Make repo private?</div>
         </div>
       </div>
     )

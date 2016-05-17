@@ -7,13 +7,12 @@ import { hashHistory } from 'react-router';
 import storage from '../../../storage.js';
 import { connect } from 'react-redux';
 
-export const fields = ['appName',
+export const fields = [
+  'appName',
   'port',
-  'expressName',
-  'github.repoName',
   'github.privacy',
   'github.description',
-  ];
+];
 
 /* Form validation function */
 const validate = values => {
@@ -28,13 +27,10 @@ const validate = values => {
   } else if (values.port.length > 5) {
     errors.port = 'Must be 5 characters or less';
   }
-  if (values.expressName && values.expressName.length > 15) {
-    errors.appName = 'Must be 15 characters or less';
-  }
-
   const githubErrors = {};
-  if (!values.github.repoName) { githubErrors.repoName = 'Required'; }
-  if (!values.github.description) { githubErrors.description = 'Required'; }
+  if (values.github.description.length > 200) {
+    githubErrors.description = 'Description should be 200 characters or fewer';
+  }
   errors.github = githubErrors;
   return errors;
 };
@@ -78,7 +74,6 @@ export default class Form extends React.Component {
         },
         routers: this.props.routers,
         github: {
-          repoName: formData.github.repoName,
           privacy: formData.github.privacy || false,
           description: formData.github.description,
         },
@@ -104,7 +99,7 @@ export default class Form extends React.Component {
   }
 
   render() {
-    const { fields: { appName, port, expressName, github }, handleSubmit, submitting } = this.props;
+    const { fields: { appName, port, github }, handleSubmit, submitting } = this.props;
     return (
       <form className="serverSettings">
         <div>
@@ -124,16 +119,6 @@ export default class Form extends React.Component {
               type="text" name="port" placeholder="8000" {...port}
             />
             <br />
-          </div>
-          <div className="serverLabel">Express name</div>
-          {expressName.touched && expressName.error &&
-            <div className="error">{expressName.error}</div>
-          }
-          <div><input className={(expressName.touched && expressName.error) ? 'error' : null}
-            type="text" name="expressName"
-            placeholder="app=express()"
-            {...expressName}
-          />
           </div>
         </div>
         <GithubForm {...github} />
