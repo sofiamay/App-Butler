@@ -16,7 +16,6 @@ export function buildFile(fileConfig, userConfig) {
       files.push(buildRouterFile(fileConfig, router));
     });
     return files;
-    // return buildRouterFile(fileConfig, userConfig);
   }
   return new Error('Undefined file type');
 }
