@@ -10,6 +10,10 @@ export function createRouter(router) {
       endpoints: [],
       editingStartPoint: false,
       editingName: true,
+      validation: {
+        startPoint: true,
+        name: true,
+      },
       ...router,
     },
   };
