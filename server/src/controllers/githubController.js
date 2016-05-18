@@ -5,6 +5,22 @@ export function createRepo(options) {
   if (!options) {
     throw new Error('Error: Options required for repo creation.');
   }
+
+  let bodyData = {};
+
+  if (options.github.description === '') {
+    bodyData = {
+      name: options.github.repoName,
+      private: options.github.privacy,
+    };
+  } else {
+    bodyData = {
+      name: options.github.repoName,
+      description: options.github.description,
+      private: options.github.privacy,
+    };
+  }
+
   const decoded = jwt.verify(options.cookies.user_session, 'CHANGETHISFORPROD');
 
   const repoOptions = {
@@ -16,9 +32,7 @@ export function createRepo(options) {
       'content-type': 'application/json',
       authorization: `token ${decoded.token}`,
     },
-    body: {
-      name: `${options.appName}`,
-    },
+    body: bodyData,
     json: true,
   };
 
@@ -37,12 +51,11 @@ export function createFile(file, settings, userInfo, overrideName) {
   const encodedFile = new Buffer(file).toString('base64');
   const decoded = jwt.verify(userInfo.user_session, 'CHANGETHISFORPROD');
   let endpoint = '';
-
   if (!settings.routers) {
     // for router files:
-    endpoint = `https://api.github.com/repos/${userInfo.user}/${settings.appName}/contents/routers/${fileName}`;
+    endpoint = `https://api.github.com/repos/${userInfo.user}/${settings.github.repoName}/contents/routers/${fileName}`;
   } else {
-    endpoint = `https://api.github.com/repos/${userInfo.user}/${settings.appName}/contents/${fileName}`;
+    endpoint = `https://api.github.com/repos/${userInfo.user}/${settings.github.repoName}/contents/${fileName}`;
   }
 
   const options = {
