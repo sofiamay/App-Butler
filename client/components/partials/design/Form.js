@@ -2,7 +2,6 @@ import React from 'react';
 import GithubForm from './GithubForm.js';
 import { reduxForm } from 'redux-form';
 import { hashHistory } from 'react-router';
-import ServerCanvas from './ServerCanvas.js';
 
 // Import storage to reset it
 import storage from '../../../storage.js';
@@ -73,7 +72,7 @@ export default class Form extends React.Component {
     const jsonData = {
       data: {
         serverType: formData.serverType,
-        Name: formData.configName,
+        appName: formData.configName,
         serverSettings: {
           port: formData.port,
           expressName: formData.expressName,
@@ -112,7 +111,7 @@ export default class Form extends React.Component {
       user: document.cookie.split(';')[3],
       data: {
         serverType: formData.serverType,
-        Name: formData.configName,
+        appName: formData.configName,
         serverSettings: {
           port: formData.port,
           expressName: formData.expressName,
@@ -168,7 +167,7 @@ export default class Form extends React.Component {
         <div>
         <br />
         </div>
-        <button disabled={submitting} onClick={handleSubmit(this.saveData)}
+        <button onClick={handleSubmit(this.saveData)}
           name="submitConfig" className="btn btn-save"
         >Save
         </button>
