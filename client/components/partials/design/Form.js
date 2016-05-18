@@ -93,7 +93,7 @@ export default class Form extends React.Component {
         },
         github: {
           repoName: formData.github.repoName,
-          privacy: formData.github.privacy || false,
+          privacy: formData.github.privacy;
           description: formData.github.description,
         },
       },
@@ -118,7 +118,7 @@ export default class Form extends React.Component {
   }
 
   saveData = (formData) => {
-    const resetState = this.props.resetState;
+    //Display waiting message on page
     const jsonData = {
       user: document.cookie.split(';')[3],
       data: {
@@ -131,12 +131,11 @@ export default class Form extends React.Component {
         routers: this.props.routers,
         github: {
           repoName: formData.github.repoName,
-          privacy: formData.github.privacy || false,
+          privacy: formData.github.privacy;
           description: formData.github.description,
         },
       },
     };
-    console.log(jsonData);
 
     fetch('/config', {
       method: 'POST',
