@@ -1,5 +1,6 @@
 import React from 'react';
 import GithubForm from './GithubForm.js';
+import MiddlewareForm from './MiddlewareForm.js';
 import { reduxForm } from 'redux-form';
 import { hashHistory } from 'react-router';
 
@@ -13,6 +14,10 @@ export const fields = [
   'github.repoName',
   'github.privacy',
   'github.description',
+  'middleware.morgan',
+  'middleware.cookieparser',
+  'middleware.bodyparserJson',
+  'middleware.bodyparserUrlencoded',
 ];
 
 /* Form validation function */
@@ -77,6 +82,12 @@ export default class Form extends React.Component {
           expressName: formData.expressName,
         },
         routers: this.props.routers,
+        middleware: {
+          morgan: formData.middleware.morgan,
+          cookieparser: formData.middleware.cookieparser,
+          bodyparserJson: formData.middleware.bodyparserJson,
+          bodyparserUrlencoded: formData.middleware.bodyparserUrlencoded,
+        },
         github: {
           repoName: formData.github.repoName,
           privacy: formData.github.privacy || false,
@@ -84,7 +95,6 @@ export default class Form extends React.Component {
         },
       },
     };
-    console.log(jsonData);
 
     fetch('/serve', {
       method: 'POST',
@@ -105,7 +115,7 @@ export default class Form extends React.Component {
   }
 
   render() {
-    const { fields: { configName, port, github }, handleSubmit, submitting } = this.props;
+    const { fields: { configName, port, github, middleware }, handleSubmit, submitting } = this.props;
     return (
       <form className="serverSettings">
         <div>
@@ -127,6 +137,7 @@ export default class Form extends React.Component {
             <br />
           </div>
         </div>
+        <MiddlewareForm {...middleware} />
         <GithubForm {...github} />
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"

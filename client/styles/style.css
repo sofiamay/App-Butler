@@ -185,6 +185,10 @@ hr {
   transition: border .2s;
 }
 
+.serverSettings .small {
+  font-size: 12px;
+}
+
 .githubForm {
   position: relative;
 }
@@ -417,9 +421,9 @@ hr {
 }
 
 .github-icon {
-  position: absolute;
-  top: 70px;
-  right: 30px;
+  display:block;
+  margin:auto;
+  margin-bottom: 10px;
 }
 
 .butler {
