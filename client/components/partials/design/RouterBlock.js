@@ -127,13 +127,25 @@ export default class RouterBlock extends React.Component {
   validateStartPoint(value, id) {
     console.log(this.props.routers);
     return this.props.routers.reduce((prev, router) => {
-      console.log('router', router.startPoint);
-      console.log('prev', prev);
       if (prev === false) {
         return false;
       }
 
       if (router.id !== id && router.startPoint === value) {
+        return false;
+      }
+
+      return true;
+    }, true);
+  }
+
+  validateRouterName(value, id) {
+    return this.props.routers.reduce((prev, router) => {
+      if (prev === false) {
+        return false;
+      }
+
+      if (router.id !== id && router.name === value) {
         return false;
       }
 
@@ -163,6 +175,7 @@ export default class RouterBlock extends React.Component {
           <div className="block-name">
             <Editable
               editing={data.editingName}
+              validate={(...args) => this.validateRouterName(...args)}
               inputClass={'routerName'}
               value={data.name}
               removeSpaces={true}
