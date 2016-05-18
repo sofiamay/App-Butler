@@ -665,3 +665,17 @@ hr {
     font-size: 50px;
   }
 }
+
+
+/* Saved configs page*/
+.config-list {
+  margin: 20px 20px 20px 20px;
+  border: 2px red dashed;
+  display: inline-block;
+}
+
+.appName {
+  text-align: center;
+  font-size: 25px;
+  margin: 15px 15px 15px 15px;
+}
