@@ -2,9 +2,9 @@ import Config from '../models/config.js';
 import User from '../models/user.js';
 
 export function createOne(request, response) {
-  User.findOne({ githubID: 'JeremyIR' }, (err, user) => {
+  // User.findOne({ githubID: 'JeremyIR' }, (err, user) => {
     const newConfig = new Config({
-      user: user,
+      user: request.body.user,
       'data.serverType': request.body.data.serverType,
       'data.appName': request.body.data.appName,
       'data.serverSettings.port': request.body.data.serverSettings.port,
@@ -13,13 +13,12 @@ export function createOne(request, response) {
       'data.github.privacy': request.body.data.github.privacy,
       'data.github.description': request.body.data.github.description,
     });
-    newConfig.save((err, savedConfig) => {
-      if (err) {
-        return response.status(500).json(err);
-      }
-      return response.send(savedConfig);
-    });
+  newConfig.save((err, savedConfig) => {
+    if (err) {
+      return response.status(500).json(err);
+    }
+    return response.send(savedConfig);
   });
+  // });
 }
-
 

@@ -109,6 +109,7 @@ export default class Form extends React.Component {
   saveData = (formData) => {
     const resetState = this.props.resetState;
     const jsonData = {
+      user: document.cookie.split(';')[3],
       data: {
         serverType: formData.serverType,
         Name: formData.configName,
@@ -168,7 +169,6 @@ export default class Form extends React.Component {
           name="submitConfig" className="btn btn-submit"
         >Save Files
         </button>
-       <br />
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server
