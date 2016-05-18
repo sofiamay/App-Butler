@@ -30,6 +30,7 @@ export function generate(request, response) {
   // copy appName to routers obj
   request.body.data.routers.forEach(router => {
     router.appName = request.body.data.appName;
+    router.github = request.body.data.github;
   });
 
   const builtFiles = buildAllFiles(request, response);
