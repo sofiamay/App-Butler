@@ -1,4 +1,5 @@
 import React from 'react';
+import Nav from './partials/Nav.js';
 
 export default class Saved extends React.Component {
   constructor(props) {
@@ -9,14 +10,16 @@ export default class Saved extends React.Component {
       method: 'GET',
       credentials: 'same-origin',
     }).then(res => res.json()).then(config => {
-      console.log(config);
+      this.configs = config;
+      console.log(this.configs);
     });
   }
 
   render() {
     return (
-      <div>
-        Hello world!
+      <div className="container">
+        <Nav />
+        sexy page
       </div>
     );
   }
