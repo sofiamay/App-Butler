@@ -169,6 +169,9 @@ export default class Form extends React.Component {
           name="submitConfig" className="btn btn-submit"
         >Save Files
         </button>
+        <div>
+        <br />
+        </div>
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server
