@@ -56,6 +56,7 @@ export default class Form extends React.Component {
     submitting: React.PropTypes.bool.isRequired,
     routers: React.PropTypes.array,
     resetState: React.PropTypes.func.isRequired,
+    createPrompt: React.PropTypes.func,
   };
 
   constructor(props) {
@@ -104,6 +105,41 @@ export default class Form extends React.Component {
     .catch(err => console.log('darn:  ', err));
   }
 
+  saveData = (formData) => {
+    const resetState = this.props.resetState;
+    const jsonData = {
+      user: document.cookie.split(';')[3],
+      data: {
+        serverType: formData.serverType,
+        appName: formData.configName,
+        serverSettings: {
+          port: formData.port,
+          expressName: formData.expressName,
+        },
+        routers: this.props.routers,
+        github: {
+          repoName: formData.github.repoName,
+          privacy: formData.github.privacy || false,
+          description: formData.github.description,
+        },
+      },
+    };
+    console.log(jsonData);
+
+    fetch('/config', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(jsonData),
+      credentials: 'same-origin',
+    })
+      .then(() => {
+        alert('files saved');
+      })
+      .catch(err => console.log('darn:  ', err));
+  }
+
   render() {
     const { fields: { configName, port, github }, handleSubmit, submitting } = this.props;
     return (
@@ -124,10 +160,17 @@ export default class Form extends React.Component {
             <input className={(port.touched && port.error) ? 'error' : null}
               type="text" name="port" placeholder="8000" {...port}
             />
-            <br />
+          <br />
           </div>
         </div>
         <GithubForm {...github} />
+        <div>
+        <br />
+        </div>
+        <button onClick={handleSubmit(this.saveData)}
+          name="submitConfig" className="btn btn-save"
+        >Save
+        </button>
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server
