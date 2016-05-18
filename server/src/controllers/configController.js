@@ -24,8 +24,10 @@ export function createOne(request, response) {
 
 export function getConfigs(request, response) {
   Config.findOne({ user: request.cookies.user }, (err, configs) => {
-    console.log(request.cookies);
-    console.log(err);
+    if (err) {
+      return response.status(404).json(err);
+    }
     console.log(configs);
+    return response.json(configs);
   });
-};
+}
