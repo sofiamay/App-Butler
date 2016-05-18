@@ -29,6 +29,9 @@ export default class Editable extends React.Component {
     }
 
     if (this.props.update && value.trim()) {
+      this.setState({
+        failedValidation: false,
+      });
       this.props.update(this.props.removeSpaces ? value.replace(/ /g, '') : value);
     }
   };
