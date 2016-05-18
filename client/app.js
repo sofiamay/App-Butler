@@ -10,6 +10,8 @@ import Design from './components/Design.js';
 import Loading from './components/Loading.js';
 import Success from './components/Success.js';
 import NoMatch from './components/NoMatch.js';
+import '../node_modules/sweetalert/dist/sweetalert.min.js';
+import '../node_modules/sweetalert/dist/sweetalert.css';
 
 // Redux Setup
 import Store from './store.js';

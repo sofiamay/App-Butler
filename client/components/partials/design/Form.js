@@ -7,6 +7,8 @@ import { hashHistory } from 'react-router';
 // Import storage to reset it
 import storage from '../../../storage.js';
 import { connect } from 'react-redux';
+import '../../../../node_modules/sweetalert/dist/sweetalert.min.js';
+import '../../../../node_modules/sweetalert/dist/sweetalert.css';
 
 export const fields = [
   'configName',
@@ -145,7 +147,7 @@ export default class Form extends React.Component {
       credentials: 'same-origin',
     })
       .then(() => {
-        alert('files saved');
+        swal("Configuration Saved!", "", "success")
       })
       .catch(err => console.log('darn:  ', err));
   }
