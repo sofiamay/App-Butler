@@ -109,7 +109,7 @@ export default class Form extends React.Component {
     return (
       <form className="serverSettings">
         <div>
-          <div className="serverLabel">App Name</div>
+          <div className="serverLabel">Config Name</div>
           <div>
             {configName.touched && configName.error && <div className="error">{configName.error}</div>}
             <input className={(configName.touched && configName.error) ? 'error' : null}
