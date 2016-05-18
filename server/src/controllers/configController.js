@@ -21,3 +21,11 @@ export function createOne(request, response) {
     return response.send(result);
   });
 }
+
+export function getConfigs(request, response) {
+  Config.findOne({ user: request.cookies.user }, (err, configs) => {
+    console.log(request.cookies);
+    console.log(err);
+    console.log(configs);
+  });
+};
