@@ -168,10 +168,10 @@ export default class Form extends React.Component {
         <div>
         <br />
         </div>
-      <button disabled={submitting} onClick={handleSubmit(this.saveData)}
-        name="submitConfig" className="btn btn-submit"
-      >Save
-      </button>
+        <button disabled={submitting} onClick={handleSubmit(this.saveData)}
+          name="submitConfig" className="btn btn-save"
+        >Save
+        </button>
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server
