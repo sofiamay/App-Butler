@@ -194,7 +194,6 @@ export default class RouterBlock extends React.Component {
               id={data.id}
             />
           </div>
-        <i className="fa fa-info-circle" aria-hidden="true"></i>
         <a
           onClick={() => data.endpoints.length > 0 ? this.confirmDelete(id) : deleteRouter(id)}
         >
