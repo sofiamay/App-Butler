@@ -26,7 +26,7 @@ export default class GithubForm extends React.Component {
     const { repoName, description } = this.props;
     return (
       <div className="githubForm">
-        <img src="../../../githubLogo.png" />
+        <img className="github-icon" src="../../../githubLogo.png" />
         <div className="serverLabel">Repo Name</div>
           <div>
             {repoName.touched && repoName.error && <div className="error">{repoName.error}</div>}

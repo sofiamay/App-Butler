@@ -38,25 +38,6 @@ describe('Routes', () => {
         if (err) { done(); }
       });
     });
-    it('Should return the constructed files to the user', (done) => {
-      const requestBody = {
-        data: {
-          serverType: 'node-express',
-          serverSettings: {
-            port: 8000,
-            expressName: 'app',
-          },
-          routers: [],
-        },
-      };
-      supertest(server)
-      .post('/config')
-      .send(requestBody)
-      .end((err, res) => {
-        expect(res.text.indexOf('require (\'express\')')).to.be.above(-1);
-        done();
-      });
-    });
   });
 });
 
