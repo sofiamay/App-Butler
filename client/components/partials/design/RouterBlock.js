@@ -176,6 +176,12 @@ export default class RouterBlock extends React.Component {
             <Editable
               editing={data.editingName}
               validate={(...args) => this.validateRouterName(...args)}
+              failedAction={
+                () => updateRouter({
+                  id,
+                  updates: { validation: { name: false } },
+                }
+                )}
               inputClass={'routerName'}
               value={data.name}
               removeSpaces={true}
@@ -188,7 +194,7 @@ export default class RouterBlock extends React.Component {
               update={
                 (update) => updateRouter({
                   id,
-                  updates: { editingName: false, name: update },
+                  updates: { editingName: false, name: update, validation: { name: true } },
                 }
                 )}
               id={data.id}
@@ -206,6 +212,12 @@ export default class RouterBlock extends React.Component {
           <Editable
             editing={data.editingStartPoint}
             validate={(...args) => this.validateStartPoint(...args)}
+            failedAction={
+              () => updateRouter({
+                id,
+                updates: { validation: { startPoint: false } },
+              }
+              )}
             inputClass={'routerName'}
             value={data.startPoint}
             removeSpaces={true}
@@ -218,7 +230,7 @@ export default class RouterBlock extends React.Component {
             update={
               (update) => updateRouter({
                 id,
-                updates: { editingStartPoint: false, startPoint: update },
+                updates: { editingStartPoint: false, startPoint: update, validation: { startPoint: true } },
               }
               )}
             id={data.id}

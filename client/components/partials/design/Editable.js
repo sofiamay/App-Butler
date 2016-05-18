@@ -8,6 +8,7 @@ export default class Editable extends React.Component {
     update: React.PropTypes.func.isRequired,
     id: React.PropTypes.string.isRequired,
     validate: React.PropTypes.func,
+    failedAction: React.PropTypes.func,
     removeSpaces: React.PropTypes.bool,
     inputClass: React.PropTypes.string,
   }
@@ -23,6 +24,9 @@ export default class Editable extends React.Component {
     const value = e.target.value;
     // If validation is present & returns false update w/ original val
     if (this.props.validate && !this.props.validate(value, this.props.id)) {
+      if (this.props.failedAction) {
+        this.props.failedAction();
+      }
       return this.setState({
         failedValidation: true,
       });
