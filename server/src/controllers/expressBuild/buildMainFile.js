@@ -48,7 +48,7 @@ function useRouters(routers) {
 }
 
 function addServerListen(name, port) {
-  return `\napp.listen(${port}, function () {\n\tconsole.log(\'${name} listening on port ${port}\');\n};\n`;
+  return `\napp.listen(${port}, function () {\n  console.log(\'${name} listening on port ${port}\');\n};\n`;
 }
 
 export function buildMainFile(fileConfig, userConfig) {
