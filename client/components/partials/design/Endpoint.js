@@ -71,8 +71,6 @@ export default class Endpoint extends React.Component {
     return connectDragSource(connectDropTarget(
       <div className="block block-endpoint" style={{ opacity: isDragging ? 0 : 1 }}>
         <div className="block-settings">
-        <i className="fa fa-info-circle" aria-hidden="true"></i>
-        <i className="fa fa-sliders" aria-hidden="true"></i>
         <a
           onClick={() => methods.deleteEndpoint({ id: data.id, routerIndex })}
         >
