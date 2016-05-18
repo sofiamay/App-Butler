@@ -14,13 +14,10 @@ export function createOne(request, response) {
     'data.github.description': request.body.data.github.description,
   };
 
-  Config.update(
-    oldConfig,
-    newAttributes,
-    { upsert: true },
-    (err, result) => {
-      if (err) { return response.status(500).json(err); }
-      return response.send(result);
+  Config.update(oldConfig, newAttributes, { upsert: true }, (err, result) => {
+    if (err) {
+      return response.status(500).json(err);
     }
-  );
+    return response.send(result);
+  });
 }

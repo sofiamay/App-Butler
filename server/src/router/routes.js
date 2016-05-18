@@ -25,6 +25,9 @@ module.exports = (app, express) => {
   });
 
   app.get('/api/users', getUser);
+  app.get('/api/config', (req, res) => {
+    console.log(req.cookies);
+  });
 
   app.post('/config', createOne);
   app.post('/serve', generateFiles);
