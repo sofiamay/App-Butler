@@ -161,17 +161,17 @@ export default class Form extends React.Component {
             <input className={(port.touched && port.error) ? 'error' : null}
               type="text" name="port" placeholder="8000" {...port}
             />
-            <br />
+          <br />
           </div>
         </div>
         <GithubForm {...github} />
-        <button disabled={submitting} onClick={handleSubmit(this.saveData)}
-          name="submitConfig" className="btn btn-submit"
-        >Save Files
-        </button>
         <div>
         <br />
         </div>
+      <button disabled={submitting} onClick={handleSubmit(this.saveData)}
+        name="submitConfig" className="btn btn-submit"
+      >Save
+      </button>
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
         >Build Server

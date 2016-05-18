@@ -147,7 +147,7 @@ hr {
 .serverCanvas::-webkit-scrollbar-track {
     background: #1069a0;
 }
- 
+
 .serverCanvas::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: #6fc6fc;
@@ -274,7 +274,12 @@ hr {
   background: #F550A1;
   color: #FFFFFF;
 }
-
+.btn-save {
+  background: #F550A1;
+  color: #FFFFFF;
+  height: 100%;
+  width: 0%;
+}
 .btn-submit:hover {
   background: #F586C4 !important;
 }
@@ -539,8 +544,8 @@ hr {
 }
 
 @keyframes textZoom {
-  from { 
-    font-size: 50px; 
+  from {
+    font-size: 50px;
   }
 
   50% {
