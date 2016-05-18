@@ -125,7 +125,10 @@ export default class RouterBlock extends React.Component {
   }
 
   validateStartPoint(value, id) {
+    console.log(this.props.routers);
     return this.props.routers.reduce((prev, router) => {
+      console.log('router', router.startPoint);
+      console.log('prev', prev);
       if (prev === false) {
         return false;
       }
@@ -135,7 +138,7 @@ export default class RouterBlock extends React.Component {
       }
 
       return true;
-    });
+    }, true);
   }
 
   render() {
