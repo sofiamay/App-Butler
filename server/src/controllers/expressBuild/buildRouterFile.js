@@ -9,7 +9,7 @@ const generatePaths = (startPoint, endpoints) => {
     }
     // prevent double '// in path'
     route = route.replace(/\/\//i, '/');
-    fileString += `\nrouter.get('${route}', function(req, res) {\n\tres.send('Path: ${route}');\n};\n`;
+    fileString += `\nrouter.get('${route}', function(req, res) {\n  res.send('Path: ${route}');\n};\n`;
   });
   return fileString;
 };

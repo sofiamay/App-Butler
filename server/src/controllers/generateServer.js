@@ -58,7 +58,7 @@ export function generate(request, response) {
             } else {
               return response.status(201).send({
                 user: request.cookies.user,
-                repoName: request.body.data.appName,
+                repoName: request.body.data.github.repoName,
               });
             }
           };
@@ -66,7 +66,7 @@ export function generate(request, response) {
         } else {
           return response.status(201).send({
             user: request.cookies.user,
-            repoName: request.body.data.appName,
+            repoName: request.body.data.github.repoName,
           });
         }
       }).catch(packageError => {
