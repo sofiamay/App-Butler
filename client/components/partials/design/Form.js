@@ -73,7 +73,16 @@ export default class Form extends React.Component {
     };
   }
 
+  validateRouters() {
+    return !this.props.routers.some((router) =>
+      (router.validation.name === false
+        || router.validation.startPoint === false));
+  }
+
   sendData = (formData) => {
+    if (!this.validateRouters()) {
+      return;
+    }
     hashHistory.push('/loading');
     const resetState = this.props.resetState;
     const jsonData = {
