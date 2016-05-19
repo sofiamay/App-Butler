@@ -32,5 +32,11 @@ export function getConfigs(request, response) {
 }
 
 export function deleteConfig(request, response) {
-  console.log(request.body);
+  Config.findOneAndRemove({ 'data.appName': request.body.data.appName }, (err) => {
+    if (err) {
+      return response.status(404).json(err);
+    }
+    // return remaining configs associated with user to update state
+    return getConfigs(request, response);
+  });
 }

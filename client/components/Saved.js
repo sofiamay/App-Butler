@@ -25,19 +25,17 @@ export default class Saved extends React.Component {
 
   deleteConfig = (currConfig) => {
     const invokeDelete = () => {
-      console.log('hi');
-      console.log(currConfig);
       fetch('/api/config', {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json',
         },
         body: JSON.stringify(currConfig),
+        credentials: 'same-origin',
       }).then(res => res.json()).then(config => {
-        // this.setState({
-        //   configurations: config,
-        // });
-        // console.log(config);
+        this.setState({
+          configurations: config,
+        });
       });
     };
     return invokeDelete;
