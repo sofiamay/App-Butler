@@ -32,7 +32,7 @@ export default class Index extends React.Component {
             </div>
             <div className="feature--title">Servers in minutes, not hours.</div>
             <div className="feature--desc">
-            Sign up, enter yours settings, and design. A click of a button later: your server is done.
+            Sign up, enter your settings, design. A click of a button later your server is done.
             </div>
           </div>
 
@@ -44,7 +44,7 @@ export default class Index extends React.Component {
             </div>
             <div className="feature--title">Save once, use forever.</div>
             <div className="feature--desc">
-            Save your configs to use later. Want to use your go-to API config? Load it up and create another!
+            Save your configs to use later. Want to use your go-to API setup? Load it up and create away!
             </div>
           </div>
 
