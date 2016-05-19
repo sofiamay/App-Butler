@@ -70,6 +70,7 @@ export default class Form extends React.Component {
     super(props);
     this.state = {
       serverType: null,
+      isValid: true,
     };
   }
 
@@ -81,7 +82,7 @@ export default class Form extends React.Component {
 
   sendData = (formData) => {
     if (!this.validateRouters()) {
-      return;
+      return this.setState({ isValid: false });
     }
     hashHistory.push('/loading');
     const resetState = this.props.resetState;
@@ -163,6 +164,7 @@ export default class Form extends React.Component {
 
   render() {
     const { fields: { configName, port, github, middleware }, handleSubmit, submitting } = this.props;
+    const displayRouterError = () => this.state.isValid ? 'none' : 'block';
     return (
       <form className="serverSettings">
         <div>
@@ -195,6 +197,9 @@ export default class Form extends React.Component {
         </button>
          <div>
         <br />
+        </div>
+        <div className="error" style={{ display: displayRouterError() }}>
+          Error: Check for duplicate routers.
         </div>
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
