@@ -146,7 +146,7 @@ export default class Form extends React.Component {
       credentials: 'same-origin',
     })
       .then(() => {
-       swal('Configuration Saved!', '', 'success');
+        swal('Configuration Saved!', '', 'success');
       })
       .catch(err => console.log('darn:  ', err));
   }

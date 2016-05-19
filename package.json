@@ -99,6 +99,7 @@
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.2",
     "replace": "^0.3.0",
+    "style-loader": "^0.13.1",
     "supertest": "^1.2.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
