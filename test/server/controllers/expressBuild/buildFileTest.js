@@ -18,6 +18,7 @@ describe('File Builder', () => {
       port: 3000,
       expressName: 'app',
     },
+    middleware: [],
   };
     const request = httpMocks.createRequest({
       method: 'POST',
@@ -29,6 +30,7 @@ describe('File Builder', () => {
             port: 8000,
             expressName: 'app',
           },
+          middleware: [],
         },
       },
       session: {
@@ -43,7 +45,7 @@ describe('File Builder', () => {
   describe('Build All files', () => {
     it('should build all files and save them to an array', () => {
       const response = httpMocks.createResponse();
-      expect(buildAllFiles(request, response)).to.contain('var express = require (\'express\');\n\n\nvar app = express();\n\n\napp.listen(8000, function () {\n  console.log(\'myApp listening on port 8000\');\n};\n');
+      expect(buildAllFiles(request, response)).to.contain('var express = require (\'express\');\n\nvar app = express();\n\n\napp.listen(8000, function () {\n  console.log(\'myApp listening on port 8000\');\n};\n');
     });
   });
   it('should call not return an error when building the main server file', () => {

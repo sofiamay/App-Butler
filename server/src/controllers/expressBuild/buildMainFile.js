@@ -1,25 +1,28 @@
-// include middleware
-
-// { id: 'df068b36-99c0-4dc8-83a2-9726ba048958',
-//     startPoint: '/endpoint',
-//     endpoints: [],
-//     editingStartPoint: false,
-//     editingName: false,
-//     name: 'New router' }
-
-// helper function
-import { camelize } from '../../utils/utils.js';
-
-// function camelize(str) {
-//   return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
-//     return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
-//   }).replace(/\s+/g, '');
-// }
-
-/* -------------------------- */
+import { addMorgan, addBodyParser,
+  addCookieParser, useMorgan, bodyparserUrlencoded,
+  useCookieParser, useBodyparserJson } from './middleware.js';
 
 function addExpress() {
-  return `var express = require (\'express\');\n\n`;
+  return `var express = require (\'express\');\n`;
+}
+
+function requireMiddleware(middleware) {
+  let fileString = '';
+  if (middleware.morgan) { fileString += addMorgan(); }
+  if (middleware.cookieparser) { fileString += addCookieParser(); }
+  if (middleware.bodyparserJson || middleware.bodyparserUrlencoded) {
+    fileString += addBodyParser();
+  }
+  return fileString;
+}
+
+function useMiddleware(middleware) {
+  let fileString = '';
+  if (middleware.morgan) { fileString += useMorgan(); }
+  if (middleware.cookieparser) { fileString += useCookieParser(); }
+  if (middleware.bodyparserJson) { fileString += useBodyparserJson(); }
+  if (middleware.bodyparserUrlencoded) { fileString += bodyparserUrlencoded(); }
+  return fileString;
 }
 
 // use imported middleware
@@ -34,10 +37,6 @@ function requireRouters(routers) {
 
 const initializeExpress = () => '\nvar app = express();\n\n';
 
-// var routes = require('./routes/index');
-// var users = require('./routes/users');
-// app.use('/', routes);
-// app.use('/users', users);
 function useRouters(routers) {
   let fileString = '';
   routers.forEach(router => {
@@ -53,16 +52,20 @@ function addServerListen(name, port) {
 
 export function buildMainFile(fileConfig, userConfig) {
   let file = '';
-  // const expressName = userConfig.serverSettings.expressName;
   const name = userConfig.appName || 'myApp';
   const port = userConfig.serverSettings.port || 8000;
   const routers = userConfig.routers || [];
+  const middleware = userConfig.middleware || [];
   // require express
   file += addExpress();
+  // require middleware
+  file += requireMiddleware(middleware);
   // require router files
   file += requireRouters(routers);
   // initialize express
   file += initializeExpress();
+  // use middleware
+  file += useMiddleware(middleware);
   // use routers as middleware
   file += useRouters(routers);
   // server listen
