@@ -31,7 +31,10 @@ export default class Saved extends React.Component {
         <br />
         {this.state.configurations.map(config =>
           <div className="config-list">
-            <a href="/#/design" className="appName">{config.data.appName}</a>
+            <a href="/#/design" className="appName">
+              {config.data.appName}
+              <i className="fa fa-remove remove-saved" aria-hidden="true"></i>
+            </a>
           </div>
         )}
       </div>
