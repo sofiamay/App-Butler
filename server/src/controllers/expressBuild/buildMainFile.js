@@ -56,7 +56,7 @@ export function buildMainFile(fileConfig, userConfig) {
   const name = userConfig.appName || 'myApp';
   const port = userConfig.serverSettings.port || 8000;
   const routers = userConfig.routers || [];
-  const middleware = userConfig.middleware;
+  const middleware = userConfig.middleware || [];
   // require express
   file += addExpress();
   // require middleware
