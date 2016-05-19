@@ -54,7 +54,7 @@ export default class Index extends React.Component {
                 <i className="fa fa-github-alt" aria-hidden="true"></i>
               </span>
             </div>
-            <div className="feature--title">Build strait to GitHub.</div>
+            <div className="feature--title">Build straight to GitHub.</div>
             <div className="feature--desc">
             Done designing your server? Simply hit the Build button to create a repo with all yours files. It's that easy.
             </div>
