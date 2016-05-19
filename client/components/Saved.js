@@ -23,20 +23,43 @@ export default class Saved extends React.Component {
     });
   }
 
+  deleteConfig = (currConfig) => {
+    const invokeDelete = () => {
+      console.log('hi');
+      console.log(currConfig);
+      fetch('/api/config', {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(currConfig),
+      }).then(res => res.json()).then(config => {
+        // this.setState({
+        //   configurations: config,
+        // });
+        // console.log(config);
+      });
+    };
+    return invokeDelete;
+  }
+
   render() {
     return (
       <div className="container">
         <Nav />
-        <h1>...your saved configurations</h1>
-        <br />
-        {this.state.configurations.map(config =>
-          <div className="config-list">
-            <a href="/#/design" className="appName">
-              {config.data.appName}
-              <i className="fa fa-remove remove-saved" aria-hidden="true"></i>
-            </a>
-          </div>
-        )}
+        <div className="saved-container">
+          <h1 className="saved-heading">...your saved configurations</h1>
+          <br />
+          {this.state.configurations.map(config =>
+            <div className="config-list">
+              <i onClick={this.deleteConfig(config)} className="fa fa-remove remove-saved" aria-hidden="true"></i>
+              <a href="/#/design" className="appName">
+                {config.data.appName}
+                <p className="description">{config.data.github.description}</p>
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

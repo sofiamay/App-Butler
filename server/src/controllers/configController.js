@@ -27,7 +27,10 @@ export function getConfigs(request, response) {
     if (err) {
       return response.status(404).json(err);
     }
-    console.log(configs);
     return response.json(configs);
   });
+}
+
+export function deleteConfig(request, response) {
+  console.log(request.body);
 }

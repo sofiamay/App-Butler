@@ -673,6 +673,15 @@ hr {
   display: inline-block;
 }
 
+.saved-container {
+  padding-left: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.description {
+  font-size: 12px;
+}
+
 .appName {
   display: block;
   text-align: center;
@@ -693,9 +702,7 @@ hr {
 
 .fa-remove.remove-saved {
   font-size: 15px;
-  padding-left: 5px;
-  position: relative;
-  top: -15px;
+  float: right;
 }
 
 .fa-remove.remove-saved:hover {
