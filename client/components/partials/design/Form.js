@@ -118,7 +118,6 @@ export default class Form extends React.Component {
   }
 
   saveData = (formData) => {
-    // Display waiting message on page
     const jsonData = {
       user: document.cookie.split(';')[3],
       data: {
