@@ -153,6 +153,7 @@ export default class Form extends React.Component {
           port: formData.port,
           expressName: formData.expressName,
         },
+        middleware: formData.middleware,
         routers: this.props.routers,
         github: {
           repoName: formData.github.repoName,

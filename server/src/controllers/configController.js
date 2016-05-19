@@ -9,9 +9,8 @@ export function createOne(request, response) {
     'data.appName': request.body.data.appName,
     'data.serverSettings.port': request.body.data.serverSettings.port,
     'data.routers': request.body.data.routers,
-    'data.github.repoName': request.body.data.github.repoName,
-    'data.github.privacy': request.body.data.github.privacy,
-    'data.github.description': request.body.data.github.description,
+    'data.github': request.body.data.github,
+    'data.middleware': request.body.data.middleware,
   };
 
   Config.update(oldConfig, newAttributes, { upsert: true }, (err, result) => {
