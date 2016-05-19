@@ -1,4 +1,3 @@
-import { camelize } from '../../utils/utils.js';
 import { addMorgan, addBodyParser,
   addCookieParser, useMorgan, bodyparserUrlencoded,
   useCookieParser, useBodyparserJson } from './middleware.js';
