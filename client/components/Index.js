@@ -9,15 +9,57 @@ export default class Index extends React.Component {
   render() {
     return (
       <div className="fullscreen">
+        <div className="logo">
+          App Butler
+        </div>
         <div className="jumbotron">
-          <img src="http://images.clipartpanda.com/butler-clipart-batman001.gif" className="butler" alt="PLACEHOLDER" />
-          <a href="/auth/github"><img src="./../GitHubLG.png" className="github" /></a>
+          <div className="jumbo-text">
+            <h2>The best way to serve up fresh Node.js apps.</h2>
+            <a href="/auth/github" className="btn btn-jumbo">
+            <i className="fa fa-github" aria-hidden="true"></i>
+            <span>  Login with GitHub</span>
+            </a>
+          </div>
+          <img src="./../img/butler.png" className="jumbo-image" />
         </div>
         <div className="about">
-          <h1>The standard Lorem Ipsum</h1>
-          <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
-          <i className="fa fa-lock" aria-hidden="true">Secure</i>
-          <i className="fa fa-magic" aria-hidden="true">Magical</i>
+
+          <div className="feature">
+            <div className="feature--img-container">
+              <span className="feature--img">
+                <i className="fa fa-clock-o" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div className="feature--title">Servers in minutes, not hours.</div>
+            <div className="feature--desc">
+            Sign up, enter yours settings, and design. A click of a button later: your server is done.
+            </div>
+          </div>
+
+          <div className="feature">
+            <div className="feature--img-container">
+              <span className="feature--img">
+                <i className="fa fa-save" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div className="feature--title">Save once, use forever.</div>
+            <div className="feature--desc">
+            Save your configs to use later. Want to use your go-to API config? Load it up and create another!
+            </div>
+          </div>
+
+          <div className="feature">
+            <div className="feature--img-container">
+              <span className="feature--img">
+                <i className="fa fa-github-alt" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div className="feature--title">Build straight to GitHub.</div>
+            <div className="feature--desc">
+            Done designing your server? Simply hit the Build button to create a repo with all yours files. It&#39;s that easy.
+            </div>
+          </div>
+
         </div>
       </div>
     );
