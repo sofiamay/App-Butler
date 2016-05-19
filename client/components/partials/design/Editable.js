@@ -7,14 +7,35 @@ export default class Editable extends React.Component {
     editing: React.PropTypes.bool.isRequired,
     update: React.PropTypes.func.isRequired,
     id: React.PropTypes.string.isRequired,
+    validate: React.PropTypes.func,
+    failedAction: React.PropTypes.func,
     removeSpaces: React.PropTypes.bool,
     inputClass: React.PropTypes.string,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      failedValidation: false,
+    };
+  }
+
   finishEdit = (e) => {
     const value = e.target.value;
+    // If validation is present & returns false update w/ original val
+    if (this.props.validate && !this.props.validate(value, this.props.id)) {
+      if (this.props.failedAction) {
+        this.props.failedAction();
+      }
+      return this.setState({
+        failedValidation: true,
+      });
+    }
 
     if (this.props.update && value.trim()) {
+      this.setState({
+        failedValidation: false,
+      });
       this.props.update(this.props.removeSpaces ? value.replace(/ /g, '') : value);
     }
   };
@@ -25,12 +46,13 @@ export default class Editable extends React.Component {
   };
   renderEdit = () => {
     const inputClass = this.props.inputClass || '';
+    const errorClass = this.state.failedValidation ? 'error' : null;
     return (
       <input type="text"
         ref={
           (e) => e ? e.selectionStart = this.props.value.length : null
         }
-        className={inputClass}
+        className={`${inputClass} ${errorClass}`}
         autoFocus={true}
         defaultValue={this.props.value}
         onBlur={this.finishEdit}

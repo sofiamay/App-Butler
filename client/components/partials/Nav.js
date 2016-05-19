@@ -16,7 +16,6 @@ const avatar = decodeURIComponent(
   );
 const user = document.cookie.replace(/(?:(?:^|.*;\s*)user\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 
-console.log('cookies: ', document.cookie);
 export default () => (
   <div className="navContainer">
     <div className="nav">

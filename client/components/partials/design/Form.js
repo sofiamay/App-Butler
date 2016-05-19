@@ -70,10 +70,20 @@ export default class Form extends React.Component {
     super(props);
     this.state = {
       serverType: null,
+      isValid: true,
     };
   }
 
+  validateRouters() {
+    return !this.props.routers.some((router) =>
+      (router.validation.name === false
+        || router.validation.startPoint === false));
+  }
+
   sendData = (formData) => {
+    if (!this.validateRouters()) {
+      return this.setState({ isValid: false });
+    }
     hashHistory.push('/loading');
     const resetState = this.props.resetState;
     const jsonData = {
@@ -152,6 +162,7 @@ export default class Form extends React.Component {
 
   render() {
     const { fields: { configName, port, github, middleware }, handleSubmit, submitting } = this.props;
+    const displayRouterError = () => this.state.isValid ? 'none' : 'block';
     return (
       <form className="serverSettings">
         <div>
@@ -184,6 +195,9 @@ export default class Form extends React.Component {
         </button>
          <div>
         <br />
+        </div>
+        <div className="error" style={{ display: displayRouterError() }}>
+          Error: Check for duplicate routers.
         </div>
         <button disabled={submitting} onClick={handleSubmit(this.sendData)}
           name="submitConfig" className="btn btn-submit"
