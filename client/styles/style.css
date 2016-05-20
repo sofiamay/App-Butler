@@ -436,6 +436,7 @@ hr {
   line-height: 60px;
   font-size: 30px;
   padding-left: 20px;
+  box-sizing: border-box;
 }
 
 .jumbotron {
@@ -668,14 +669,45 @@ hr {
 
 
 /* Saved configs page*/
-.config-list {
-  margin: 20px 20px 20px 20px;
-  display: inline-block;
-}
-
 .saved-container {
   padding-left: 20px;
   font-family: 'Roboto', sans-serif;
+}
+
+.config-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.config {
+  display: inline-block;
+  margin: 0 20px 20px 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  transition: all ease-in-out 150ms;
+}
+
+.config:hover {
+  transform: translate(0px, -3px) scale(1.05);
+}
+
+.config-header {
+  overflow: hidden;
+  height: 25px;
+  background-color: #1da8ff;
+  border-radius: 3px 3px 0 0;
+  padding: 4px 4px 0 0;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  text-align: right;
+}
+
+.config-header a:hover {
+  color: #FF1744;
 }
 
 .description {
@@ -683,28 +715,11 @@ hr {
 }
 
 .appName {
+  height: calc(100% - 25px);
+  box-sizing: border-box;
   display: block;
   text-align: center;
   font-size: 25px;
-  padding: 0.5em;
-  line-height: 1;
-  color: black;
-  background: aliceblue;
-  border-radius: 10px;
-  box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.3);
-  transition: all ease-in-out 150ms;
-}
-
-.appName:hover {
-  box-shadow: 0px 27px 20px -20px rgba(0, 0, 0, 0.2);
-  transform: translate(0px, -3px) scale(1.05);
-}
-
-.fa-remove.remove-saved {
-  font-size: 15px;
-  float: right;
-}
-
-.fa-remove.remove-saved:hover {
-  color: red;
+  padding: 10px 5px 5px 5px;
+  color: #333;
 }

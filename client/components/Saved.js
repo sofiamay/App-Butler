@@ -62,17 +62,25 @@ export default class Saved extends React.Component {
       <div className="container">
         <Nav />
         <div className="saved-container">
-          <h1 className="saved-heading">...your saved configurations</h1>
-          <br />
-          {this.state.configurations.map(config =>
-            <div className="config-list">
-              <i onClick={this.deleteConfig(config)} className="fa fa-remove remove-saved" aria-hidden="true"></i>
-              <a onClick={this.setConfig(config)} href="/#/design" className="appName">
-                {config.data.appName}
-                <p className="description">{config.data.github.description}</p>
-              </a>
-            </div>
-          )}
+          <h1 className="saved-heading">
+            <i className="fa fa-server" aria-hidden="true"></i>
+            &nbsp;My Configs
+          </h1>
+          <div className="config-list">
+            {this.state.configurations.map((config, index) =>
+              <div className="config" key={`config-${index}`}>
+                <div className="config-header">
+                  <a onClick={this.deleteConfig(config)}>
+                    <i className="fa fa-remove" aria-hidden="true"></i>
+                  </a>
+                </div>
+                <a onClick={this.setConfig(config)} href="/#/design" className="appName">
+                  {config.data.appName}
+                  <p className="description">{config.data.github.description}</p>
+                </a>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );

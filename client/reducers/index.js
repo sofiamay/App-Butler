@@ -19,15 +19,27 @@ export default (state, action) => {
 
   if (action.type === 'SET_STATE') {
     const config = action.config;
-    for (let i = 0; i < config.data.routers.length; i++) {
-      config.data.routers[i].validation = { startPoint: true };
-    }
+
+    config.data.routers = config.data.routers.map(router =>
+      Object.assign({}, router, {
+        validation: {
+          startPoint: true,
+          name: true,
+        },
+        editingStartPoint: false,
+        editingName: false,
+      })
+    );
 
     state = {
       ui: {},
       routers: config.data.routers,
       form: {
         config: {
+          _asyncValidating: false,
+          _initialized: false,
+          _submitting: false,
+          _submitFailed: false,
           configName: {
             value: config.appName,
           },
