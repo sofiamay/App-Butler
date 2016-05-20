@@ -10,17 +10,18 @@ export default class Index extends React.Component {
     return (
       <div className="fullscreen">
         <div className="logo">
-          App Butler
+          <img src="../img/logo.svg" height="20px" alt="App Butler" />
         </div>
         <div className="jumbotron">
           <div className="jumbo-text">
-            <h2>The best way to serve up fresh Node.js apps.</h2>
+            <h2>Build Faster.</h2>
+            <div className="jumbo-tagline">The premier drag and drop Node.js server builder.</div>
             <a href="/auth/github" className="btn btn-jumbo">
             <i className="fa fa-github" aria-hidden="true"></i>
             <span>  Login with GitHub</span>
             </a>
           </div>
-          <img src="./../img/butler.png" className="jumbo-image" />
+          <img src="./../img/butler.svg" className="jumbo-image" />
         </div>
         <div className="about">
 
