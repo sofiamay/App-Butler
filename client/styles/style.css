@@ -688,6 +688,11 @@ hr {
   height: 200px;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  transition: all ease-in-out 150ms;
+}
+
+.config:hover {
+  transform: translate(0px, -3px) scale(1.05);
 }
 
 .config-header {
@@ -710,17 +715,11 @@ hr {
 }
 
 .appName {
-  height: 100%;
+  height: calc(100% - 25px);
   box-sizing: border-box;
   display: block;
   text-align: center;
   font-size: 25px;
-  padding: 0 5px 5px 5px;
-  margin-top: 15px;
+  padding: 10px 5px 5px 5px;
   color: #333;
-  transition: all ease-in-out 150ms;
-}
-
-.appName:hover {
-  transform: translate(0px, -3px) scale(1.05);
 }

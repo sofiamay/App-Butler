@@ -62,7 +62,10 @@ export default class Saved extends React.Component {
       <div className="container">
         <Nav />
         <div className="saved-container">
-          <h1 className="saved-heading"><i className="fa fa-server" aria-hidden="true"></i> My Configs</h1>
+          <h1 className="saved-heading">
+            <i className="fa fa-server" aria-hidden="true"></i>
+            &nbsp;My Configs
+          </h1>
           <div className="config-list">
             {this.state.configurations.map(config =>
               <div className="config">
