@@ -67,8 +67,8 @@ export default class Saved extends React.Component {
             &nbsp;My Configs
           </h1>
           <div className="config-list">
-            {this.state.configurations.map(config =>
-              <div className="config">
+            {this.state.configurations.map((config, index) =>
+              <div className="config" key={`config-${index}`}>
                 <div className="config-header">
                   <a onClick={this.deleteConfig(config)}>
                     <i className="fa fa-remove" aria-hidden="true"></i>
