@@ -88,7 +88,6 @@ export function generateFiles(request, response) {
   if (!reqData) {
     return response.status(400).send(new Error('No server type on request'));
   }
-
   // generate express server
   return generate(request, response);
 }

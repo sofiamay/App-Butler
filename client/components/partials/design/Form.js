@@ -128,8 +128,24 @@ export default class Form extends React.Component {
   }
 
   saveData = (formData) => {
+    // get cookie given name (can move to utils if need to be reused)
+    const getCookie = cname => {
+      const name = `${cname}=`;
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return '';
+    };
+
     const jsonData = {
-      user: document.cookie.split(';')[3],
+      user: getCookie('user'),
       data: {
         serverType: formData.serverType,
         appName: formData.configName,
@@ -137,6 +153,7 @@ export default class Form extends React.Component {
           port: formData.port,
           expressName: formData.expressName,
         },
+        middleware: formData.middleware,
         routers: this.props.routers,
         github: {
           repoName: formData.github.repoName,

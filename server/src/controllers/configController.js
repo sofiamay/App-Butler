@@ -9,18 +9,33 @@ export function createOne(request, response) {
     'data.appName': request.body.data.appName,
     'data.serverSettings.port': request.body.data.serverSettings.port,
     'data.routers': request.body.data.routers,
-    'data.github.repoName': request.body.data.github.repoName,
-    'data.github.privacy': request.body.data.github.privacy,
-    'data.github.description': request.body.data.github.description,
+    'data.github': request.body.data.github,
+    'data.middleware': request.body.data.middleware,
   };
 
-  Config.update(
-    oldConfig,
-    newAttributes,
-    { upsert: true },
-    (err, result) => {
-      if (err) { return response.status(500).json(err); }
-      return response.send(result);
+  Config.update(oldConfig, newAttributes, { upsert: true }, (err, result) => {
+    if (err) {
+      return response.status(500).json(err);
     }
-  );
+    return response.send(result);
+  });
+}
+
+export function getConfigs(request, response) {
+  Config.find({ user: request.cookies.user }, (err, configs) => {
+    if (err) {
+      return response.status(404).json(err);
+    }
+    return response.json(configs);
+  });
+}
+
+export function deleteConfig(request, response) {
+  Config.findOneAndRemove({ 'data.appName': request.body.data.appName }, (err) => {
+    if (err) {
+      return response.status(404).json(err);
+    }
+    // return remaining configs associated with user to update state
+    return getConfigs(request, response);
+  });
 }

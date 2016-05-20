@@ -10,6 +10,12 @@ const configSchema = new Schema({
     serverSettings: {
       port: String,
     },
+    middleware: {
+      morgan: Boolean,
+      cookieparser: Boolean,
+      bodyparserJson: Boolean,
+      bodyparserUrlencoded: Boolean,
+    },
     routers: [{
       id: String,
       startPoint: String,

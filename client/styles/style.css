@@ -665,3 +665,46 @@ hr {
     font-size: 50px;
   }
 }
+
+
+/* Saved configs page*/
+.config-list {
+  margin: 20px 20px 20px 20px;
+  display: inline-block;
+}
+
+.saved-container {
+  padding-left: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.appName {
+  display: block;
+  text-align: center;
+  font-size: 25px;
+  padding: 0.5em;
+  line-height: 1;
+  color: black;
+  background: aliceblue;
+  border-radius: 10px;
+  box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.3);
+  transition: all ease-in-out 150ms;
+}
+
+.appName:hover {
+  box-shadow: 0px 27px 20px -20px rgba(0, 0, 0, 0.2);
+  transform: translate(0px, -3px) scale(1.05);
+}
+
+.fa-remove.remove-saved {
+  font-size: 15px;
+  float: right;
+}
+
+.fa-remove.remove-saved:hover {
+  color: red;
+}
