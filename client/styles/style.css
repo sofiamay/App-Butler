@@ -436,6 +436,7 @@ hr {
   line-height: 60px;
   font-size: 30px;
   padding-left: 20px;
+  box-sizing: border-box;
 }
 
 .jumbotron {
