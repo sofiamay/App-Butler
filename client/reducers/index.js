@@ -36,6 +36,10 @@ export default (state, action) => {
       routers: config.data.routers,
       form: {
         config: {
+          _asyncValidating: false,
+          _initialized: false,
+          _submitting: false,
+          _submitFailed: false,
           configName: {
             value: config.appName,
           },
