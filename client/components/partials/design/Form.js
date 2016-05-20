@@ -188,7 +188,7 @@ export default class Form extends React.Component {
       method: 'GET',
       credentials: 'same-origin',
     }).then(res => res.json()).then(user => {
-      if (Boolean(findWhere(user, formData.configName))) {
+      if (Boolean(findWhere(user, { appName: formData.configName }))) {
         swal({
           title: 'Warning: Configuration exists',
           text: 'Click continue to overwrite',
