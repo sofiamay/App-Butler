@@ -29,15 +29,6 @@ export function buildAllFiles(req, res) {
   for (const fileName in req.session.files) {
     if (fileName) {
       files.push(buildFile(req.session.files[fileName], req.body.data));
-      // Code below puts all files in one array
-      // const result = buildFile(req.session.files[fileName], req.body.data);
-      // if (Array.isArray(result)) {
-      //   result.forEach(file => {
-      //     files.push(file);
-      //   });
-      // } else {
-      //   files.push(result);
-      // }
     }
   }
 

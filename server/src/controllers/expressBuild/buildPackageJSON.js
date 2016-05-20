@@ -34,8 +34,9 @@ const addDependencies = dependencies => {
   if (dependencies.bodyparserJson || dependencies.bodyparserUrlencoded) {
     fileString += addDepBodyparserJson();
   }
-  if (fileString[fileString.length-2] === ',') {
-    fileString = fileString.slice(0, fileString.length - 2) + fileString.slice(fileString.length - 1);
+  if (fileString[fileString.length - 2] === ',') {
+    fileString = fileString.slice(0, fileString.length - 2) +
+      fileString.slice(fileString.length - 1);
   }
   fileString += '  }\n';
   return fileString;
