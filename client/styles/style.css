@@ -50,6 +50,11 @@ hr {
   float: right;
 }
 
+.myconfigs {
+  color: aliceblue;
+  font-family: 'Roboto', sans-serif;
+}
+
 .nav ul {
   margin: 0;
   padding: 0;
