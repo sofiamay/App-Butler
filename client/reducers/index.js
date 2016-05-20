@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import ui from './ui.js';
 import routers from './routers.js';
 import { reducer as form } from 'redux-form';
+import { setMiddleware, setGithub } from './../actions/saved.js';
 
 const appReducer = combineReducers({
   ui,
@@ -14,6 +15,27 @@ const appReducer = combineReducers({
 export default (state, action) => {
   if (action.type === 'RESET_STATE') {
     state = undefined;
+  }
+
+  if (action.type === 'SET_STATE') {
+    const config = action.config;
+
+    state = {
+      ui: {},
+      routers: config.data.routers,
+      form: {
+        config: {
+          configName: {
+            value: config.appName,
+          },
+          middleware: setMiddleware(config.data.middleware),
+          github: setGithub(config.data.github),
+          port: {
+            value: config.data.serverSettings.port,
+          },
+        },
+      },
+    };
   }
 
   return appReducer(state, action);

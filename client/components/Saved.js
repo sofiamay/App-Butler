@@ -1,8 +1,18 @@
 import React from 'react';
 import Nav from './partials/Nav.js';
+// import storage from '../storage.js';
+import { connect } from 'react-redux';
+import { setState } from '../actions/saved.js';
+
+@connect(null, dispatch => ({
+  setState: (config) => {
+    dispatch(setState(config));
+  },
+}))
 
 export default class Saved extends React.Component {
   static propTypes = {
+    setState: React.PropTypes.func.isRequired,
     configurations: React.PropTypes.array,
   }
 
@@ -16,11 +26,17 @@ export default class Saved extends React.Component {
       method: 'GET',
       credentials: 'same-origin',
     }).then(res => res.json()).then(config => {
-      console.log(config);
       this.setState({
         configurations: config,
       });
     });
+  }
+
+  setConfig = (currConfig) => {
+    const invokeSet = () => {
+      this.props.setState(currConfig);
+    };
+    return invokeSet;
   }
 
   deleteConfig = (currConfig) => {
@@ -51,7 +67,7 @@ export default class Saved extends React.Component {
           {this.state.configurations.map(config =>
             <div className="config-list">
               <i onClick={this.deleteConfig(config)} className="fa fa-remove remove-saved" aria-hidden="true"></i>
-              <a href="/#/design" className="appName">
+              <a onClick={this.setConfig(config)} href="/#/design" className="appName">
                 {config.data.appName}
                 <p className="description">{config.data.github.description}</p>
               </a>

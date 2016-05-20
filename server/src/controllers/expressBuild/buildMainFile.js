@@ -29,7 +29,7 @@ function useMiddleware(middleware) {
 function requireRouters(routers) {
   let fileString = '';
   routers.forEach(router => {
-    const name = camelize(router.name);
+    const name = router.name;
     fileString += `var ${name} = require('../routers/${name}');\n`;
   });
   return fileString;
@@ -40,7 +40,7 @@ const initializeExpress = () => '\nvar app = express();\n\n';
 function useRouters(routers) {
   let fileString = '';
   routers.forEach(router => {
-    const name = camelize(router.name);
+    const name = router.name;
     fileString += `app.use(\'${router.startPoint}\', ${name});\n`;
   });
   return fileString;
