@@ -3,6 +3,7 @@ import GithubForm from './GithubForm.js';
 import MiddlewareForm from './MiddlewareForm.js';
 import { reduxForm } from 'redux-form';
 import { hashHistory } from 'react-router';
+import { findWhere } from 'underscore'
 
 // Import storage to reset it
 import storage from '../../../storage.js';
@@ -127,8 +128,8 @@ export default class Form extends React.Component {
     .catch(err => console.log('darn:  ', err));
   }
 
-  saveData = (formData) => {
-    // get cookie given name (can move to utils if need to be reused)
+  writeData = (formData) => {
+   // get cookie given name (can move to utils if need to be reused)
     const getCookie = cname => {
       const name = `${cname}=`;
       const ca = document.cookie.split(';');
@@ -171,11 +172,62 @@ export default class Form extends React.Component {
       body: JSON.stringify(jsonData),
       credentials: 'same-origin',
     })
-      .then(() => {
-        swal('Configuration Saved!', '', 'success');
-      })
+    .then(() => {
+      swal({
+        title: 'Sucess: Saved!',
+        imageUrl: '../../../img/check.png',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    })
+    .catch(err => console.log('darn:  ', err));
+  }
+
+  saveData = (formData) => {
+    fetch('/api/config', {
+      method: 'GET',
+      credentials: 'same-origin',
+    }).then(res => res.json()).then(user => {
+      if (Boolean(findWhere(user, formData.configName))) {
+        swal({
+          title: 'Warning: Configuration exists',
+          text: 'Click continue to overwrite',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Continue!',
+          cancelButtonText: 'Cancel',
+          confirmButtonClass: 'btn btn-success',
+          cancelButtonClass: 'btn btn-danger',
+          buttonsStyling: false,
+        },
+        (isConfirm) => {
+          if (isConfirm === true) {
+            this.writeData(formData)
+            .then(() => {
+              swal({
+                title: 'Sucess: Saved!',
+                imageUrl: '../../../img/check.png',
+                timer: 2000,
+                showConfirmButton: false,
+              });
+            });
+          } else if (isConfirm === false) {
+            swal(
+            'Cancelled',
+            'Your configuration was not saved :)',
+            'error'
+          );
+          }
+        });
+      } else {
+        this.writeData(formData);
+      }
+    })
       .catch(err => console.log('darn:  ', err));
   }
+
 
   render() {
     const { fields: { configName, port, github, middleware }, handleSubmit, submitting } = this.props;
