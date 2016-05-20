@@ -19,7 +19,10 @@ export default (state, action) => {
 
   if (action.type === 'SET_STATE') {
     const config = action.config;
-
+    for (let i = 0; i < config.data.routers.length; i++) {
+      config.data.routers[i].validation = { startPoint: true };
+    }
+    console.log(config.data.routers);
     state = {
       ui: {},
       routers: config.data.routers,
