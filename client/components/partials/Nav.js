@@ -23,7 +23,7 @@ export default () => (
         <li><Link to={'/design'}>App Butler</Link></li>
       </ul>
       <ul className="rightNav">
-        <a href="/#/saved" className="myconfigs">My Configs </a>
+        <li><a href="/#/saved" className="myconfigs">My Configs </a></li>
         <li><a href={`https://github.com/${user}`} target="_blank">
         <div className="avatar" style={{ backgroundImage: `url('${avatar}')` }}>{ user } </div>
         </a></li>
