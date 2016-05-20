@@ -18,9 +18,22 @@ describe('Index', () => {
 });
 
 describe('Design Page', () => {
+  const design = TestUtils.renderIntoDocument(<Provider store={Store}><Design /></Provider>);
   it('renders without problems', () => {
-    const design = TestUtils.renderIntoDocument(<Provider store={Store}><Design /></Provider>);
     expect(design).to.exist;
+  });
+  it('Creates a Router when button is clicked', () => {
+    // First, we find the button container
+    var routerButton = TestUtils.findRenderedDOMComponentWithClass(
+      design,
+      'btn btn-primary'
+    );
+    TestUtils.Simulate.click(routerButton);
+    var router = TestUtils.findRenderedDOMComponentWithClass(
+      design,
+      'routerContainer'
+    );
+    expect(router).to.exist;
   });
 });
 

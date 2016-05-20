@@ -13,7 +13,7 @@ module.exports = function (config) {
     preprocessors: {
       'client/test/tests.webpack.js': ['webpack', 'sourcemap'],
     },
-    reporters: ['dots'], // report results in this format
+    reporters: ['progress'], // report results in this format
     webpack: webpackConfig,
     webpackServer: {
       noInfo: true, // please don't spam the console when running in karma!
