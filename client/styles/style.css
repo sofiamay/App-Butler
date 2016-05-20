@@ -47,7 +47,11 @@ hr {
 .logout {
   color: aliceblue;
   padding-right: 8px;
-  float: right;
+}
+
+.myconfigs {
+  color: aliceblue;
+  font-family: 'Roboto', sans-serif;
 }
 
 .nav ul {
