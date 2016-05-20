@@ -3,7 +3,7 @@ import GithubForm from './GithubForm.js';
 import MiddlewareForm from './MiddlewareForm.js';
 import { reduxForm } from 'redux-form';
 import { hashHistory } from 'react-router';
-import { findWhere } from 'underscore'
+import { findWhere } from 'underscore';
 
 // Import storage to reset it
 import storage from '../../../storage.js';
@@ -57,6 +57,7 @@ const validate = values => {
   fields,
   validate,
 })
+
 export default class Form extends React.Component {
   static propTypes = {
     fields: React.PropTypes.object.isRequired,
@@ -75,6 +76,22 @@ export default class Form extends React.Component {
     };
   }
 
+   // get cookie given name (can move to utils if need to be reused)
+  getCookie = cname => {
+    const name = `${cname}=`;
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  };
+
   validateRouters() {
     return !this.props.routers.some((router) =>
       (router.validation.name === false
@@ -83,7 +100,7 @@ export default class Form extends React.Component {
 
   sendData = (formData) => {
     if (!this.validateRouters()) {
-      return this.setState({ isValid: false });
+      this.setState({ isValid: false });
     }
     hashHistory.push('/loading');
     const resetState = this.props.resetState;
@@ -129,24 +146,8 @@ export default class Form extends React.Component {
   }
 
   writeData = (formData) => {
-   // get cookie given name (can move to utils if need to be reused)
-    const getCookie = cname => {
-      const name = `${cname}=`;
-      const ca = document.cookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') {
-          c = c.substring(1);
-        }
-        if (c.indexOf(name) === 0) {
-          return c.substring(name.length, c.length);
-        }
-      }
-      return '';
-    };
-
     const jsonData = {
-      user: getCookie('user'),
+      user: this.getCookie('user'),
       data: {
         serverType: formData.serverType,
         appName: formData.configName,
@@ -203,7 +204,7 @@ export default class Form extends React.Component {
           buttonsStyling: false,
         },
         (isConfirm) => {
-          if (isConfirm === true) {
+          if (isConfirm) {
             this.writeData(formData)
             .then(() => {
               swal({
@@ -213,7 +214,7 @@ export default class Form extends React.Component {
                 showConfirmButton: false,
               });
             });
-          } else if (isConfirm === false) {
+          } else if (!isConfirm) {
             swal(
             'Cancelled',
             'Your configuration was not saved :)',
@@ -227,7 +228,6 @@ export default class Form extends React.Component {
     })
       .catch(err => console.log('darn:  ', err));
   }
-
 
   render() {
     const { fields: { configName, port, github, middleware }, handleSubmit, submitting } = this.props;
