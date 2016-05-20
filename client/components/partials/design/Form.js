@@ -174,8 +174,8 @@ export default class Form extends React.Component {
     })
     .then(() => {
       swal({
-        title: 'Configuration Saved!',
-        imageUrl: 'https://pixabay.com/static/uploads/photo/2014/04/02/11/01/tick-305245_960_720.png',
+        title: 'Sucess: Saved!',
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Checkmark.svg/450px-Checkmark.svg.png',
         timer: 2000,
         showConfirmButton: false,
       });
@@ -190,14 +190,14 @@ export default class Form extends React.Component {
     }).then(res => res.json()).then(user => {
       if (Boolean(findWhere(user, formData.configName))) {
         swal({
-          title: 'This configuration exists',
-          text: 'Would you like to overwrite it?',
+          title: 'Warning: configuration exists',
+          text: 'Click continue to overwrite',
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, overwrite!',
-          cancelButtonText: 'No, let me change it!',
+          confirmButtonText: 'Continue!',
+          cancelButtonText: 'Cancel',
           confirmButtonClass: 'btn btn-success',
           cancelButtonClass: 'btn btn-danger',
           buttonsStyling: false,
@@ -207,8 +207,8 @@ export default class Form extends React.Component {
             this.writeData(formData)
             .then(() => {
               swal({
-                title: 'Configuration Saved!',
-                imageUrl: 'https://pixabay.com/static/uploads/photo/2014/04/02/11/01/tick-305245_960_720.png',
+                title: 'Sucess: Saved!',
+                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Checkmark.svg/450px-Checkmark.svg.png',
                 timer: 2000,
                 showConfirmButton: false,
               });
