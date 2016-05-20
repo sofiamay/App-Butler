@@ -75,14 +75,21 @@ See [contributing.md](contributing.md) for contribution and github workflow guid
 
 ## Architecture
 ### High Level Architecture
-![](http://i.imgur.com/oZEjl3d.png?1)
+![](http://i.imgur.com/fhjGcPf.png)
+### Database
+!{}(http://i.imgur.com/iWL202V.png?1)
 
 <hr>
 
 ## API
 
-| Method | Route   | Description                                    |
-|--------|---------|------------------------------------------------|
-| POST   | /serve  | Generates a boilerplate and sends it to github |
-| POST   | /config | Saves a new config                             |
-| POST   | /login  | Logs in user through Github  
+| Method | Route      | Description                                    |
+|--------|------------|------------------------------------------------|
+| POST   | api/serve  | Generates a boilerplate and sends it to github |
+| GET    | api/config | Get current user's configs from the database   |
+| POST   | /serve     | Generates a new config                         |
+| POST   | /config    | Saves a user's config to the database          |
+| DELETE | /agi/config| Delete's a user's config                       |
+| POST   | api/login  | Logs in user through Github                    |
+| GET    | api/users  | Get current user from the database             |
+
