@@ -85,11 +85,11 @@ See [contributing.md](contributing.md) for contribution and github workflow guid
 
 | Method | Route      | Description                                    |
 |--------|------------|------------------------------------------------|
-| POST   | api/serve  | Generates a boilerplate and sends it to github |
+| POST   | api/serve  | Generate a boilerplate and sends it to github  |
 | GET    | api/config | Get current user's configs from the database   |
-| POST   | api/serve  | Generates a new config                         |
-| POST   | api/config | Saves a user's config to the database          |
-| DELETE | agi/config | Delete's a user's config                       |
-| POST   | api/login  | Logs in user through Github                    |
+| POST   | api/serve  | Generate a new config                          |
+| POST   | api/config | Save a user's config to the database           |
+| DELETE | api/config | Delete a user's config                         |
+| POST   | api/login  | Log in user through Github                     |
 | GET    | api/users  | Get current user from the database             |
 
