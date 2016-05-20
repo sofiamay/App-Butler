@@ -77,7 +77,7 @@ See [contributing.md](contributing.md) for contribution and github workflow guid
 ### High Level Architecture
 ![](http://i.imgur.com/fhjGcPf.png)
 ### Database
-!{}(http://i.imgur.com/iWL202V.png?1)
+![](http://i.imgur.com/iWL202V.png?1)
 
 <hr>
 
