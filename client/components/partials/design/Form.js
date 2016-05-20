@@ -146,7 +146,7 @@ export default class Form extends React.Component {
     };
 
     const jsonData = {
-      user: getCookie('user'), // document.cookie.split(';')[3].slice(6),
+      user: getCookie('user'),
       data: {
         serverType: formData.serverType,
         appName: formData.configName,
