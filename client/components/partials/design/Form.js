@@ -175,7 +175,7 @@ export default class Form extends React.Component {
     .then(() => {
       swal({
         title: 'Sucess: Saved!',
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Checkmark.svg/450px-Checkmark.svg.png',
+        imageUrl: '../../../img/check.png',
         timer: 2000,
         showConfirmButton: false,
       });
@@ -190,7 +190,7 @@ export default class Form extends React.Component {
     }).then(res => res.json()).then(user => {
       if (Boolean(findWhere(user, formData.configName))) {
         swal({
-          title: 'Warning: configuration exists',
+          title: 'Warning: Configuration exists',
           text: 'Click continue to overwrite',
           type: 'warning',
           showCancelButton: true,
@@ -208,7 +208,7 @@ export default class Form extends React.Component {
             .then(() => {
               swal({
                 title: 'Sucess: Saved!',
-                imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Checkmark.svg/450px-Checkmark.svg.png',
+                imageUrl: '../../../img/check.png',
                 timer: 2000,
                 showConfirmButton: false,
               });
