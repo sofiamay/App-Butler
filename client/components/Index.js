@@ -57,7 +57,7 @@ export default class Index extends React.Component {
             </div>
             <div className="feature--title">Build straight to GitHub.</div>
             <div className="feature--desc">
-            Done designing your server? Simply hit the Build button to create a repo with all yours files. It&#39;s that easy.
+            Done designing your server? Simply hit the Build button to create a repo with all of your files. It&#39;s that easy.
             </div>
           </div>
 
