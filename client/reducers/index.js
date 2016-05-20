@@ -22,7 +22,7 @@ export default (state, action) => {
     for (let i = 0; i < config.data.routers.length; i++) {
       config.data.routers[i].validation = { startPoint: true };
     }
-    console.log(config.data.routers);
+
     state = {
       ui: {},
       routers: config.data.routers,
