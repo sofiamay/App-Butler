@@ -464,10 +464,16 @@ hr {
 .jumbo-text h2{
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  font-size: 60px;
+  font-size: 80px;
   color: #FFFFFF;
   box-sizing: border-box;
   text-shadow: 1px 2px 0px rgba(0, 0 ,0, .2);
+}
+
+@media only screen and (max-width: 1050px) {
+  .jumbo-text h2{
+    font-size: 60px;
+  }
 }
 
 .jumbo-tagline {
@@ -538,7 +544,7 @@ hr {
 .feature--desc {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
-  color: rgba(0,0,0,.7);
+  color: rgba(0,0,0,.8);
   font-style: italic;
 }
 
